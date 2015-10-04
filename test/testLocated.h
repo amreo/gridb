@@ -37,6 +37,25 @@ class TestLocated : public QObject
 			QVERIFY(l.getX() == x);
 			QVERIFY(l.getY() == y);
 		}
+		void costructor3_data() {
+			QTest::addColumn<int>("x");
+			QTest::addColumn<int>("y");
+			QTest::newRow("x=0 y=0") << 0 << 0;
+			QTest::newRow("x=1 y=0") << 1 << 0;
+			QTest::newRow("x=0 y=1") << 0 << 1;
+			QTest::newRow("x=1 y=1") << 1 << 1;
+		}
+		void costructor3() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Located l(x,y);
+			Located l2 = l;
+			Located l3(l);
+			QVERIFY(l2.getX() == x);
+			QVERIFY(l2.getY() == y);
+			QVERIFY(l3.getX() == x);
+			QVERIFY(l3.getY() == y);
+		}
 };
 
 #endif // TESTLOCATED_H

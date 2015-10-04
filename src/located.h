@@ -4,7 +4,7 @@
 #include "src_global.h"
 
 /**
- * @brief This class is the base $class class of any non-movable objects
+ * @brief This class is the base class of any non-movable objects
  *		  and it can rappresent a fixed position in 2D space
  * @author amreo
  * @version 1.0
@@ -25,6 +25,12 @@ class SRCSHARED_EXPORT Located
 		 * @param Coordinate y
 		 */
 		Located(int x, int y);
+
+		/**
+		 * @brief Create a new instance of fixed position from located object
+		 * @param Located object
+		 */
+		Located(const Located& loc);
 
 		/**
 		 * @brief Return the X coordinate
