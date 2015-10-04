@@ -5,6 +5,12 @@
 #include <QMap>
 #include <QString>
 
+/**
+ * @brief The AutoTest class
+ * @author amreo
+ * @version 1.0
+ * @since 1.0
+ */
 class AutoTest
 {
 	public:

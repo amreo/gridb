@@ -4,12 +4,19 @@
 #include <QDebug>
 #define ADD(name,test) at.addTest(name, new test)
 
+/**
+ * @author amreo
+ * @brief main
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char *argv[])
 {
 	AutoTest at;
 
 	//Tests
-	ADD("ID001", TestLocated);
+	ADD("001", TestLocated);
 
 	//Run test(s)
 	if (argc==1) {
