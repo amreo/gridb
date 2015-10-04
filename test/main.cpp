@@ -1,6 +1,7 @@
 #include "autotest.h"
 #include "testEx.h"
 #include "testLocated.h"
+#include "testDirection.h"
 #include <QDebug>
 #define ADD(name,test) at.addTest(name, new test)
 
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
 
 	//Tests
 	ADD("001", TestLocated);
-
+	ADD("002", TestDirection);
 	//Run test(s)
 	if (argc==1) {
 		return at.runAll(argc,argv);

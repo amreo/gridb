@@ -42,7 +42,11 @@ class SRCSHARED_EXPORT Located
 		 * @return Y coordinate
 		 */
 		int getY();
-
+		/**
+		 * @brief Return the location of this object
+		 * @return Location of this object
+		 */
+		Located* getLocation();
 	protected:
 		/**
 		 * @brief Coordinate x

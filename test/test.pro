@@ -20,7 +20,8 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
     autotest.h \
-    testLocated.h
+    testLocated.h \
+    testDirection.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../bin/release/ -lgridb
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../bin/debug/ -lgridb
