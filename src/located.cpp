@@ -12,3 +12,14 @@ Located::Located(int x, int y)
 	this->x = x;
 	this->y = y;
 }
+
+int Located::getX()
+{
+	return this->x;
+}
+
+
+int Located::getY()
+{
+	return this->y;
+}

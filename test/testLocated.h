@@ -19,8 +19,8 @@ class TestLocated : public QObject
 
 		void costructor1() {
 			Located l;
-			QVERIFY(l.x == 0);
-			QVERIFY(l.y == 0);
+			QVERIFY(l.getX() == 0);
+			QVERIFY(l.getY() == 0);
 		}
 		void costructor2_data() {
 			QTest::addColumn<int>("x");
@@ -34,8 +34,8 @@ class TestLocated : public QObject
 			QFETCH(int, x);
 			QFETCH(int, y);
 			Located l(x,y);
-			QVERIFY(l.x == x);
-			QVERIFY(l.y == y);
+			QVERIFY(l.getX() == x);
+			QVERIFY(l.getY() == y);
 		}
 };
 
