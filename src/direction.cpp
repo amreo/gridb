@@ -12,3 +12,13 @@ Direction::Direction(int coefficientX, int coefficientY)
 	this->coefficientX = coefficientX;
 	this->coefficientY = coefficientY;
 }
+
+int Direction::getCoefficientX()
+{
+	return this->coefficientX;
+}
+
+int Direction::getCoefficientY()
+{
+	return this->coefficientY;
+}

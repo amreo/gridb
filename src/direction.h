@@ -17,7 +17,18 @@ class SRCSHARED_EXPORT Direction
 		 */
 		Direction(int coefficientX = 0, int coefficientY = 0);
 
-	//protected:
+		/**
+		 * @brief Return the coefficient of x
+		 * @return The coefficient of x
+		 */
+		int getCoefficientX();
+		/**
+		 * @brief Return the coefficient of y
+		 * @return The coefficient of y
+		 */
+		int getCoefficientY();
+
+	protected:
 		/**
 		 * @brief Coefficient X of direction.
 		 * * -1 to left

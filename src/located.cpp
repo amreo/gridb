@@ -23,8 +23,6 @@ int Located::getX()
 {
 	return this->x;
 }
-
-
 int Located::getY()
 {
 	return this->y;
