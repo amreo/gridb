@@ -60,6 +60,11 @@ void Direction::setCoefficientY(const int coefficientY)
 	if (this->coefficientY < -1) this->coefficientY = -1;
 }
 
+Direction Direction::sum(const Direction& dir1, const Direction& dir2)
+{
+	return Direction(dir1.coefficientX + dir2.coefficientX, dir1.coefficientY + dir2.coefficientY);
+}
+
 Direction Direction::NONE = Direction(0, 0);
 Direction Direction::UP = Direction(0, -1);
 Direction Direction::UP_RIGHT = Direction(1, -1);

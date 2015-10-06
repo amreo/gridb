@@ -157,6 +157,66 @@ class TestDirection : public QObject
 			QVERIFY(dir.getCoefficientX() == fixedCoeX);
 			QVERIFY(dir.getCoefficientY() == fixedCoeY);
 		}
+
+		void sum_data() {
+			QTest::addColumn <int> ("dir1_x");
+			QTest::addColumn <int> ("dir1_y");
+			QTest::addColumn <int> ("dir2_x");
+			QTest::addColumn <int> ("dir2_y");
+			QTest::addColumn <int> ("dir3_x");
+			QTest::addColumn <int> ("dir3_y");
+
+			QTest::newRow("none+none") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY();
+			QTest::newRow("none+right up") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+									   << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
+									   << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY();
+			QTest::newRow("none+left down") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
+									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY();
+			QTest::newRow("right up+left down") << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
+									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
+									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY();
+			QTest::newRow("left up+right down") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
+									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY();
+			QTest::newRow("right up+right down") << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
+									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
+									   << Direction::RIGHT.getCoefficientX() << Direction::RIGHT.getCoefficientY();
+			QTest::newRow("left up+left down") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
+									   << Direction::LEFT.getCoefficientX() << Direction::LEFT.getCoefficientY();
+			QTest::newRow("left up+right up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+									   << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
+									   << Direction::UP.getCoefficientX() << Direction::UP.getCoefficientY();
+			QTest::newRow("left down+right down") << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
+									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
+									   << Direction::DOWN.getCoefficientX() << Direction::DOWN.getCoefficientY();
+
+			QTest::newRow("left up+left up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+									   << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+									   << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY();
+			QTest::newRow("right down+right down") << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
+									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
+									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY();
+		}
+		void sum() {
+			QFETCH(int, dir1_x);
+			QFETCH(int, dir1_y);
+			QFETCH(int, dir2_x);
+			QFETCH(int, dir2_y);
+			QFETCH(int, dir3_x);
+			QFETCH(int, dir3_y);
+
+			Direction dir1(dir1_x, dir1_y);
+			Direction dir2(dir2_x, dir2_y);
+			Direction dir3 = Direction::sum(dir1,dir2);
+
+			QVERIFY(dir3.getCoefficientX() == dir3_x);
+			QVERIFY(dir3.getCoefficientY() == dir3_y);
+		}
+
 };
 
 
