@@ -46,7 +46,8 @@ class SRCSHARED_EXPORT Located
 		 * @brief Return the location of this object
 		 * @return Location of this object
 		 */
-		Located* getLocation();
+		Located getLocation();
+
 	protected:
 		/**
 		 * @brief Coordinate x

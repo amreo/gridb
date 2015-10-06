@@ -61,9 +61,9 @@ class TestLocated : public QObject
 			QFETCH(int, x);
 			QFETCH(int, y);
 			Located l(x,y);
-			Located* l2 = l.getLocation();
-			QVERIFY(l2->getX() == x);
-			QVERIFY(l2->getY() == y);
+			Located l2 = l.getLocation();
+			QVERIFY(l2.getX() == x);
+			QVERIFY(l2.getY() == y);
 		}
 };
 

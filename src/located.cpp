@@ -28,7 +28,7 @@ int Located::getY()
 	return this->y;
 }
 
-Located* Located::getLocation()
+Located Located::getLocation()
 {
-	return new Located(this->x, this->y);
+	return Located(this->x, this->y);
 }
