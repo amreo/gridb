@@ -193,7 +193,6 @@ class TestDirection : public QObject
 			QTest::newRow("left down+right down") << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
 									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
 									   << Direction::DOWN.getCoefficientX() << Direction::DOWN.getCoefficientY();
-
 			QTest::newRow("left up+left up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
 									   << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
 									   << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY();
@@ -212,6 +211,22 @@ class TestDirection : public QObject
 			Direction dir1(dir1_x, dir1_y);
 			Direction dir2(dir2_x, dir2_y);
 			Direction dir3 = Direction::sum(dir1,dir2);
+
+			QVERIFY(dir3.getCoefficientX() == dir3_x);
+			QVERIFY(dir3.getCoefficientY() == dir3_y);
+		}
+		void sum2_data() {
+			sum_data();
+		}
+		void sum2() {
+			QFETCH(int, dir1_x);
+			QFETCH(int, dir1_y);
+			QFETCH(int, dir2_x);
+			QFETCH(int, dir2_y);
+			QFETCH(int, dir3_x);
+			QFETCH(int, dir3_y);
+
+			Direction dir3 = Direction::sum(dir1_x,dir1_y, dir2_x, dir2_y);
 
 			QVERIFY(dir3.getCoefficientX() == dir3_x);
 			QVERIFY(dir3.getCoefficientY() == dir3_y);

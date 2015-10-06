@@ -65,6 +65,11 @@ Direction Direction::sum(const Direction& dir1, const Direction& dir2)
 	return Direction(dir1.coefficientX + dir2.coefficientX, dir1.coefficientY + dir2.coefficientY);
 }
 
+Direction Direction::sum(const int coeX1, const int coeY1, const int coeX2, const int coeY2)
+{
+	return Direction(coeX1+coeX2, coeY1+coeY2);
+}
+
 Direction Direction::NONE = Direction(0, 0);
 Direction Direction::UP = Direction(0, -1);
 Direction Direction::UP_RIGHT = Direction(1, -1);
