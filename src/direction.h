@@ -10,12 +10,19 @@
 class SRCSHARED_EXPORT Direction
 {
 	public:
+
 		/**
 		 * @brief Create a new instance of direction
 		 * @param coefficient X
 		 * @param coefficient Y
 		 */
 		Direction(int coefficientX = 0, int coefficientY = 0);
+
+		/**
+		 * @brief Copy costructor of Direction
+		 * @param dir
+		 */
+		Direction(const Direction& dir);
 
 		/**
 		 * @brief Return the coefficient of x
@@ -27,6 +34,43 @@ class SRCSHARED_EXPORT Direction
 		 * @return The coefficient of y
 		 */
 		int getCoefficientY();
+
+		/**
+		 * @brief Direction NONE (0; 0)
+		 */
+		static Direction NONE;
+		/**
+		 * @brief Direction UP (0; -1)
+		 */
+		static Direction UP;
+		/**
+		 * @brief Direction UP_RIGHT (1; -1)
+		 */
+		static Direction UP_RIGHT;
+		/**
+		 * @brief Direction RIGHT (1; 0)
+		 */
+		static Direction RIGHT;
+		/**
+		 * @brief Direction DOWN_RIGHT (1; 1)
+		 */
+		static Direction DOWN_RIGHT;
+		/**
+		 * @brief Direction DOWN (0; 1)
+		 */
+		static Direction DOWN;
+		/**
+		 * @brief Direction DOWN_LEFT (-1; 1)
+		 */
+		static Direction DOWN_LEFT;
+		/**
+		 * @brief Direction LEFT (-1; 0)
+		 */
+		static Direction LEFT;
+		/**
+		 * @brief Direction UP_LEFT (-1; -1)
+		 */
+		static Direction UP_LEFT;
 
 	protected:
 		/**
