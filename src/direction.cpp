@@ -34,10 +34,30 @@ Direction Direction::getDirectionOpposite()
 	return Direction(-this->coefficientX, -this->coefficientY);
 }
 
-void Direction::setDirection(const Direction dir)
+void Direction::setDirection(const Direction& dir)
 {
 	this->coefficientX = dir.coefficientX;
 	this->coefficientY = dir.coefficientY;
+}
+
+void Direction::setDirection(const int coefficientX, const int coefficientY)
+{
+	setCoefficientX(coefficientX);
+	setCoefficientY(coefficientY);
+}
+
+void Direction::setCoefficientX(const int coefficientX)
+{
+	this->coefficientX = coefficientX;
+	if (this->coefficientX > 1) this->coefficientX = 1;
+	if (this->coefficientX < -1) this->coefficientX = -1;
+}
+
+void Direction::setCoefficientY(const int coefficientY)
+{
+	this->coefficientY = coefficientY;
+	if (this->coefficientY > 1) this->coefficientY = 1;
+	if (this->coefficientY < -1) this->coefficientY = -1;
 }
 
 Direction Direction::NONE = Direction(0, 0);

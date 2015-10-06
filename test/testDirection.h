@@ -125,6 +125,38 @@ class TestDirection : public QObject
 			QVERIFY(dir2.getCoefficientX() == fixedCoeX);
 			QVERIFY(dir2.getCoefficientY() == fixedCoeY);
 		}
+
+		void setDirection2_data() {
+			common_data();
+		}
+		void setDirection2() {
+			QFETCH(int, coeX);
+			QFETCH(int, coeY);
+			QFETCH(int, fixedCoeX);
+			QFETCH(int, fixedCoeY);
+			Direction dir (-100, -100);
+			dir.setDirection(coeX, coeY);
+
+			QVERIFY(dir.getCoefficientX() == fixedCoeX);
+			QVERIFY(dir.getCoefficientY() == fixedCoeY);
+		}
+
+
+		void setCoefficient_data() {
+			common_data();
+		}
+		void setCoefficient() {
+			QFETCH(int, coeX);
+			QFETCH(int, coeY);
+			QFETCH(int, fixedCoeX);
+			QFETCH(int, fixedCoeY);
+			Direction dir (-100, -100);
+			dir.setCoefficientX(coeX);
+			dir.setCoefficientY(coeY);
+
+			QVERIFY(dir.getCoefficientX() == fixedCoeX);
+			QVERIFY(dir.getCoefficientY() == fixedCoeY);
+		}
 };
 
 

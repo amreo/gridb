@@ -43,9 +43,27 @@ class SRCSHARED_EXPORT Direction
 
 		/**
 		 * @brief Set the direction of this
-		 * @param dir to copy
+		 * @param new direction
 		 */
-		void setDirection(const Direction dir);
+		void setDirection(const Direction& dir);
+		/**
+		 * @brief Set the direction of this
+		 * @param New coefficient X
+		 * @param New coefficient Y
+		 */
+		void setDirection(const int coefficientX, const int coefficientY);
+
+		/**
+		 * @brief Set the coefficient X
+		 * @param New coefficient X
+		 */
+		void setCoefficientX(const int coefficientX);
+		/**
+		 * @brief Set the coefficient Y
+		 * @param New coefficient Y
+		 */
+		void setCoefficientY(const int coefficientY);
+
 
 		/**
 		 * @brief Direction NONE (0; 0)
