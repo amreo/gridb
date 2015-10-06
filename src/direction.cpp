@@ -29,6 +29,17 @@ int Direction::getCoefficientY()
 	return this->coefficientY;
 }
 
+Direction Direction::getDirectionOpposite()
+{
+	return Direction(-this->coefficientX, -this->coefficientY);
+}
+
+void Direction::setDirection(const Direction dir)
+{
+	this->coefficientX = dir.coefficientX;
+	this->coefficientY = dir.coefficientY;
+}
+
 Direction Direction::NONE = Direction(0, 0);
 Direction Direction::UP = Direction(0, -1);
 Direction Direction::UP_RIGHT = Direction(1, -1);

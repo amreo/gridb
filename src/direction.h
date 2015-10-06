@@ -36,6 +36,18 @@ class SRCSHARED_EXPORT Direction
 		int getCoefficientY();
 
 		/**
+		 * @brief Return the direction opposite of this
+		 * @return The direction opposite of this
+		 */
+		Direction getDirectionOpposite();
+
+		/**
+		 * @brief Set the direction of this
+		 * @param dir to copy
+		 */
+		void setDirection(const Direction dir);
+
+		/**
 		 * @brief Direction NONE (0; 0)
 		 */
 		static Direction NONE;

@@ -96,6 +96,35 @@ class TestDirection : public QObject
 			QVERIFY(Direction::NONE.getCoefficientX() == 0);
 			QVERIFY(Direction::NONE.getCoefficientY() == 0);
 		}
+
+		void opposite_data() {
+			common_data();
+		}
+		void opposite() {
+			QFETCH(int, coeX);
+			QFETCH(int, coeY);
+			QFETCH(int, fixedCoeX);
+			QFETCH(int, fixedCoeY);
+			Direction dir (coeX, coeY);
+			dir = dir.getDirectionOpposite();
+			QVERIFY(dir.getCoefficientX() == -fixedCoeX);
+			QVERIFY(dir.getCoefficientY() == -fixedCoeY);
+		}
+
+		void setDirection_data() {
+			common_data();
+		}
+		void setDirection() {
+			QFETCH(int, coeX);
+			QFETCH(int, coeY);
+			QFETCH(int, fixedCoeX);
+			QFETCH(int, fixedCoeY);
+			Direction dir (coeX, coeY);
+			Direction dir2;
+			dir2.setDirection(dir);
+			QVERIFY(dir2.getCoefficientX() == fixedCoeX);
+			QVERIFY(dir2.getCoefficientY() == fixedCoeY);
+		}
 };
 
 
