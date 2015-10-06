@@ -27,8 +27,8 @@ class TestLocated : public QObject
 
 		void costructor1() {
 			Located l;
-			QVERIFY(l.getX() == 0);
-			QVERIFY(l.getY() == 0);
+			QCOMPARE(l.getX(), 0);
+			QCOMPARE(l.getY(), 0);
 		}
 		void costructor2_data() {
 			common_data();
@@ -37,8 +37,8 @@ class TestLocated : public QObject
 			QFETCH(int, x);
 			QFETCH(int, y);
 			Located l(x,y);
-			QVERIFY(l.getX() == x);
-			QVERIFY(l.getY() == y);
+			QCOMPARE(l.getX(), x);
+			QCOMPARE(l.getY(), y);
 		}
 		void costructor3_data() {
 			common_data();
@@ -49,10 +49,10 @@ class TestLocated : public QObject
 			Located l(x,y);
 			Located l2 = l;
 			Located l3(l);
-			QVERIFY(l2.getX() == x);
-			QVERIFY(l2.getY() == y);
-			QVERIFY(l3.getX() == x);
-			QVERIFY(l3.getY() == y);
+			QCOMPARE(l2.getX(), x);
+			QCOMPARE(l2.getY(), y);
+			QCOMPARE(l3.getX(), x);
+			QCOMPARE(l3.getY(), y);
 		}
 		void getLocation_data() {
 			common_data();
@@ -62,8 +62,8 @@ class TestLocated : public QObject
 			QFETCH(int, y);
 			Located l(x,y);
 			Located l2 = l.getLocation();
-			QVERIFY(l2.getX() == x);
-			QVERIFY(l2.getY() == y);
+			QCOMPARE(l2.getX(), x);
+			QCOMPARE(l2.getY(), y);
 		}
 };
 

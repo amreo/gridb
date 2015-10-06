@@ -55,8 +55,8 @@ class TestDirection : public QObject
 			QFETCH(int, fixedCoeX);
 			QFETCH(int, fixedCoeY);
 			Direction dir (coeX, coeY);
-			QVERIFY(dir.getCoefficientX() == fixedCoeX);
-			QVERIFY(dir.getCoefficientY() == fixedCoeY);
+			QCOMPARE(dir.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir.getCoefficientY(), fixedCoeY);
 		}
 
 		void costructor2_data() {
@@ -70,31 +70,31 @@ class TestDirection : public QObject
 			Direction dir (coeX, coeY);
 			Direction dir2 = dir;
 			Direction dir3(dir);
-			QVERIFY(dir2.getCoefficientX() == fixedCoeX);
-			QVERIFY(dir2.getCoefficientY() == fixedCoeY);
-			QVERIFY(dir3.getCoefficientX() == fixedCoeX);
-			QVERIFY(dir3.getCoefficientY() == fixedCoeY);
+			QCOMPARE(dir2.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir2.getCoefficientY(), fixedCoeY);
+			QCOMPARE(dir3.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir3.getCoefficientY(), fixedCoeY);
 		}
 
 		void staticDirection() {
-			QVERIFY(Direction::UP.getCoefficientX() == 0);
-			QVERIFY(Direction::UP.getCoefficientY() == -1);
-			QVERIFY(Direction::UP_RIGHT.getCoefficientX() == 1);
-			QVERIFY(Direction::UP_RIGHT.getCoefficientY() == -1);
-			QVERIFY(Direction::RIGHT.getCoefficientX() == 1);
-			QVERIFY(Direction::RIGHT.getCoefficientY() == 0);
-			QVERIFY(Direction::DOWN_RIGHT.getCoefficientX() == 1);
-			QVERIFY(Direction::DOWN_RIGHT.getCoefficientY() == 1);
-			QVERIFY(Direction::DOWN.getCoefficientX() == 0);
-			QVERIFY(Direction::DOWN.getCoefficientY() == 1);
-			QVERIFY(Direction::DOWN_LEFT.getCoefficientX() == -1);
-			QVERIFY(Direction::DOWN_LEFT.getCoefficientY() == 1);
-			QVERIFY(Direction::LEFT.getCoefficientX() == -1);
-			QVERIFY(Direction::LEFT.getCoefficientY() == 0);
-			QVERIFY(Direction::UP_LEFT.getCoefficientX() == -1);
-			QVERIFY(Direction::UP_LEFT.getCoefficientY() == -1);
-			QVERIFY(Direction::NONE.getCoefficientX() == 0);
-			QVERIFY(Direction::NONE.getCoefficientY() == 0);
+			QCOMPARE(Direction::UP.getCoefficientX(), 0);
+			QCOMPARE(Direction::UP.getCoefficientY(), -1);
+			QCOMPARE(Direction::UP_RIGHT.getCoefficientX(), 1);
+			QCOMPARE(Direction::UP_RIGHT.getCoefficientY(), -1);
+			QCOMPARE(Direction::RIGHT.getCoefficientX(), 1);
+			QCOMPARE(Direction::RIGHT.getCoefficientY(), 0);
+			QCOMPARE(Direction::DOWN_RIGHT.getCoefficientX(), 1);
+			QCOMPARE(Direction::DOWN_RIGHT.getCoefficientY(), 1);
+			QCOMPARE(Direction::DOWN.getCoefficientX(), 0);
+			QCOMPARE(Direction::DOWN.getCoefficientY(), 1);
+			QCOMPARE(Direction::DOWN_LEFT.getCoefficientX(), -1);
+			QCOMPARE(Direction::DOWN_LEFT.getCoefficientY(), 1);
+			QCOMPARE(Direction::LEFT.getCoefficientX(), -1);
+			QCOMPARE(Direction::LEFT.getCoefficientY(), 0);
+			QCOMPARE(Direction::UP_LEFT.getCoefficientX(), -1);
+			QCOMPARE(Direction::UP_LEFT.getCoefficientY(), -1);
+			QCOMPARE(Direction::NONE.getCoefficientX(), 0);
+			QCOMPARE(Direction::NONE.getCoefficientY(), 0);
 		}
 
 		void opposite_data() {
@@ -107,8 +107,8 @@ class TestDirection : public QObject
 			QFETCH(int, fixedCoeY);
 			Direction dir (coeX, coeY);
 			dir = dir.getDirectionOpposite();
-			QVERIFY(dir.getCoefficientX() == -fixedCoeX);
-			QVERIFY(dir.getCoefficientY() == -fixedCoeY);
+			QCOMPARE(dir.getCoefficientX(), -fixedCoeX);
+			QCOMPARE(dir.getCoefficientY(), -fixedCoeY);
 		}
 
 		void setDirection_data() {
@@ -122,8 +122,8 @@ class TestDirection : public QObject
 			Direction dir (coeX, coeY);
 			Direction dir2;
 			dir2.setDirection(dir);
-			QVERIFY(dir2.getCoefficientX() == fixedCoeX);
-			QVERIFY(dir2.getCoefficientY() == fixedCoeY);
+			QCOMPARE(dir2.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir2.getCoefficientY(), fixedCoeY);
 		}
 
 		void setDirection2_data() {
@@ -137,8 +137,8 @@ class TestDirection : public QObject
 			Direction dir (-100, -100);
 			dir.setDirection(coeX, coeY);
 
-			QVERIFY(dir.getCoefficientX() == fixedCoeX);
-			QVERIFY(dir.getCoefficientY() == fixedCoeY);
+			QCOMPARE(dir.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir.getCoefficientY(), fixedCoeY);
 		}
 
 
@@ -154,8 +154,8 @@ class TestDirection : public QObject
 			dir.setCoefficientX(coeX);
 			dir.setCoefficientY(coeY);
 
-			QVERIFY(dir.getCoefficientX() == fixedCoeX);
-			QVERIFY(dir.getCoefficientY() == fixedCoeY);
+			QCOMPARE(dir.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir.getCoefficientY(), fixedCoeY);
 		}
 
 		void sum_data() {
@@ -212,8 +212,8 @@ class TestDirection : public QObject
 			Direction dir2(dir2_x, dir2_y);
 			Direction dir3 = Direction::sum(dir1,dir2);
 
-			QVERIFY(dir3.getCoefficientX() == dir3_x);
-			QVERIFY(dir3.getCoefficientY() == dir3_y);
+			QCOMPARE(dir3.getCoefficientX(), dir3_x);
+			QCOMPARE(dir3.getCoefficientY(), dir3_y);
 		}
 		void sum2_data() {
 			sum_data();
@@ -228,8 +228,8 @@ class TestDirection : public QObject
 
 			Direction dir3 = Direction::sum(dir1_x,dir1_y, dir2_x, dir2_y);
 
-			QVERIFY(dir3.getCoefficientX() == dir3_x);
-			QVERIFY(dir3.getCoefficientY() == dir3_y);
+			QCOMPARE(dir3.getCoefficientX(), dir3_x);
+			QCOMPARE(dir3.getCoefficientY(), dir3_y);
 		}
 
 };
