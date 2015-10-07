@@ -16,15 +16,10 @@ class SRCSHARED_EXPORT Located
 	public:
 		/**
 		 * @brief Create a new instance of fixed position
-		 *		X = 0 and Y = 0
-		 */
-		Located();
-		/**
-		 * @brief Create a new instance of fixed position
 		 * @param Coordinate x
 		 * @param Coordinate y
 		 */
-		Located(int x, int y);
+		Located(int x = 0, int y = 0);
 
 		/**
 		 * @brief Create a new instance of fixed position from located object
