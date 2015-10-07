@@ -80,6 +80,11 @@ Direction Direction::sub(const int coeX1, const int coeY1, const int coeX2, cons
 	return Direction(coeX1-coeX2, coeY1-coeY2);
 }
 
+bool Direction::equal(const Direction& dir1, const Direction& dir2)
+{
+	return dir1.coefficientX == dir2.coefficientX && dir1.coefficientY == dir2.coefficientY;
+}
+
 Direction Direction::operator+(const Direction& dir2)
 {
 	return Direction(this->coefficientX + dir2.coefficientX, this->coefficientY + dir2.coefficientY);
@@ -88,6 +93,16 @@ Direction Direction::operator+(const Direction& dir2)
 Direction Direction::operator-(const Direction& dir2)
 {
 	return Direction(this->coefficientX - dir2.coefficientX, this->coefficientY - dir2.coefficientY);
+}
+
+bool Direction::operator==(const Direction& dir2)
+{
+	return this->coefficientX == dir2.coefficientX && this->coefficientY == dir2.coefficientY;
+}
+
+bool Direction::operator!=(const Direction& dir2)
+{
+	return this->coefficientX != dir2.coefficientX || this->coefficientY != dir2.coefficientY;
 }
 
 Direction Direction::NONE = Direction(0, 0);

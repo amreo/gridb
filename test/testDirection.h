@@ -275,6 +275,42 @@ class TestDirection : public QObject
 			QCOMPARE(dir5.getCoefficientY(), dir3_y);
 		}
 
+		void equal_data() {
+			QTest::addColumn <int> ("dir1_x");
+			QTest::addColumn <int> ("dir1_y");
+			QTest::addColumn <int> ("dir2_x");
+			QTest::addColumn <int> ("dir2_y");
+			QTest::addColumn <bool> ("result");
+
+			QTest::newRow("none == none") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+										  << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+										  << true;
+			QTest::newRow("left up == none") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+										  << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+										  << false;
+			QTest::newRow("none == left up") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
+										  << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+										  << false;
+			QTest::newRow("left up == left up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+										  << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+										  << true;
+			QTest::newRow("right down == left up") << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
+										  << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
+										  << false;
+		}
+		void equal() {
+			QFETCH(int, dir1_x);
+			QFETCH(int, dir1_y);
+			QFETCH(int, dir2_x);
+			QFETCH(int, dir2_y);
+			QFETCH(bool, result);
+			Direction dir1(dir1_x, dir1_y);
+			Direction dir2(dir2_x, dir2_y);
+
+			QCOMPARE(Direction::equal(dir1, dir2), result);
+			QCOMPARE(dir1 == dir2, result);
+			QCOMPARE(dir1 != dir2, !result);
+		}
 };
 
 

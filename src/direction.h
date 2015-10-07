@@ -94,6 +94,14 @@ class SRCSHARED_EXPORT Direction
 		static Direction sub(const int coeX1, const int coeY1, const int coeX2, const int coeY2);
 
 		/**
+		 * @brief Check if the dir1 and dir2 are equal
+		 * @param dir1 first direction
+		 * @param dir2 second direction
+		 * @return true if are equal, else false
+		 */
+		static bool equal(const Direction& dir1, const Direction& dir2);
+
+		/**
 		 * @brief Sum the directions
 		 * @param dir2 second Direction
 		 * @return dir1 + dir2
@@ -105,6 +113,19 @@ class SRCSHARED_EXPORT Direction
 		 * @return dir1 - dir2
 		 */
 		Direction operator- (const Direction& dir2);
+
+		/**
+		 * @brief Check if the directions are equal
+		 * @param dir2 second direction
+		 * @return true if ar equal, else false
+		 */
+		bool operator== (const Direction& dir2);
+		/**
+		 * @brief Check if the directions aren't equal
+		 * @param dir2 second direction
+		 * @return false if ar equal, else true
+		 */
+		bool operator!= (const Direction& dir2);
 
 		/**
 		 * @brief Direction NONE (0; 0)
