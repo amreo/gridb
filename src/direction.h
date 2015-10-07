@@ -78,6 +78,20 @@ class SRCSHARED_EXPORT Direction
 		 * @return the direction summed
 		 */
 		static Direction sum(const int coeX1, const int coeY1, const int coeX2, const int coeY2);
+		/**
+		 * @brief Sub the direction left and right
+		 * @param dir1 Direction 1
+		 * @param dir2 Direction 2
+		 * @return the direction 1 - direction 2
+		 */
+		static Direction sub(const Direction& dir1, const Direction& dir2);
+		/**
+		 * @brief Sub the direction left and right
+		 * @param dir1 Direction 1
+		 * @param dir2 Direction 2
+		 * @return the direction 1 - direction 2
+		 */
+		static Direction sub(const int coeX1, const int coeY1, const int coeX2, const int coeY2);
 
 		/**
 		 * @brief Direction NONE (0; 0)
