@@ -94,6 +94,19 @@ class SRCSHARED_EXPORT Direction
 		static Direction sub(const int coeX1, const int coeY1, const int coeX2, const int coeY2);
 
 		/**
+		 * @brief Sum the directions
+		 * @param dir2 second Direction
+		 * @return dir1 + dir2
+		 */
+		Direction operator+ (const Direction& dir2);
+		/**
+		 * @brief Sub the directions
+		 * @param dir2 second Direction
+		 * @return dir1 - dir2
+		 */
+		Direction operator- (const Direction& dir2);
+
+		/**
 		 * @brief Direction NONE (0; 0)
 		 */
 		static Direction NONE;

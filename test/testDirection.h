@@ -201,11 +201,14 @@ class TestDirection : public QObject
 			Direction dir2(dir2_x, dir2_y);
 			Direction dir3 = Direction::sum(dir1,dir2);
 			Direction dir4 = Direction::sum(dir1_x,dir1_y, dir2_x, dir2_y);
+			Direction dir5 = dir1 + dir2;
 
 			QCOMPARE(dir3.getCoefficientX(), dir3_x);
 			QCOMPARE(dir3.getCoefficientY(), dir3_y);
 			QCOMPARE(dir4.getCoefficientX(), dir3_x);
 			QCOMPARE(dir4.getCoefficientY(), dir3_y);
+			QCOMPARE(dir5.getCoefficientX(), dir3_x);
+			QCOMPARE(dir5.getCoefficientY(), dir3_y);
 		}
 
 		void sub_data() {
@@ -262,11 +265,14 @@ class TestDirection : public QObject
 			Direction dir2(dir2_x, dir2_y);
 			Direction dir3 = Direction::sub(dir1,dir2);
 			Direction dir4 = Direction::sub(dir1_x,dir1_y, dir2_x, dir2_y);
+			Direction dir5 = dir1 - dir2;
 
 			QCOMPARE(dir3.getCoefficientX(), dir3_x);
 			QCOMPARE(dir3.getCoefficientY(), dir3_y);
 			QCOMPARE(dir4.getCoefficientX(), dir3_x);
 			QCOMPARE(dir4.getCoefficientY(), dir3_y);
+			QCOMPARE(dir5.getCoefficientX(), dir3_x);
+			QCOMPARE(dir5.getCoefficientY(), dir3_y);
 		}
 
 };
