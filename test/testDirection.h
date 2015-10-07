@@ -121,24 +121,13 @@ class TestDirection : public QObject
 			QFETCH(int, fixedCoeY);
 			Direction dir (coeX, coeY);
 			Direction dir2;
+			Direction dir3;
 			dir2.setDirection(dir);
+			dir3.setDirection(coeX, coeY);
 			QCOMPARE(dir2.getCoefficientX(), fixedCoeX);
 			QCOMPARE(dir2.getCoefficientY(), fixedCoeY);
-		}
-
-		void setDirection2_data() {
-			common_data();
-		}
-		void setDirection2() {
-			QFETCH(int, coeX);
-			QFETCH(int, coeY);
-			QFETCH(int, fixedCoeX);
-			QFETCH(int, fixedCoeY);
-			Direction dir (-100, -100);
-			dir.setDirection(coeX, coeY);
-
-			QCOMPARE(dir.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir.getCoefficientY(), fixedCoeY);
+			QCOMPARE(dir3.getCoefficientX(), fixedCoeX);
+			QCOMPARE(dir3.getCoefficientY(), fixedCoeY);
 		}
 
 
@@ -211,25 +200,12 @@ class TestDirection : public QObject
 			Direction dir1(dir1_x, dir1_y);
 			Direction dir2(dir2_x, dir2_y);
 			Direction dir3 = Direction::sum(dir1,dir2);
+			Direction dir4 = Direction::sum(dir1_x,dir1_y, dir2_x, dir2_y);
 
 			QCOMPARE(dir3.getCoefficientX(), dir3_x);
 			QCOMPARE(dir3.getCoefficientY(), dir3_y);
-		}
-		void sum2_data() {
-			sum_data();
-		}
-		void sum2() {
-			QFETCH(int, dir1_x);
-			QFETCH(int, dir1_y);
-			QFETCH(int, dir2_x);
-			QFETCH(int, dir2_y);
-			QFETCH(int, dir3_x);
-			QFETCH(int, dir3_y);
-
-			Direction dir3 = Direction::sum(dir1_x,dir1_y, dir2_x, dir2_y);
-
-			QCOMPARE(dir3.getCoefficientX(), dir3_x);
-			QCOMPARE(dir3.getCoefficientY(), dir3_y);
+			QCOMPARE(dir4.getCoefficientX(), dir3_x);
+			QCOMPARE(dir4.getCoefficientY(), dir3_y);
 		}
 
 		void sub_data() {
@@ -285,27 +261,14 @@ class TestDirection : public QObject
 			Direction dir1(dir1_x, dir1_y);
 			Direction dir2(dir2_x, dir2_y);
 			Direction dir3 = Direction::sub(dir1,dir2);
+			Direction dir4 = Direction::sub(dir1_x,dir1_y, dir2_x, dir2_y);
 
 			QCOMPARE(dir3.getCoefficientX(), dir3_x);
 			QCOMPARE(dir3.getCoefficientY(), dir3_y);
+			QCOMPARE(dir4.getCoefficientX(), dir3_x);
+			QCOMPARE(dir4.getCoefficientY(), dir3_y);
 		}
 
-		void sub2_data() {
-			sub_data();
-		}
-		void sub2() {
-			QFETCH(int, dir1_x);
-			QFETCH(int, dir1_y);
-			QFETCH(int, dir2_x);
-			QFETCH(int, dir2_y);
-			QFETCH(int, dir3_x);
-			QFETCH(int, dir3_y);
-
-			Direction dir3 = Direction::sub(dir1_x,dir1_y, dir2_x, dir2_y);
-
-			QCOMPARE(dir3.getCoefficientX(), dir3_x);
-			QCOMPARE(dir3.getCoefficientY(), dir3_y);
-		}
 };
 
 
