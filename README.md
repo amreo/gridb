@@ -20,6 +20,6 @@ The license is GPL3 (general public license v3)
   * git clone https://github.com/amreo/gridb.git
   * qmake
   * make
-  * doxygen (if you want documentation
+  * doxygen (if you want documentation)
   
   The library is in the 'bin' directory, the documentation in 'doc' directory and the header file (.h) in 'src' directory
