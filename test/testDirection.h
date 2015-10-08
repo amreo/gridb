@@ -218,36 +218,20 @@ class TestDirection : public QObject
 		}
 
 		void equal_data() {
-			QTest::addColumn <int> ("dir1_x");
-			QTest::addColumn <int> ("dir1_y");
-			QTest::addColumn <int> ("dir2_x");
-			QTest::addColumn <int> ("dir2_y");
+			QTest::addColumn <Direction> ("dir1");
+			QTest::addColumn <Direction> ("dir2");
 			QTest::addColumn <bool> ("result");
 
-			QTest::newRow("none == none") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-										  << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-										  << true;
-			QTest::newRow("left up == none") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-										  << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-										  << false;
-			QTest::newRow("none == left up") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-										  << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-										  << false;
-			QTest::newRow("left up == left up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-										  << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-										  << true;
-			QTest::newRow("right down == left up") << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
-										  << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-										  << false;
+			QTest::newRow("none == none") << Direction::NONE << Direction::NONE << true;
+			QTest::newRow("left up == none") << Direction::UP_LEFT << Direction::NONE << false;
+			QTest::newRow("none == left up") << Direction::NONE << Direction::UP_LEFT << false;
+			QTest::newRow("left up == left up") << Direction::UP_LEFT << Direction::UP_LEFT << true;
+			QTest::newRow("right down == left up") << Direction::DOWN_RIGHT << Direction::UP_LEFT << false;
 		}
 		void equal() {
-			QFETCH(int, dir1_x);
-			QFETCH(int, dir1_y);
-			QFETCH(int, dir2_x);
-			QFETCH(int, dir2_y);
+			QFETCH(Direction, dir1);
+			QFETCH(Direction, dir2);
 			QFETCH(bool, result);
-			Direction dir1(dir1_x, dir1_y);
-			Direction dir2(dir2_x, dir2_y);
 
 			QCOMPARE(Direction::equal(dir1, dir2), result);
 			QCOMPARE(dir1 == dir2, result);
