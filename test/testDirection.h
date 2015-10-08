@@ -150,67 +150,37 @@ class TestDirection : public QObject
 		}
 
 		void sum_data() {
-			QTest::addColumn <int> ("dir1_x");
-			QTest::addColumn <int> ("dir1_y");
-			QTest::addColumn <int> ("dir2_x");
-			QTest::addColumn <int> ("dir2_y");
-			QTest::addColumn <int> ("dir3_x");
-			QTest::addColumn <int> ("dir3_y");
+			QTest::addColumn <Direction> ("dir1");
+			QTest::addColumn <Direction> ("dir2");
+			QTest::addColumn <Direction> ("dir3");
 
-			QTest::newRow("none+none") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY();
-			QTest::newRow("none+right up") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-									   << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
-									   << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY();
-			QTest::newRow("none+left down") << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY()
-									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
-									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY();
-			QTest::newRow("right up+left down") << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
-									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
-									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY();
-			QTest::newRow("left up+right down") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
-									   << Direction::NONE.getCoefficientX() << Direction::NONE.getCoefficientY();
-			QTest::newRow("right up+right down") << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
-									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
-									   << Direction::RIGHT.getCoefficientX() << Direction::RIGHT.getCoefficientY();
-			QTest::newRow("left up+left down") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-									   << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
-									   << Direction::LEFT.getCoefficientX() << Direction::LEFT.getCoefficientY();
-			QTest::newRow("left up+right up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-									   << Direction::UP_RIGHT.getCoefficientX() << Direction::UP_RIGHT.getCoefficientY()
-									   << Direction::UP.getCoefficientX() << Direction::UP.getCoefficientY();
-			QTest::newRow("left down+right down") << Direction::DOWN_LEFT.getCoefficientX() << Direction::DOWN_LEFT.getCoefficientY()
-									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
-									   << Direction::DOWN.getCoefficientX() << Direction::DOWN.getCoefficientY();
-			QTest::newRow("left up+left up") << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-									   << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY()
-									   << Direction::UP_LEFT.getCoefficientX() << Direction::UP_LEFT.getCoefficientY();
-			QTest::newRow("right down+right down") << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
-									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY()
-									   << Direction::DOWN_RIGHT.getCoefficientX() << Direction::DOWN_RIGHT.getCoefficientY();
+			QTest::newRow("none+none") << Direction::NONE << Direction::NONE << Direction::NONE;
+			QTest::newRow("none+right up") << Direction::NONE << Direction::UP_RIGHT << Direction::UP_RIGHT;
+			QTest::newRow("none+left down") << Direction::NONE<< Direction::DOWN_LEFT << Direction::DOWN_LEFT;
+			QTest::newRow("right up+left down") << Direction::UP_RIGHT << Direction::DOWN_LEFT << Direction::NONE;
+			QTest::newRow("left up+right down") << Direction::UP_LEFT << Direction::DOWN_RIGHT << Direction::NONE;
+			QTest::newRow("right up+right down") << Direction::UP_RIGHT << Direction::DOWN_RIGHT << Direction::RIGHT;
+			QTest::newRow("left up+left down") << Direction::UP_LEFT << Direction::DOWN_LEFT << Direction::LEFT;
+			QTest::newRow("left up+right up") << Direction::UP_LEFT << Direction::UP_RIGHT << Direction::UP;
+			QTest::newRow("left down+right down") << Direction::DOWN_LEFT << Direction::DOWN_RIGHT << Direction::DOWN;
+			QTest::newRow("left up+left up") << Direction::UP_LEFT << Direction::UP_LEFT << Direction::UP_LEFT;
+			QTest::newRow("right down+right down") << Direction::DOWN_RIGHT << Direction::DOWN_RIGHT << Direction::DOWN_RIGHT;
 		}
 		void sum() {
-			QFETCH(int, dir1_x);
-			QFETCH(int, dir1_y);
-			QFETCH(int, dir2_x);
-			QFETCH(int, dir2_y);
-			QFETCH(int, dir3_x);
-			QFETCH(int, dir3_y);
+			QFETCH(Direction, dir1);
+			QFETCH(Direction, dir2);
+			QFETCH(Direction, dir3);
 
-			Direction dir1(dir1_x, dir1_y);
-			Direction dir2(dir2_x, dir2_y);
-			Direction dir3 = Direction::sum(dir1,dir2);
-			Direction dir4 = Direction::sum(dir1_x,dir1_y, dir2_x, dir2_y);
+			Direction dir6 = Direction::sum(dir1,dir2);
+			Direction dir4 = Direction::sum(dir1.getCoefficientX(),dir1.getCoefficientY(), dir2.getCoefficientX(), dir2.getCoefficientY());
 			Direction dir5 = dir1 + dir2;
 
-			QCOMPARE(dir3.getCoefficientX(), dir3_x);
-			QCOMPARE(dir3.getCoefficientY(), dir3_y);
-			QCOMPARE(dir4.getCoefficientX(), dir3_x);
-			QCOMPARE(dir4.getCoefficientY(), dir3_y);
-			QCOMPARE(dir5.getCoefficientX(), dir3_x);
-			QCOMPARE(dir5.getCoefficientY(), dir3_y);
+			QCOMPARE(dir4.getCoefficientX(), dir3.getCoefficientX());
+			QCOMPARE(dir4.getCoefficientY(), dir3.getCoefficientY());
+			QCOMPARE(dir5.getCoefficientX(), dir3.getCoefficientX());
+			QCOMPARE(dir5.getCoefficientY(), dir3.getCoefficientY());
+			QCOMPARE(dir6.getCoefficientX(), dir3.getCoefficientX());
+			QCOMPARE(dir6.getCoefficientY(), dir3.getCoefficientY());
 		}
 
 		void sub_data() {
