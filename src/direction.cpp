@@ -29,9 +29,38 @@ int Direction::getCoefficientY()
 	return this->coefficientY;
 }
 
+int Direction::getDirectionAngle()
+{
+	if (Direction::equal(*this, Direction::UP))
+		return 0;
+	else if (Direction::equal(*this, Direction::UP_RIGHT))
+		return 1;
+	else if (Direction::equal(*this, Direction::RIGHT))
+		return 2;
+	else if (Direction::equal(*this, Direction::DOWN_RIGHT))
+		return 3;
+	else if (Direction::equal(*this, Direction::DOWN))
+		return 4;
+	else if (Direction::equal(*this, Direction::DOWN_LEFT))
+		return 5;
+	else if (Direction::equal(*this, Direction::LEFT))
+		return 6;
+	else if (Direction::equal(*this, Direction::UP_LEFT))
+		return 7;
+	return 0;
+}
+
 Direction Direction::getDirectionOpposite()
 {
 	return Direction(-this->coefficientX, -this->coefficientY);
+}
+
+Direction Direction::getDirectionRotated(int angle)
+{
+	if (*this==Direction::NONE) return Direction::NONE;
+	Direction dir = Direction::NONE;
+	dir.setDirection(this->getDirectionAngle() + angle);
+	return dir;
 }
 
 void Direction::setDirection(const Direction& dir)
@@ -44,6 +73,39 @@ void Direction::setDirection(const int coefficientX, const int coefficientY)
 {
 	setCoefficientX(coefficientX);
 	setCoefficientY(coefficientY);
+}
+
+void Direction::setDirection(int angle)
+{
+	//simply and positivity angle
+	angle %= 8;
+	if (angle < 0) angle = 8+angle;
+	switch (angle) {
+		case 0:
+			this->setDirection(Direction::UP);
+			return;
+		case 1:
+			this->setDirection(Direction::UP_RIGHT);
+			return;
+		case 2:
+			this->setDirection(Direction::RIGHT);
+			return;
+		case 3:
+			this->setDirection(Direction::DOWN_RIGHT);
+			return;
+		case 4:
+			this->setDirection(Direction::DOWN);
+			return;
+		case 5:
+			this->setDirection(Direction::DOWN_LEFT);
+			return;
+		case 6:
+			this->setDirection(Direction::LEFT);
+			return;
+		case 7:
+			this->setDirection(Direction::UP_LEFT);
+			return;
+	}
 }
 
 void Direction::setCoefficientX(const int coefficientX)

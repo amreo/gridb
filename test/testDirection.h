@@ -6,6 +6,8 @@
 #include "direction.h"
 #include <QDebug>
 
+Q_DECLARE_METATYPE(Direction)
+
 /**
  * @author amreo
  * @brief The TestDirection class
@@ -310,6 +312,68 @@ class TestDirection : public QObject
 			QCOMPARE(Direction::equal(dir1, dir2), result);
 			QCOMPARE(dir1 == dir2, result);
 			QCOMPARE(dir1 != dir2, !result);
+		}
+
+		void rotate_data() {
+			QTest::addColumn <Direction> ("dir");
+			QTest::addColumn <int> ("times");
+			QTest::addColumn <Direction> ("result");
+			QTest::newRow("none --> none") << Direction::NONE << 0 << Direction::NONE;
+			QTest::newRow("none --> none") << Direction::NONE << 10 << Direction::NONE;
+			QTest::newRow("up --> left") << Direction::UP << -2 << Direction::LEFT;
+			QTest::newRow("up --> right") << Direction::UP << 2 << Direction::RIGHT;
+			QTest::newRow("up --> down") << Direction::UP << 4 << Direction::DOWN;
+			QTest::newRow("up --> down-right") << Direction::UP << 3 << Direction::DOWN_RIGHT;
+			QTest::newRow("up --> down-left") << Direction::UP << 5 << Direction::DOWN_LEFT;
+			QTest::newRow("up --> down-right") << Direction::UP << -5 << Direction::DOWN_RIGHT;
+			QTest::newRow("up --> down-left") << Direction::UP << -3 << Direction::DOWN_LEFT;
+			QTest::newRow("left --> left") << Direction::LEFT << 0 << Direction::LEFT;
+			QTest::newRow("left --> right") << Direction::LEFT << 4 << Direction::RIGHT;
+			QTest::newRow("left --> down") << Direction::LEFT << -2 << Direction::DOWN;
+			QTest::newRow("left --> down-right") << Direction::LEFT << -3 << Direction::DOWN_RIGHT;
+			QTest::newRow("left --> down-left") << Direction::LEFT << -1 << Direction::DOWN_LEFT;
+			QTest::newRow("left --> down-right") << Direction::LEFT << 5 << Direction::DOWN_RIGHT;
+			QTest::newRow("left --> down-left") << Direction::LEFT << 7 << Direction::DOWN_LEFT;
+		}
+		void rotate() {
+			QFETCH(Direction, dir);
+			QFETCH(int, times);
+			QFETCH(Direction, result);
+
+			Direction dir2 = dir.getDirectionRotated(times);
+
+			QCOMPARE(dir2.getCoefficientX(), result.getCoefficientX());
+			QCOMPARE(dir2.getCoefficientY(), result.getCoefficientY());
+		}
+
+		void angle_data() {
+			QTest::addColumn <Direction> ("dir");
+			QTest::addColumn <int> ("angle");
+			QTest::addColumn <int> ("angle_inverse");
+
+			QTest::newRow("angle-0") << Direction::UP << 0 << -8;
+			QTest::newRow("angle-1") << Direction::UP_RIGHT << 1 << -7;
+			QTest::newRow("angle-2") << Direction::RIGHT << 2 << -6;
+			QTest::newRow("angle-3") << Direction::DOWN_RIGHT << 3 << -5;
+			QTest::newRow("angle-4") << Direction::DOWN << 4 << -4;
+			QTest::newRow("angle-5") << Direction::DOWN_LEFT << 5 << -3;
+			QTest::newRow("angle-6") << Direction::LEFT << 6 << -2;
+			QTest::newRow("angle-7") << Direction::UP_LEFT << 7 << -1;
+		}
+		void angle() {
+			QFETCH(Direction, dir);
+			QFETCH(int, angle);
+			QFETCH(int, angle_inverse);
+			Direction dir2;
+			dir2.setDirection(angle);
+			Direction dir3;
+			dir3.setDirection(angle_inverse);
+
+			QCOMPARE(dir.getDirectionAngle(), angle);
+			QCOMPARE(dir2.getCoefficientX(), dir.getCoefficientX());
+			QCOMPARE(dir2.getCoefficientY(), dir.getCoefficientY());
+			QCOMPARE(dir3.getCoefficientX(), dir.getCoefficientX());
+			QCOMPARE(dir3.getCoefficientY(), dir.getCoefficientY());
 		}
 };
 

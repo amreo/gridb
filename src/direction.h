@@ -17,7 +17,6 @@ class SRCSHARED_EXPORT Direction
 		 * @param coefficient Y
 		 */
 		Direction(int coefficientX = 0, int coefficientY = 0);
-
 		/**
 		 * @brief Copy costructor of Direction
 		 * @param dir
@@ -36,10 +35,22 @@ class SRCSHARED_EXPORT Direction
 		int getCoefficientY();
 
 		/**
+		 * @brief Return the angle(time) of direction, 0=UP, 1=UP_RIGHT, 2=RIGHT, ...
+		 * @return The angle(time) of direction
+		 */
+		int getDirectionAngle();
+
+		/**
 		 * @brief Return the direction opposite of this
 		 * @return The direction opposite of this
 		 */
 		Direction getDirectionOpposite();
+		/**
+		 * @brief Return the direction rotated clockwise of 45° degrees for times time.
+		 * @param angle number of rotation. if it's negative then it mean counterclockwise
+		 * @return The direction rotated clockwise of 45° degrees for times time
+		 */
+		Direction getDirectionRotated(int angle);
 
 		/**
 		 * @brief Set the direction of this
@@ -52,6 +63,11 @@ class SRCSHARED_EXPORT Direction
 		 * @param New coefficient Y
 		 */
 		void setDirection(const int coefficientX, const int coefficientY);
+		/**
+		 * @brief Set the direction of this from angle(time)
+		 * @param angle
+		 */
+		void setDirection(int angle);
 
 		/**
 		 * @brief Set the coefficient X
