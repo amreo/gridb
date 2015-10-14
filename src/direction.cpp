@@ -19,17 +19,17 @@ Direction::Direction(const Direction& dir)
 	this->coefficientY = dir.coefficientY;
 }
 
-int Direction::getCoefficientX()
+int Direction::getCoefficientX() const
 {
 	return this->coefficientX;
 }
 
-int Direction::getCoefficientY()
+int Direction::getCoefficientY() const
 {
 	return this->coefficientY;
 }
 
-int Direction::getDirectionAngle()
+int Direction::getDirectionAngle() const
 {
 	if (Direction::equal(*this, Direction::UP))
 		return 0;
@@ -50,14 +50,14 @@ int Direction::getDirectionAngle()
 	return 0;
 }
 
-Direction Direction::getDirectionOpposite()
+Direction Direction::getDirectionOpposite() const
 {
 	return Direction(-this->coefficientX, -this->coefficientY);
 }
 
-Direction Direction::getDirectionRotated(int angle)
+Direction Direction::getDirectionRotated(int angle) const
 {
-	if (*this==Direction::NONE) return Direction::NONE;
+	if (Direction::equal(Direction::NONE, *this)) return Direction::NONE;
 	Direction dir = Direction::NONE;
 	dir.setDirection(this->getDirectionAngle() + angle);
 	return dir;

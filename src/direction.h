@@ -4,8 +4,8 @@
 
 /**
  * @brief This class rappresent a one direction (up, down, ...)
- * @version 1.0
- * @since 1.0
+ * @version 0.1
+ * @since 0.1
  */
 class SRCSHARED_EXPORT Direction
 {
@@ -27,30 +27,30 @@ class SRCSHARED_EXPORT Direction
 		 * @brief Return the coefficient of x
 		 * @return The coefficient of x
 		 */
-		int getCoefficientX();
+		int getCoefficientX() const;
 		/**
 		 * @brief Return the coefficient of y
 		 * @return The coefficient of y
 		 */
-		int getCoefficientY();
+		int getCoefficientY() const;
 
 		/**
 		 * @brief Return the angle(time) of direction, 0=UP, 1=UP_RIGHT, 2=RIGHT, ...
 		 * @return The angle(time) of direction
 		 */
-		int getDirectionAngle();
+		int getDirectionAngle() const;
 
 		/**
 		 * @brief Return the direction opposite of this
 		 * @return The direction opposite of this
 		 */
-		Direction getDirectionOpposite();
+		Direction getDirectionOpposite() const;
 		/**
 		 * @brief Return the direction rotated clockwise of 45° degrees for times time.
 		 * @param angle number of rotation. if it's negative then it mean counterclockwise
 		 * @return The direction rotated clockwise of 45° degrees for times time
 		 */
-		Direction getDirectionRotated(int angle);
+		Direction getDirectionRotated(int angle) const;
 
 		/**
 		 * @brief Set the direction of this
