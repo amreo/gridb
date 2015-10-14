@@ -21,11 +21,13 @@ win32:OBJECTS_DIR = ../build/o/win32
 macx:OBJECTS_DIR = ../build/o/mac
 
 SOURCES += located.cpp \
-    direction.cpp
+    direction.cpp \
+    movable.cpp
 
 HEADERS += located.h\
         src_global.h \
-    direction.h
+    direction.h \
+    movable.h
 
 unix {
     target.path = /usr/lib
