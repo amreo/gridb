@@ -8,8 +8,8 @@
 /**
  * @author amreo
  * @brief The TestLocated class
- * @version 1.0
- * @since 1.0
+ * @version 0.1
+ * @since 0.1
  */
 class TestLocated : public QObject
 {
@@ -23,6 +23,9 @@ class TestLocated : public QObject
 			QTest::newRow("x=1 y=0") << 1 << 0;
 			QTest::newRow("x=0 y=1") << 0 << 1;
 			QTest::newRow("x=1 y=1") << 1 << 1;
+			QTest::newRow("x=-1 y=0") << -1 << 0;
+			QTest::newRow("x=0 y=-1") << 0 << -1;
+			QTest::newRow("x=-1 y=-1") << -1 << -1;
 		}
 
 		void costructor1() {
