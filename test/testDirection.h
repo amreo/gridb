@@ -11,8 +11,8 @@ Q_DECLARE_METATYPE(Direction)
 /**
  * @author amreo
  * @brief The TestDirection class
- * @version 1.0
- * @since 1.0
+ * @version 0.1
+ * @since 0.1
  */
 class TestDirection : public QObject
 {
