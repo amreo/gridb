@@ -66,6 +66,28 @@ class TestMovable : public QObject
 			QCOMPARE(l6.getY(), y);
 
 		}
+
+		void set_data() {
+			common_data();
+		}
+		void set() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Movable l1;
+			Movable l2;
+			Movable l3;
+			l1.setX(x);
+			l1.setY(y);
+			l2.setMovable(x,y);
+			l3.setMovable(l1);
+			QCOMPARE(l1.getX(), x);
+			QCOMPARE(l1.getY(), y);
+			QCOMPARE(l2.getX(), x);
+			QCOMPARE(l2.getY(), y);
+			QCOMPARE(l3.getX(), x);
+			QCOMPARE(l3.getY(), y);
+		}
+
 };
 
 #endif // TESTMOVABLE_H

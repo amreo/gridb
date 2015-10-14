@@ -34,6 +34,29 @@ class Movable : public QObject, public Located
 		 */
 		Movable(const Located& loc);
 
+		/**
+		 * @brief Set the coordinate X
+		 * @param New coordinte X
+		 */
+		void setX(int x);
+		/**
+		 * @brief Set the coordinate Y
+		 * @param New coordinte Y
+		 */
+		void setY(int y);
+
+		/**
+		 * @brief Set the coordinate x and y
+		 * @param New coordinate x
+		 * @param New coordinate y
+		 */
+		void setMovable(int x, int y);
+		/**
+		 * @brief Set the coordinate x and y from loc
+		 * @param Located object
+		 */
+		void setMovable(const Located& loc);
+
 
 	signals:
 
