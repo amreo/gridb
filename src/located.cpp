@@ -12,11 +12,11 @@ Located::Located(const Located& loc)
 	this->y = loc.y;
 }
 
-int Located::getX()
+ int Located::getX() const
 {
 	return this->x;
 }
-int Located::getY()
+int Located::getY() const
 {
 	return this->y;
 }
