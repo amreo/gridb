@@ -4,13 +4,9 @@
 
 Direction::Direction(int coefficientX, int coefficientY)
 {
-	if (coefficientX > 1) coefficientX = 1;
-	if (coefficientX < -1) coefficientX = -1;
-	if (coefficientY > 1) coefficientY = 1;
-	if (coefficientY < -1) coefficientY = -1;
 
-	this->coefficientX = coefficientX;
-	this->coefficientY = coefficientY;
+	this->coefficientX = qBound(-1, coefficientX, 1);
+	this->coefficientY = qBound(-1,coefficientY, 1);
 }
 
 Direction::Direction(const Direction& dir)
@@ -71,8 +67,8 @@ void Direction::setDirection(const Direction& dir)
 
 void Direction::setDirection(const int coefficientX, const int coefficientY)
 {
-	setCoefficientX(coefficientX);
-	setCoefficientY(coefficientY);
+	this->coefficientX = qBound(-1, coefficientX, 1);
+	this->coefficientY = qBound(-1,coefficientY, 1);
 }
 
 void Direction::setDirection(int angle)
@@ -110,16 +106,12 @@ void Direction::setDirection(int angle)
 
 void Direction::setCoefficientX(const int coefficientX)
 {
-	this->coefficientX = coefficientX;
-	if (this->coefficientX > 1) this->coefficientX = 1;
-	if (this->coefficientX < -1) this->coefficientX = -1;
+	this->coefficientX = qBound(-1,coefficientX,1);
 }
 
 void Direction::setCoefficientY(const int coefficientY)
 {
-	this->coefficientY = coefficientY;
-	if (this->coefficientY > 1) this->coefficientY = 1;
-	if (this->coefficientY < -1) this->coefficientY = -1;
+	this->coefficientY = qBound(-1,coefficientY,1);
 }
 
 Direction Direction::sum(const Direction& dir1, const Direction& dir2)
