@@ -2,6 +2,7 @@
 #include "testEx.h"
 #include "testLocated.h"
 #include "testDirection.h"
+#include "testMovable.h"
 #include <QDebug>
 #define ADD(name,test) at.addTest(name, new test)
 
@@ -17,8 +18,10 @@ int main(int argc, char *argv[])
 	AutoTest at;
 
 	//Tests
-	ADD("001", TestLocated);
-	ADD("002", TestDirection);
+	ADD("Located", TestLocated);
+	ADD("Direction", TestDirection);
+	ADD("Movable", TestMovable);
+
 	//Run test(s)
 	if (argc==1) {
 		return at.runAll(argc,argv);
