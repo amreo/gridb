@@ -57,8 +57,8 @@ class TestDirection : public QObject
 			QFETCH(int, fixedCoeX);
 			QFETCH(int, fixedCoeY);
 			Direction dir (coeX, coeY);
-			QCOMPARE(dir.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir.getCoefficientY(), fixedCoeY);
+			QCOMPARE(dir.coefficientX(), fixedCoeX);
+			QCOMPARE(dir.coefficientY(), fixedCoeY);
 		}
 
 		void costructor2_data() {
@@ -72,31 +72,31 @@ class TestDirection : public QObject
 			Direction dir (coeX, coeY);
 			Direction dir2 = dir;
 			Direction dir3(dir);
-			QCOMPARE(dir2.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir2.getCoefficientY(), fixedCoeY);
-			QCOMPARE(dir3.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir3.getCoefficientY(), fixedCoeY);
+			QCOMPARE(dir2.coefficientX(), fixedCoeX);
+			QCOMPARE(dir2.coefficientY(), fixedCoeY);
+			QCOMPARE(dir3.coefficientX(), fixedCoeX);
+			QCOMPARE(dir3.coefficientY(), fixedCoeY);
 		}
 
 		void staticDirection() {
-			QCOMPARE(Direction::UP.getCoefficientX(), 0);
-			QCOMPARE(Direction::UP.getCoefficientY(), -1);
-			QCOMPARE(Direction::UP_RIGHT.getCoefficientX(), 1);
-			QCOMPARE(Direction::UP_RIGHT.getCoefficientY(), -1);
-			QCOMPARE(Direction::RIGHT.getCoefficientX(), 1);
-			QCOMPARE(Direction::RIGHT.getCoefficientY(), 0);
-			QCOMPARE(Direction::DOWN_RIGHT.getCoefficientX(), 1);
-			QCOMPARE(Direction::DOWN_RIGHT.getCoefficientY(), 1);
-			QCOMPARE(Direction::DOWN.getCoefficientX(), 0);
-			QCOMPARE(Direction::DOWN.getCoefficientY(), 1);
-			QCOMPARE(Direction::DOWN_LEFT.getCoefficientX(), -1);
-			QCOMPARE(Direction::DOWN_LEFT.getCoefficientY(), 1);
-			QCOMPARE(Direction::LEFT.getCoefficientX(), -1);
-			QCOMPARE(Direction::LEFT.getCoefficientY(), 0);
-			QCOMPARE(Direction::UP_LEFT.getCoefficientX(), -1);
-			QCOMPARE(Direction::UP_LEFT.getCoefficientY(), -1);
-			QCOMPARE(Direction::NONE.getCoefficientX(), 0);
-			QCOMPARE(Direction::NONE.getCoefficientY(), 0);
+			QCOMPARE(Direction::UP.coefficientX(), 0);
+			QCOMPARE(Direction::UP.coefficientY(), -1);
+			QCOMPARE(Direction::UP_RIGHT.coefficientX(), 1);
+			QCOMPARE(Direction::UP_RIGHT.coefficientY(), -1);
+			QCOMPARE(Direction::RIGHT.coefficientX(), 1);
+			QCOMPARE(Direction::RIGHT.coefficientY(), 0);
+			QCOMPARE(Direction::DOWN_RIGHT.coefficientX(), 1);
+			QCOMPARE(Direction::DOWN_RIGHT.coefficientY(), 1);
+			QCOMPARE(Direction::DOWN.coefficientX(), 0);
+			QCOMPARE(Direction::DOWN.coefficientY(), 1);
+			QCOMPARE(Direction::DOWN_LEFT.coefficientX(), -1);
+			QCOMPARE(Direction::DOWN_LEFT.coefficientY(), 1);
+			QCOMPARE(Direction::LEFT.coefficientX(), -1);
+			QCOMPARE(Direction::LEFT.coefficientY(), 0);
+			QCOMPARE(Direction::UP_LEFT.coefficientX(), -1);
+			QCOMPARE(Direction::UP_LEFT.coefficientY(), -1);
+			QCOMPARE(Direction::NONE.coefficientX(), 0);
+			QCOMPARE(Direction::NONE.coefficientY(), 0);
 		}
 
 		void opposite_data() {
@@ -109,8 +109,8 @@ class TestDirection : public QObject
 			QFETCH(int, fixedCoeY);
 			Direction dir (coeX, coeY);
 			dir = dir.getDirectionOpposite();
-			QCOMPARE(dir.getCoefficientX(), -fixedCoeX);
-			QCOMPARE(dir.getCoefficientY(), -fixedCoeY);
+			QCOMPARE(dir.coefficientX(), -fixedCoeX);
+			QCOMPARE(dir.coefficientY(), -fixedCoeY);
 		}
 
 		void setDirection_data() {
@@ -126,10 +126,10 @@ class TestDirection : public QObject
 			Direction dir3;
 			dir2.setDirection(dir);
 			dir3.setDirection(coeX, coeY);
-			QCOMPARE(dir2.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir2.getCoefficientY(), fixedCoeY);
-			QCOMPARE(dir3.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir3.getCoefficientY(), fixedCoeY);
+			QCOMPARE(dir2.coefficientX(), fixedCoeX);
+			QCOMPARE(dir2.coefficientY(), fixedCoeY);
+			QCOMPARE(dir3.coefficientX(), fixedCoeX);
+			QCOMPARE(dir3.coefficientY(), fixedCoeY);
 		}
 
 
@@ -145,8 +145,8 @@ class TestDirection : public QObject
 			dir.setCoefficientX(coeX);
 			dir.setCoefficientY(coeY);
 
-			QCOMPARE(dir.getCoefficientX(), fixedCoeX);
-			QCOMPARE(dir.getCoefficientY(), fixedCoeY);
+			QCOMPARE(dir.coefficientX(), fixedCoeX);
+			QCOMPARE(dir.coefficientY(), fixedCoeY);
 		}
 
 		void sum_data() {
@@ -172,15 +172,15 @@ class TestDirection : public QObject
 			QFETCH(Direction, dir3);
 
 			Direction dir6 = Direction::sum(dir1,dir2);
-			Direction dir4 = Direction::sum(dir1.getCoefficientX(),dir1.getCoefficientY(), dir2.getCoefficientX(), dir2.getCoefficientY());
+			Direction dir4 = Direction::sum(dir1.coefficientX(),dir1.coefficientY(), dir2.coefficientX(), dir2.coefficientY());
 			Direction dir5 = dir1 + dir2;
 
-			QCOMPARE(dir4.getCoefficientX(), dir3.getCoefficientX());
-			QCOMPARE(dir4.getCoefficientY(), dir3.getCoefficientY());
-			QCOMPARE(dir5.getCoefficientX(), dir3.getCoefficientX());
-			QCOMPARE(dir5.getCoefficientY(), dir3.getCoefficientY());
-			QCOMPARE(dir6.getCoefficientX(), dir3.getCoefficientX());
-			QCOMPARE(dir6.getCoefficientY(), dir3.getCoefficientY());
+			QCOMPARE(dir4.coefficientX(), dir3.coefficientX());
+			QCOMPARE(dir4.coefficientY(), dir3.coefficientY());
+			QCOMPARE(dir5.coefficientX(), dir3.coefficientX());
+			QCOMPARE(dir5.coefficientY(), dir3.coefficientY());
+			QCOMPARE(dir6.coefficientX(), dir3.coefficientX());
+			QCOMPARE(dir6.coefficientY(), dir3.coefficientY());
 		}
 
 		void sub_data() {
@@ -206,15 +206,15 @@ class TestDirection : public QObject
 			QFETCH(Direction, dir3);
 
 			Direction dir6 = Direction::sub(dir1,dir2);
-			Direction dir4 = Direction::sub(dir1.getCoefficientX(),dir1.getCoefficientY(), dir2.getCoefficientX(), dir2.getCoefficientY());
+			Direction dir4 = Direction::sub(dir1.coefficientX(),dir1.coefficientY(), dir2.coefficientX(), dir2.coefficientY());
 			Direction dir5 = dir1 - dir2;
 
-			QCOMPARE(dir4.getCoefficientX(), dir3.getCoefficientX());
-			QCOMPARE(dir4.getCoefficientY(), dir3.getCoefficientY());
-			QCOMPARE(dir5.getCoefficientX(), dir3.getCoefficientX());
-			QCOMPARE(dir5.getCoefficientY(), dir3.getCoefficientY());
-			QCOMPARE(dir6.getCoefficientX(), dir3.getCoefficientX());
-			QCOMPARE(dir6.getCoefficientY(), dir3.getCoefficientY());
+			QCOMPARE(dir4.coefficientX(), dir3.coefficientX());
+			QCOMPARE(dir4.coefficientY(), dir3.coefficientY());
+			QCOMPARE(dir5.coefficientX(), dir3.coefficientX());
+			QCOMPARE(dir5.coefficientY(), dir3.coefficientY());
+			QCOMPARE(dir6.coefficientX(), dir3.coefficientX());
+			QCOMPARE(dir6.coefficientY(), dir3.coefficientY());
 		}
 
 		void equal_data() {
@@ -266,8 +266,8 @@ class TestDirection : public QObject
 
 			Direction dir2 = dir.getDirectionRotated(times);
 
-			QCOMPARE(dir2.getCoefficientX(), result.getCoefficientX());
-			QCOMPARE(dir2.getCoefficientY(), result.getCoefficientY());
+			QCOMPARE(dir2.coefficientX(), result.coefficientX());
+			QCOMPARE(dir2.coefficientY(), result.coefficientY());
 		}
 
 		void angle_data() {
@@ -294,10 +294,10 @@ class TestDirection : public QObject
 			dir3.setDirection(angle_inverse);
 
 			QCOMPARE(dir.getDirectionAngle(), angle);
-			QCOMPARE(dir2.getCoefficientX(), dir.getCoefficientX());
-			QCOMPARE(dir2.getCoefficientY(), dir.getCoefficientY());
-			QCOMPARE(dir3.getCoefficientX(), dir.getCoefficientX());
-			QCOMPARE(dir3.getCoefficientY(), dir.getCoefficientY());
+			QCOMPARE(dir2.coefficientX(), dir.coefficientX());
+			QCOMPARE(dir2.coefficientY(), dir.coefficientY());
+			QCOMPARE(dir3.coefficientX(), dir.coefficientX());
+			QCOMPARE(dir3.coefficientY(), dir.coefficientY());
 		}
 };
 

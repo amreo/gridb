@@ -27,12 +27,12 @@ class SRCSHARED_EXPORT Direction
 		 * @brief Return the coefficient of x
 		 * @return The coefficient of x
 		 */
-		int getCoefficientX() const;
+		int coefficientX() const;
 		/**
 		 * @brief Return the coefficient of y
 		 * @return The coefficient of y
 		 */
-		int getCoefficientY() const;
+		int coefficientY() const;
 
 		/**
 		 * @brief Return the angle(time) of direction, 0=UP, 1=UP_RIGHT, 2=RIGHT, ...
@@ -187,14 +187,14 @@ class SRCSHARED_EXPORT Direction
 		 * * +1 to right
 		 * * 0 no move
 		 */
-		short int coefficientX;
+		short int _coefficientX;
 		/**
 		 * @brief Coefficient Y of direction.
 		 * * -1 to up
 		 * * +1 to down
 		 * * 0 no move
 		 */
-		short int coefficientY;
+		short int _coefficientY;
 
 };
 
