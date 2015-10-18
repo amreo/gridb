@@ -1,26 +1,80 @@
-#ifndef TESTDIRECTION_H
-#define TESTDIRECTION_H
+#ifndef TESTS_H
+#define TESTS_H
 
-#include "autotest.h"
 #include <QTest>
-#include "direction.h"
 #include <QDebug>
+#include "located.h"
+#include "direction.h"
+#include "movable.h"
 
 Q_DECLARE_METATYPE(Direction)
 
+
 /**
  * @author amreo
- * @brief The TestDirection class
+ * @brief The test class
  * @version 0.1
  * @since 0.1
  */
-class TestDirection : public QObject
+class Test : public QObject
 {
 		Q_OBJECT
 
 	private slots:
+		void testLocated_common_data() {
+			QTest::addColumn<int>("x");
+			QTest::addColumn<int>("y");
+			QTest::newRow("x=0 y=0") << 0 << 0;
+			QTest::newRow("x=1 y=0") << 1 << 0;
+			QTest::newRow("x=0 y=1") << 0 << 1;
+			QTest::newRow("x=1 y=1") << 1 << 1;
+			QTest::newRow("x=-1 y=0") << -1 << 0;
+			QTest::newRow("x=0 y=-1") << 0 << -1;
+			QTest::newRow("x=-1 y=-1") << -1 << -1;
+		}
+		void testLocated_costructor1() {
+			Located l;
+			QCOMPARE(l.x(), 0);
+			QCOMPARE(l.y(), 0);
+		}
+		void testLocated_costructor2_data() {
+			testLocated_common_data();
+		}
+		void testLocated_costructor2() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Located l(x,y);
+			QCOMPARE(l.x(), x);
+			QCOMPARE(l.y(), y);
+		}
+		void testLocated_costructor3_data() {
+			testLocated_common_data();
+		}
+		void testLocated_costructor3() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Located l(x,y);
+			Located l2 = l;
+			Located l3(l);
+			QCOMPARE(l2.x(), x);
+			QCOMPARE(l2.y(), y);
+			QCOMPARE(l3.x(), x);
+			QCOMPARE(l3.y(), y);
+		}
+		void testLocated_getLocation_data() {
+			testLocated_common_data();
+		}
+		void testLocated_getLocation() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Located l(x,y);
+			Located l2 = l.getLocation();
+			QCOMPARE(l2.x(), x);
+			QCOMPARE(l2.y(), y);
+		}
 
-		void common_data() {
+
+		void testDirection_common_data() {
 			QTest::addColumn<int>("coeX");
 			QTest::addColumn<int>("coeY");
 			QTest::addColumn<int>("fixedCoeX");
@@ -46,12 +100,10 @@ class TestDirection : public QObject
 			QTest::newRow("coe  0  2") <<  0 <<  2 <<  0 <<  1;
 			QTest::newRow("coe  2  2") <<  2 <<  2 <<  1 <<  1;
 		}
-
-		void costructor1_data() {
-			common_data();
+		void testDirection_costructor1_data() {
+			testDirection_common_data();
 		}
-
-		void costructor1() {
+		void testDirection_costructor1() {
 			QFETCH(int, coeX);
 			QFETCH(int, coeY);
 			QFETCH(int, fixedCoeX);
@@ -60,11 +112,10 @@ class TestDirection : public QObject
 			QCOMPARE(dir.coefficientX(), fixedCoeX);
 			QCOMPARE(dir.coefficientY(), fixedCoeY);
 		}
-
-		void costructor2_data() {
-			common_data();
+		void testDirection_costructor2_data() {
+			testDirection_common_data();
 		}
-		void costructor2() {
+		void testDirection_costructor2() {
 			QFETCH(int, coeX);
 			QFETCH(int, coeY);
 			QFETCH(int, fixedCoeX);
@@ -77,8 +128,7 @@ class TestDirection : public QObject
 			QCOMPARE(dir3.coefficientX(), fixedCoeX);
 			QCOMPARE(dir3.coefficientY(), fixedCoeY);
 		}
-
-		void staticDirection() {
+		void testDirection_staticDirection() {
 			QCOMPARE(Direction::UP.coefficientX(), 0);
 			QCOMPARE(Direction::UP.coefficientY(), -1);
 			QCOMPARE(Direction::UP_RIGHT.coefficientX(), 1);
@@ -98,11 +148,10 @@ class TestDirection : public QObject
 			QCOMPARE(Direction::NONE.coefficientX(), 0);
 			QCOMPARE(Direction::NONE.coefficientY(), 0);
 		}
-
-		void opposite_data() {
-			common_data();
+		void testDirection_opposite_data() {
+			testDirection_common_data();
 		}
-		void opposite() {
+		void testDirection_opposite() {
 			QFETCH(int, coeX);
 			QFETCH(int, coeY);
 			QFETCH(int, fixedCoeX);
@@ -112,11 +161,10 @@ class TestDirection : public QObject
 			QCOMPARE(dir.coefficientX(), -fixedCoeX);
 			QCOMPARE(dir.coefficientY(), -fixedCoeY);
 		}
-
-		void setDirection_data() {
-			common_data();
+		void testDirection_setDirection_data() {
+			testDirection_common_data();
 		}
-		void setDirection() {
+		void testDirection_setDirection() {
 			QFETCH(int, coeX);
 			QFETCH(int, coeY);
 			QFETCH(int, fixedCoeX);
@@ -131,12 +179,10 @@ class TestDirection : public QObject
 			QCOMPARE(dir3.coefficientX(), fixedCoeX);
 			QCOMPARE(dir3.coefficientY(), fixedCoeY);
 		}
-
-
-		void setCoefficient_data() {
-			common_data();
+		void testDirection_setCoefficient_data() {
+			testDirection_common_data();
 		}
-		void setCoefficient() {
+		void testDirection_setCoefficient() {
 			QFETCH(int, coeX);
 			QFETCH(int, coeY);
 			QFETCH(int, fixedCoeX);
@@ -148,8 +194,7 @@ class TestDirection : public QObject
 			QCOMPARE(dir.coefficientX(), fixedCoeX);
 			QCOMPARE(dir.coefficientY(), fixedCoeY);
 		}
-
-		void sum_data() {
+		void testDirection_sum_data() {
 			QTest::addColumn <Direction> ("dir1");
 			QTest::addColumn <Direction> ("dir2");
 			QTest::addColumn <Direction> ("dir3");
@@ -166,7 +211,7 @@ class TestDirection : public QObject
 			QTest::newRow("left up+left up") << Direction::UP_LEFT << Direction::UP_LEFT << Direction::UP_LEFT;
 			QTest::newRow("right down+right down") << Direction::DOWN_RIGHT << Direction::DOWN_RIGHT << Direction::DOWN_RIGHT;
 		}
-		void sum() {
+		void testDirection_sum() {
 			QFETCH(Direction, dir1);
 			QFETCH(Direction, dir2);
 			QFETCH(Direction, dir3);
@@ -182,8 +227,7 @@ class TestDirection : public QObject
 			QCOMPARE(dir6.coefficientX(), dir3.coefficientX());
 			QCOMPARE(dir6.coefficientY(), dir3.coefficientY());
 		}
-
-		void sub_data() {
+		void testDirection_sub_data() {
 			QTest::addColumn <Direction> ("dir1");
 			QTest::addColumn <Direction> ("dir2");
 			QTest::addColumn <Direction> ("dir3");
@@ -200,7 +244,7 @@ class TestDirection : public QObject
 			QTest::newRow("left up-left up") << Direction::UP_LEFT << Direction::UP_LEFT << Direction::NONE;
 			QTest::newRow("right down-right down") << Direction::DOWN_RIGHT << Direction::DOWN_RIGHT << Direction::NONE;
 		}
-		void sub() {
+		void testDirection_sub() {
 			QFETCH(Direction, dir1);
 			QFETCH(Direction, dir2);
 			QFETCH(Direction, dir3);
@@ -216,8 +260,7 @@ class TestDirection : public QObject
 			QCOMPARE(dir6.coefficientX(), dir3.coefficientX());
 			QCOMPARE(dir6.coefficientY(), dir3.coefficientY());
 		}
-
-		void equal_data() {
+		void testDirection_equal_data() {
 			QTest::addColumn <Direction> ("dir1");
 			QTest::addColumn <Direction> ("dir2");
 			QTest::addColumn <bool> ("result");
@@ -228,7 +271,7 @@ class TestDirection : public QObject
 			QTest::newRow("left up == left up") << Direction::UP_LEFT << Direction::UP_LEFT << true;
 			QTest::newRow("right down == left up") << Direction::DOWN_RIGHT << Direction::UP_LEFT << false;
 		}
-		void equal() {
+		void testDirection_equal() {
 			QFETCH(Direction, dir1);
 			QFETCH(Direction, dir2);
 			QFETCH(bool, result);
@@ -237,8 +280,7 @@ class TestDirection : public QObject
 			QCOMPARE(dir1 == dir2, result);
 			QCOMPARE(dir1 != dir2, !result);
 		}
-
-		void rotate_data() {
+		void testDirection_rotate_data() {
 			QTest::addColumn <Direction> ("dir");
 			QTest::addColumn <int> ("times");
 			QTest::addColumn <Direction> ("result");
@@ -259,7 +301,7 @@ class TestDirection : public QObject
 			QTest::newRow("left --> down-right") << Direction::LEFT << 5 << Direction::DOWN_RIGHT;
 			QTest::newRow("left --> down-left") << Direction::LEFT << 7 << Direction::DOWN_LEFT;
 		}
-		void rotate() {
+		void testDirection_rotate() {
 			QFETCH(Direction, dir);
 			QFETCH(int, times);
 			QFETCH(Direction, result);
@@ -269,8 +311,7 @@ class TestDirection : public QObject
 			QCOMPARE(dir2.coefficientX(), result.coefficientX());
 			QCOMPARE(dir2.coefficientY(), result.coefficientY());
 		}
-
-		void angle_data() {
+		void testDirection_angle_data() {
 			QTest::addColumn <Direction> ("dir");
 			QTest::addColumn <int> ("angle");
 			QTest::addColumn <int> ("angle_inverse");
@@ -284,7 +325,7 @@ class TestDirection : public QObject
 			QTest::newRow("angle-6") << Direction::LEFT << 6 << -2;
 			QTest::newRow("angle-7") << Direction::UP_LEFT << 7 << -1;
 		}
-		void angle() {
+		void testDirection_angle() {
 			QFETCH(Direction, dir);
 			QFETCH(int, angle);
 			QFETCH(int, angle_inverse);
@@ -299,7 +340,93 @@ class TestDirection : public QObject
 			QCOMPARE(dir3.coefficientX(), dir.coefficientX());
 			QCOMPARE(dir3.coefficientY(), dir.coefficientY());
 		}
+
+		void testMovable_common_data() {
+			QTest::addColumn<int>("x");
+			QTest::addColumn<int>("y");
+			QTest::newRow("x=0 y=0") << 0 << 0;
+			QTest::newRow("x=1 y=0") << 1 << 0;
+			QTest::newRow("x=0 y=1") << 0 << 1;
+			QTest::newRow("x=1 y=1") << 1 << 1;
+			QTest::newRow("x=-1 y=0") << -1 << 0;
+			QTest::newRow("x=0 y=-1") << 0 << -1;
+			QTest::newRow("x=-1 y=-1") << -1 << -1;
+		}
+		void testMovable_costructor1() {
+			Movable l;
+			QCOMPARE(l.x(), 0);
+			QCOMPARE(l.y(), 0);
+		}
+		void testMovable_costructor2_data() {
+			testMovable_common_data();
+		}
+		void testMovable_costructor2() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Movable l(x,y);
+			QCOMPARE(l.x(), x);
+			QCOMPARE(l.y(), y);
+		}
+		void testMovable_costructor3_data() {
+			testMovable_common_data();
+		}
+		void testMovable_costructor3() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Movable l(x,y);
+			Movable l2 = l;
+			Movable l3(l);
+			Located l4(x,y);
+			Movable l5 = l4;
+			Movable l6(l4);
+			QCOMPARE(l2.x(), x);
+			QCOMPARE(l2.y(), y);
+			QCOMPARE(l3.x(), x);
+			QCOMPARE(l3.y(), y);
+			QCOMPARE(l5.x(), x);
+			QCOMPARE(l5.y(), y);
+			QCOMPARE(l6.x(), x);
+			QCOMPARE(l6.y(), y);
+
+		}
+		void testMovable_set_data() {
+			testMovable_common_data();
+		}
+		void testMovable_set() {
+			QFETCH(int, x);
+			QFETCH(int, y);
+			Movable l1;
+			Movable l2;
+			Movable l3;
+			Movable l1_receiver;
+			Movable l2_receiver;
+			Movable l3_receiver;
+			connect(&l1, SIGNAL(locationChanged(const Located&)),
+					&l1_receiver, SLOT(setMovable(const Located&)));
+			connect(&l2, SIGNAL(locationChanged(const Located&)),
+					&l2_receiver, SLOT(setMovable(const Located&)));
+			connect(&l3, SIGNAL(locationChanged(const Located&)),
+					&l3_receiver, SLOT(setMovable(const Located&)));
+			l1.setX(x);
+			l1.setY(y);
+			l2.setMovable(x,y);
+			l3.setMovable(l1);
+			QCOMPARE(l1.x(), x);
+			QCOMPARE(l1.y(), y);
+			QCOMPARE(l2.x(), x);
+			QCOMPARE(l2.y(), y);
+			QCOMPARE(l3.x(), x);
+			QCOMPARE(l3.y(), y);
+
+			QCOMPARE(l1_receiver.x(), x);
+			QCOMPARE(l1_receiver.y(), y);
+			QCOMPARE(l2_receiver.x(), x);
+			QCOMPARE(l2_receiver.y(), y);
+			QCOMPARE(l3_receiver.x(), x);
+			QCOMPARE(l3_receiver.y(), y);
+		}
+
+
 };
 
-
-#endif // TESTDIRECTION_H
+#endif // TESTS_H
