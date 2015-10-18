@@ -77,6 +77,11 @@ class Movable : public QObject, public Located
 		 * @param offset
 		 */
 		void move(const Direction& dir, int offset = 0);
+		/**
+		 * @brief Move the coordinate by the offset
+		 * @param offset X and Y
+		 */
+		void move(const Located& offset);
 };
 
 #endif // MOVABLE_H

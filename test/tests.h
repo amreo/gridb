@@ -426,7 +426,7 @@ class Test : public QObject
 			QCOMPARE(l3_receiver.x(), x);
 			QCOMPARE(l3_receiver.y(), y);
 		}
-		void testMovable_move1_data() {
+		void testMovable_move13_data() {
 			QTest::addColumn<int>("fromX");
 			QTest::addColumn<int>("fromY");
 			QTest::addColumn<int>("offX");
@@ -448,7 +448,7 @@ class Test : public QObject
 			QTest::newRow("2;4 + 2;4") << 2 << 4 << 2 << 4 << 4 << 8;
 			QTest::newRow("2;4 + -2;-4") << 2 << 4 << -2 << -4 << 0 << 0;
 		}
-		void testMovable_move1() {
+		void testMovable_move13() {
 			QFETCH(int, fromX);
 			QFETCH(int, fromY);
 			QFETCH(int, offX);
@@ -458,14 +458,23 @@ class Test : public QObject
 
 			Movable mov(fromX, fromY);
 			Movable mov_receiver;
+			Movable mov2(fromX, fromY);
+			Movable mov2_receiver;
 			connect(&mov, SIGNAL(locationChanged(const Located&)),
 					&mov_receiver, SLOT(setMovable(const Located&)));
+			connect(&mov2, SIGNAL(locationChanged(const Located&)),
+					&mov2_receiver, SLOT(setMovable(const Located&)));
 			mov.move(offX, offY);
+			mov2.move(Located(offX, offY));
 
 			QCOMPARE(mov.x(), toX);
 			QCOMPARE(mov.y(), toY);
 			QCOMPARE(mov_receiver.x(), toX);
 			QCOMPARE(mov_receiver.y(), toY);
+			QCOMPARE(mov2.x(), toX);
+			QCOMPARE(mov2.y(), toY);
+			QCOMPARE(mov2_receiver.x(), toX);
+			QCOMPARE(mov2_receiver.y(), toY);
 		}
 		void testMovable_move2_data() {
 			QTest::addColumn<int>("fromX");

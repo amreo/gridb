@@ -57,3 +57,10 @@ void Movable::move(const Direction& dir, int offset)
 	this->_y += offset * dir.coefficientY();
 	emit locationChanged(*this);
 }
+
+void Movable::move(const Located& offset)
+{
+	this->_x += offset.x();
+	this->_y += offset.y();
+	emit locationChanged(*this);
+}
