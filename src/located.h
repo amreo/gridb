@@ -31,12 +31,12 @@ class SRCSHARED_EXPORT Located
 		 * @brief Return the X coordinate
 		 * @return X coordinate
 		 */
-		int getX() const;
+		int x() const;
 		/**
 		 * @brief Return the Y coordinate
 		 * @return Y coordinate
 		 */
-		int getY() const;
+		int y() const;
 		/**
 		 * @brief Return the location of this object
 		 * @return Location of this object
@@ -47,11 +47,11 @@ class SRCSHARED_EXPORT Located
 		/**
 		 * @brief Coordinate x
 		 */
-		int x;
+		int _x;
 		/**
 		 * @brief Coordinate y
 		 */
-		int y;
+		int _y;
 };
 
 #endif // LOCATED_H

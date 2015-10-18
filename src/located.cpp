@@ -2,26 +2,26 @@
 
 Located::Located(int x, int y)
 {
-	this->x = x;
-	this->y = y;
+	this->_x = x;
+	this->_y = y;
 }
 
 Located::Located(const Located& loc)
 {
-	this->x = loc.x;
-	this->y = loc.y;
+	this->_x = loc._x;
+	this->_y = loc._y;
 }
 
- int Located::getX() const
+ int Located::x() const
 {
-	return this->x;
+	return this->_x;
 }
-int Located::getY() const
+int Located::y() const
 {
-	return this->y;
+	return this->_y;
 }
 
 Located Located::getLocation()
 {
-	return Located(this->x, this->y);
+	return Located(this->_x, this->_y);
 }

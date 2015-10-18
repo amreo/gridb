@@ -31,8 +31,8 @@ class TestMovable : public QObject
 
 		void costructor1() {
 			Movable l;
-			QCOMPARE(l.getX(), 0);
-			QCOMPARE(l.getY(), 0);
+			QCOMPARE(l.x(), 0);
+			QCOMPARE(l.y(), 0);
 		}
 		void costructor2_data() {
 			common_data();
@@ -41,8 +41,8 @@ class TestMovable : public QObject
 			QFETCH(int, x);
 			QFETCH(int, y);
 			Movable l(x,y);
-			QCOMPARE(l.getX(), x);
-			QCOMPARE(l.getY(), y);
+			QCOMPARE(l.x(), x);
+			QCOMPARE(l.y(), y);
 		}
 		void costructor3_data() {
 			common_data();
@@ -56,14 +56,14 @@ class TestMovable : public QObject
 			Located l4(x,y);
 			Movable l5 = l4;
 			Movable l6(l4);
-			QCOMPARE(l2.getX(), x);
-			QCOMPARE(l2.getY(), y);
-			QCOMPARE(l3.getX(), x);
-			QCOMPARE(l3.getY(), y);
-			QCOMPARE(l5.getX(), x);
-			QCOMPARE(l5.getY(), y);
-			QCOMPARE(l6.getX(), x);
-			QCOMPARE(l6.getY(), y);
+			QCOMPARE(l2.x(), x);
+			QCOMPARE(l2.y(), y);
+			QCOMPARE(l3.x(), x);
+			QCOMPARE(l3.y(), y);
+			QCOMPARE(l5.x(), x);
+			QCOMPARE(l5.y(), y);
+			QCOMPARE(l6.x(), x);
+			QCOMPARE(l6.y(), y);
 
 		}
 
@@ -80,12 +80,12 @@ class TestMovable : public QObject
 			l1.setY(y);
 			l2.setMovable(x,y);
 			l3.setMovable(l1);
-			QCOMPARE(l1.getX(), x);
-			QCOMPARE(l1.getY(), y);
-			QCOMPARE(l2.getX(), x);
-			QCOMPARE(l2.getY(), y);
-			QCOMPARE(l3.getX(), x);
-			QCOMPARE(l3.getY(), y);
+			QCOMPARE(l1.x(), x);
+			QCOMPARE(l1.y(), y);
+			QCOMPARE(l2.x(), x);
+			QCOMPARE(l2.y(), y);
+			QCOMPARE(l3.x(), x);
+			QCOMPARE(l3.y(), y);
 		}
 
 };
