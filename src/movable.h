@@ -34,6 +34,14 @@ class Movable : public QObject, public Located
 		 */
 		Movable(const Located& loc);
 
+	signals:
+		/**
+		 * @brief This signal is emitted whenever the location is changed
+		 * @param New location
+		 */
+		void locationChanged(const Located& newLocation);
+
+	public slots:
 		/**
 		 * @brief Set the coordinate X
 		 * @param New coordinte X
@@ -56,11 +64,6 @@ class Movable : public QObject, public Located
 		 * @param Located object
 		 */
 		void setMovable(const Located& loc);
-
-
-	signals:
-
-	public slots:
 
 };
 

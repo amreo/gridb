@@ -76,6 +76,15 @@ class TestMovable : public QObject
 			Movable l1;
 			Movable l2;
 			Movable l3;
+			Movable l1_receiver;
+			Movable l2_receiver;
+			Movable l3_receiver;
+			connect(&l1, SIGNAL(locationChanged(const Located&)),
+					&l1_receiver, SLOT(setMovable(const Located&)));
+			connect(&l2, SIGNAL(locationChanged(const Located&)),
+					&l2_receiver, SLOT(setMovable(const Located&)));
+			connect(&l3, SIGNAL(locationChanged(const Located&)),
+					&l3_receiver, SLOT(setMovable(const Located&)));
 			l1.setX(x);
 			l1.setY(y);
 			l2.setMovable(x,y);
@@ -86,6 +95,13 @@ class TestMovable : public QObject
 			QCOMPARE(l2.y(), y);
 			QCOMPARE(l3.x(), x);
 			QCOMPARE(l3.y(), y);
+
+			QCOMPARE(l1_receiver.x(), x);
+			QCOMPARE(l1_receiver.y(), y);
+			QCOMPARE(l2_receiver.x(), x);
+			QCOMPARE(l2_receiver.y(), y);
+			QCOMPARE(l3_receiver.x(), x);
+			QCOMPARE(l3_receiver.y(), y);
 		}
 
 };
