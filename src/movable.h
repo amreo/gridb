@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "located.h"
+#include "direction.h"
 
 /**
  * @brief This class is the base class of any movable objects
@@ -52,7 +53,6 @@ class Movable : public QObject, public Located
 		 * @param New coordinte Y
 		 */
 		void setY(int y);
-
 		/**
 		 * @brief Set the coordinate x and y
 		 * @param New coordinate x
@@ -65,6 +65,18 @@ class Movable : public QObject, public Located
 		 */
 		void setMovable(const Located& loc);
 
+		/**
+		 * @brief Move the coordinate by offset
+		 * @param offset x
+		 * @param offset y
+		 */
+		void move(int offsetX, int offsetY);
+		/**
+		 * @brief Move the coordinate by direction and offset
+		 * @param dir
+		 * @param offset
+		 */
+		void move(const Direction& dir, int offset = 0);
 };
 
 #endif // MOVABLE_H

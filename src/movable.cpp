@@ -43,3 +43,17 @@ void Movable::setMovable(const Located& loc)
 	this->_y = loc.y();
 	emit locationChanged(*this);
 }
+
+void Movable::move(int offsetX, int offsetY)
+{
+	this->_x += offsetX;
+	this->_y += offsetY;
+	emit locationChanged(*this);
+}
+
+void Movable::move(const Direction& dir, int offset)
+{
+	this->_x += offset * dir.coefficientX();
+	this->_y += offset * dir.coefficientY();
+	emit locationChanged(*this);
+}
