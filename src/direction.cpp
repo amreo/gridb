@@ -159,12 +159,12 @@ bool Direction::operator!=(const Direction& dir2)
 	return this->_coefficientX != dir2._coefficientX || this->_coefficientY != dir2._coefficientY;
 }
 
-Direction Direction::NONE = Direction(0, 0);
-Direction Direction::UP = Direction(0, -1);
-Direction Direction::UP_RIGHT = Direction(1, -1);
-Direction Direction::RIGHT = Direction(1, 0);
-Direction Direction::DOWN_RIGHT = Direction(1, 1);
-Direction Direction::DOWN = Direction(0, 1);
-Direction Direction::DOWN_LEFT = Direction(-1, 1);
-Direction Direction::LEFT  = Direction(-1, 0);
-Direction Direction::UP_LEFT = Direction(-1, -1);
+const Direction Direction::NONE = Direction(0, 0);
+const Direction Direction::UP = Direction(0, -1);
+const Direction Direction::UP_RIGHT = Direction(1, -1);
+const Direction Direction::RIGHT = Direction(1, 0);
+const Direction Direction::DOWN_RIGHT = Direction(1, 1);
+const Direction Direction::DOWN = Direction(0, 1);
+const Direction Direction::DOWN_LEFT = Direction(-1, 1);
+const Direction Direction::LEFT  = Direction(-1, 0);
+const Direction Direction::UP_LEFT = Direction(-1, -1);

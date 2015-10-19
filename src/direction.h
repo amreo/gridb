@@ -146,39 +146,39 @@ class SRCSHARED_EXPORT Direction
 		/**
 		 * @brief Direction NONE (0; 0)
 		 */
-		static Direction NONE;
+		const static Direction NONE;
 		/**
 		 * @brief Direction UP (0; -1)
 		 */
-		static Direction UP;
+		const static Direction UP;
 		/**
 		 * @brief Direction UP_RIGHT (1; -1)
 		 */
-		static Direction UP_RIGHT;
+		const static Direction UP_RIGHT;
 		/**
 		 * @brief Direction RIGHT (1; 0)
 		 */
-		static Direction RIGHT;
+		const static Direction RIGHT;
 		/**
 		 * @brief Direction DOWN_RIGHT (1; 1)
 		 */
-		static Direction DOWN_RIGHT;
+		const static Direction DOWN_RIGHT;
 		/**
 		 * @brief Direction DOWN (0; 1)
 		 */
-		static Direction DOWN;
+		const static Direction DOWN;
 		/**
 		 * @brief Direction DOWN_LEFT (-1; 1)
 		 */
-		static Direction DOWN_LEFT;
+		const static Direction DOWN_LEFT;
 		/**
 		 * @brief Direction LEFT (-1; 0)
 		 */
-		static Direction LEFT;
+		const static Direction LEFT;
 		/**
 		 * @brief Direction UP_LEFT (-1; -1)
 		 */
-		static Direction UP_LEFT;
+		const static Direction UP_LEFT;
 
 	protected:
 		/**
