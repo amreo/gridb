@@ -43,6 +43,14 @@ class SRCSHARED_EXPORT Located
 		 */
 		Located getLocation();
 
+		/**
+		 * @brief Check if the location are equal
+		 * @param First location
+		 * @param Second location
+		 * @return True if are in the same location (x and y), else false
+		 */
+		static bool isLocationEqual(const Located& loc1, const Located& loc2);
+
 	protected:
 		/**
 		 * @brief Coordinate x

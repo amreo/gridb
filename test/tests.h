@@ -6,7 +6,6 @@
 #include "located.h"
 #include "direction.h"
 #include "movable.h"
-
 Q_DECLARE_METATYPE(Direction)
 
 
@@ -71,6 +70,39 @@ class Test : public QObject
 			Located l2 = l.getLocation();
 			QCOMPARE(l2.x(), x);
 			QCOMPARE(l2.y(), y);
+		}
+		void testLocated_equalLocation_data() {
+			QTest::addColumn<int>("x1");
+			QTest::addColumn<int>("y1");
+			QTest::addColumn<int>("x2");
+			QTest::addColumn<int>("y2");
+			QTest::addColumn<bool>("result");
+
+			QTest::newRow("0;0 0;0") << 0 << 0 << 0 << 0 << true;
+			QTest::newRow("1;0 1;0") << 1 << 0 << 1 << 0 << true;
+			QTest::newRow("0;1 0;1") << 0 << 1 << 0 << 1 << true;
+			QTest::newRow("1;1 1;1") << 1 << 1 << 1 << 1 << true;
+			QTest::newRow("-1:0 -1;0") << -1 << 0 << -1 << 0 << true;
+			QTest::newRow("0;-1 0;-1") << 0 << -1 << 0 << -1 << true;
+			QTest::newRow("-1;-1 -1;-1") << -1 << -1 << -1 << -1 << true;
+
+			QTest::newRow("0;0 2;0") << 0 << 0 << 2 << 0 << false;
+			QTest::newRow("1;0 1;2") << 1 << 0 << 1 << 2 << false;
+			QTest::newRow("2;1 0;1") << 2 << 1 << 0 << 1 << false;
+			QTest::newRow("1;2 1;1") << 1 << 2 << 1 << 1 << false;
+			QTest::newRow("-3:0 -1;0") << -3 << 0 << -1 << 0 << false;
+			QTest::newRow("0;-10 0;-1") << 0 << -10 << 0 << -1 << false;
+			QTest::newRow("-1;6 -1;-1") << -1 << 6 << -1 << -1 << false;
+		}
+		void testLocated_equalLocation() {
+			QFETCH(int, x1);
+			QFETCH(int, y1);
+			QFETCH(int, x2);
+			QFETCH(int, y2);
+			QFETCH(bool, result);
+
+			QCOMPARE(Located::isLocationEqual(Located(x1,y1), Located(x2, y2)), result);
+			QCOMPARE(Located::isLocationEqual(Located(x1,y1), Movable(x2, y2)), result);
 		}
 
 

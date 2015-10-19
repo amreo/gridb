@@ -25,3 +25,8 @@ Located Located::getLocation()
 {
 	return Located(this->_x, this->_y);
 }
+
+bool Located::isLocationEqual(const Located& loc1, const Located& loc2)
+{
+	return loc1._x == loc2._x && loc1._y == loc2._y;
+}
