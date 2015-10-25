@@ -22,12 +22,14 @@ macx:OBJECTS_DIR = ../build/o/mac
 
 SOURCES += located.cpp \
     direction.cpp \
-    movable.cpp
+    movable.cpp \
+    coord.cpp
 
 HEADERS += located.h\
         src_global.h \
     direction.h \
-    movable.h
+    movable.h \
+    coord.h
 
 unix {
     target.path = /usr/lib

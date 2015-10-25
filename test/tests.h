@@ -6,6 +6,7 @@
 #include "located.h"
 #include "direction.h"
 #include "movable.h"
+#include "coord.h"
 Q_DECLARE_METATYPE(Direction)
 
 
@@ -32,7 +33,7 @@ class Test : public QObject
 			QTest::newRow("x=-1 y=-1") << -1 << -1;
 		}
 		void testLocated_costructor1() {
-			Located l;
+			Coord l;
 			QCOMPARE(l.x(), 0);
 			QCOMPARE(l.y(), 0);
 		}
@@ -42,7 +43,7 @@ class Test : public QObject
 		void testLocated_costructor2() {
 			QFETCH(int, x);
 			QFETCH(int, y);
-			Located l(x,y);
+			Coord l(x,y);
 			QCOMPARE(l.x(), x);
 			QCOMPARE(l.y(), y);
 		}
@@ -52,7 +53,7 @@ class Test : public QObject
 		void testLocated_costructor3() {
 			QFETCH(int, x);
 			QFETCH(int, y);
-			Located l(x,y);
+			Coord l(x,y);
 			Located l2 = l;
 			Located l3(l);
 			QCOMPARE(l2.x(), x);
@@ -66,7 +67,7 @@ class Test : public QObject
 		void testLocated_getLocation() {
 			QFETCH(int, x);
 			QFETCH(int, y);
-			Located l(x,y);
+			Coord l(x,y);
 			Located l2 = l.getLocation();
 			QCOMPARE(l2.x(), x);
 			QCOMPARE(l2.y(), y);
@@ -101,8 +102,8 @@ class Test : public QObject
 			QFETCH(int, y2);
 			QFETCH(bool, result);
 
-			QCOMPARE(Located::isLocationEqual(Located(x1,y1), Located(x2, y2)), result);
-			QCOMPARE(Located::isLocationEqual(Located(x1,y1), Movable(x2, y2)), result);
+			QCOMPARE(Located::isLocationEqual(Coord(x1,y1), Coord(x2, y2)), result);
+			QCOMPARE(Located::isLocationEqual(Coord(x1,y1), Coord(x2, y2)), result);
 		}
 
 
@@ -386,7 +387,7 @@ class Test : public QObject
 			QTest::newRow("x=-1 y=-1") << -1 << -1;
 		}
 		void testMovable_costructor1() {
-			Movable l;
+			Coord l;
 			QCOMPARE(l.x(), 0);
 			QCOMPARE(l.y(), 0);
 		}
@@ -396,7 +397,7 @@ class Test : public QObject
 		void testMovable_costructor2() {
 			QFETCH(int, x);
 			QFETCH(int, y);
-			Movable l(x,y);
+			Coord l(x,y);
 			QCOMPARE(l.x(), x);
 			QCOMPARE(l.y(), y);
 		}
@@ -406,20 +407,13 @@ class Test : public QObject
 		void testMovable_costructor3() {
 			QFETCH(int, x);
 			QFETCH(int, y);
-			Movable l(x,y);
+			Coord l(x,y);
 			Movable l2 = l;
 			Movable l3(l);
-			Located l4(x,y);
-			Movable l5 = l4;
-			Movable l6(l4);
 			QCOMPARE(l2.x(), x);
 			QCOMPARE(l2.y(), y);
 			QCOMPARE(l3.x(), x);
 			QCOMPARE(l3.y(), y);
-			QCOMPARE(l5.x(), x);
-			QCOMPARE(l5.y(), y);
-			QCOMPARE(l6.x(), x);
-			QCOMPARE(l6.y(), y);
 
 		}
 		void testMovable_set_data() {
@@ -428,12 +422,12 @@ class Test : public QObject
 		void testMovable_set() {
 			QFETCH(int, x);
 			QFETCH(int, y);
-			Movable l1;
-			Movable l2;
-			Movable l3;
-			Movable l1_receiver;
-			Movable l2_receiver;
-			Movable l3_receiver;
+			Coord l1;
+			Coord l2;
+			Coord l3;
+			Coord l1_receiver;
+			Coord l2_receiver;
+			Coord l3_receiver;
 			connect(&l1, SIGNAL(locationChanged(const Located&)),
 					&l1_receiver, SLOT(setMovable(const Located&)));
 			connect(&l2, SIGNAL(locationChanged(const Located&)),
@@ -488,16 +482,16 @@ class Test : public QObject
 			QFETCH(int, toX);
 			QFETCH(int, toY);
 
-			Movable mov(fromX, fromY);
-			Movable mov_receiver;
-			Movable mov2(fromX, fromY);
-			Movable mov2_receiver;
+			Coord mov(fromX, fromY);
+			Coord mov_receiver;
+			Coord mov2(fromX, fromY);
+			Coord mov2_receiver;
 			connect(&mov, SIGNAL(locationChanged(const Located&)),
 					&mov_receiver, SLOT(setMovable(const Located&)));
 			connect(&mov2, SIGNAL(locationChanged(const Located&)),
 					&mov2_receiver, SLOT(setMovable(const Located&)));
 			mov.move(offX, offY);
-			mov2.move(Located(offX, offY));
+			mov2.move(Coord(offX, offY));
 
 			QCOMPARE(mov.x(), toX);
 			QCOMPARE(mov.y(), toY);
@@ -529,8 +523,8 @@ class Test : public QObject
 			QFETCH(int, toX);
 			QFETCH(int, toY);
 
-			Movable mov(fromX, fromY);
-			Movable mov_receiver;
+			Coord mov(fromX, fromY);
+			Coord mov_receiver;
 			connect(&mov, SIGNAL(locationChanged(const Located&)),
 					&mov_receiver, SLOT(setMovable(const Located&)));
 			mov.move(dir, off);

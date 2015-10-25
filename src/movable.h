@@ -6,8 +6,7 @@
 #include "direction.h"
 
 /**
- * @brief This class is the base class of any movable objects
- *		  and it can rappresent a movable position in 2D space
+ * @brief This class is the base class of any movable objects in 2D space
  * @author amreo
  * @version 0.1
  * @since 0.1
@@ -17,12 +16,6 @@ class Movable : public QObject, public Located
 		Q_OBJECT
 
 	public:
-		/**
-		 * @brief Create a new instance of movable position or object
-		 * @param Coordinate x
-		 * @param Coordinate y
-		 */
-		Movable(int x = 0, int y = 0, QObject *parent = 0);
 
 		/**
 		 * @brief Create a new instance of movable position from movable object
@@ -82,6 +75,14 @@ class Movable : public QObject, public Located
 		 * @param offset X and Y
 		 */
 		void move(const Located& offset);
+
+	protected:
+		/**
+		 * @brief Create a new instance of movable position or object
+		 * @param Coordinate x
+		 * @param Coordinate y
+		 */
+		Movable(int x = 0, int y = 0, QObject *parent = 0);
 };
 
 #endif // MOVABLE_H
