@@ -1,7 +1,6 @@
 
 #include "tests.h"
 #include <QDebug>
-#define ADD(name,test) at.addTest(name, new test)
 
 /**
  * @author amreo
