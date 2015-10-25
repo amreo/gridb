@@ -19,6 +19,11 @@ Coord Coord::sub(const Located& left, const Located& right)
 	return Coord(left.x()-right.x(), left.y()-right.y());
 }
 
+Coord Coord::sub(const Located& left, const Direction& dir, int offset)
+{
+	return Coord(left.x()-dir.coefficientX()*offset, left.y()-dir.coefficientY()*offset);
+}
+
 Coord Coord::operator+(const Located& right)
 {
 	return Coord(this->x()+right.x(), this->y()+right.y());

@@ -27,10 +27,11 @@ class Coord : public Movable
 		 */
 		static Coord sum(const Located& left, const Located& right);
 		/**
-		 * @brief Sum the left and the right
+		 * @brief Sum the left and the direction
 		 * @param left
-		 * @param right
-		 * @return the sum of left and right
+		 * @param the direction
+		 * @param offset
+		 * @return the sum of left and the Direction
 		 */
 		static Coord sum(const Located& left, const Direction& dir, int offset = 1);
 		/**
@@ -40,6 +41,14 @@ class Coord : public Movable
 		 * @return the sum of left and -right
 		 */
 		static Coord sub(const Located& left, const Located& right);
+		/**
+		 * @brief Sub the left and the direction
+		 * @param left
+		 * @param the direction
+		 * @param offset
+		 * @return the sum of left and the Direction
+		 */
+		static Coord sub(const Located& left, const Direction& dir, int offset = 1);
 
 
 		/**
