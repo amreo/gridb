@@ -64,3 +64,15 @@ void Movable::move(const Located& offset)
 	this->_y += offset.y();
 	emit locationChanged(*this);
 }
+
+Movable Movable::operator >>(const Located& loc)
+{
+	this->move(loc);
+	return *this;
+}
+
+Movable Movable::operator <<(const Located& loc)
+{
+	this->move(-loc.x(), -loc.y());
+	return *this;
+}

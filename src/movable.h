@@ -28,6 +28,17 @@ class Movable : public QObject, public Located
 		 */
 		Movable(const Located& loc);
 
+		/**
+		 * @brief Move the coordinte by the offset loc
+		 * @param offset x and y
+		 */
+		Movable operator >>(const Located& loc);
+		/**
+		 * @brief Move the coordinte by the offset -loc
+		 * @param offset x and y
+		 */
+		Movable operator <<(const Located& loc);
+
 	signals:
 		/**
 		 * @brief This signal is emitted whenever the location is changed
@@ -69,7 +80,7 @@ class Movable : public QObject, public Located
 		 * @param dir
 		 * @param offset
 		 */
-		void move(const Direction& dir, int offset = 0);
+		void move(const Direction& dir, int offset = 1);
 		/**
 		 * @brief Move the coordinate by the offset
 		 * @param offset X and Y

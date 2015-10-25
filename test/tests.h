@@ -486,12 +486,17 @@ class Test : public QObject
 			Coord mov_receiver;
 			Coord mov2(fromX, fromY);
 			Coord mov2_receiver;
+			Coord mov3(fromX, fromY);
+			Coord mov3_receiver;
 			connect(&mov, SIGNAL(locationChanged(const Located&)),
 					&mov_receiver, SLOT(setMovable(const Located&)));
 			connect(&mov2, SIGNAL(locationChanged(const Located&)),
 					&mov2_receiver, SLOT(setMovable(const Located&)));
+			connect(&mov3, SIGNAL(locationChanged(const Located&)),
+					&mov3_receiver, SLOT(setMovable(const Located&)));
 			mov.move(offX, offY);
 			mov2.move(Coord(offX, offY));
+			mov3>>Coord(offX, offY);
 
 			QCOMPARE(mov.x(), toX);
 			QCOMPARE(mov.y(), toY);
@@ -501,6 +506,10 @@ class Test : public QObject
 			QCOMPARE(mov2.y(), toY);
 			QCOMPARE(mov2_receiver.x(), toX);
 			QCOMPARE(mov2_receiver.y(), toY);
+			QCOMPARE(mov3.x(), toX);
+			QCOMPARE(mov3.y(), toY);
+			QCOMPARE(mov3_receiver.x(), toX);
+			QCOMPARE(mov3_receiver.y(), toY);
 		}
 		void testMovable_move2_data() {
 			QTest::addColumn<int>("fromX");
@@ -534,6 +543,47 @@ class Test : public QObject
 			QCOMPARE(mov_receiver.x(), toX);
 			QCOMPARE(mov_receiver.y(), toY);
 		}
+		void testMovable_negative_move_data() {
+			QTest::addColumn<int>("fromX");
+			QTest::addColumn<int>("fromY");
+			QTest::addColumn<int>("offX");
+			QTest::addColumn<int>("offY");
+			QTest::addColumn<int>("toX");
+			QTest::addColumn<int>("toY");
+
+			QTest::newRow("0;0 - 1;1") << 0 << 0 << 1 << 1 << -1 << -1;
+			QTest::newRow("0;0 - -1;-1") << 0 << 0 << -1 << -1 << 1 << 1;
+			QTest::newRow("-1;-1 - -1;-1") << -1 << -1 << -1 << -1 << 0 << 0;
+			QTest::newRow("-1;-1 - 1;1") << -1 << -1 << 1 << 1 << -2 << -2;
+			QTest::newRow("1;1 - 1;1") << 1 << 1 << 1 << 1 << 0 << 0;
+			QTest::newRow("1;1 - -1;-1") << 1 << 1 << -1 << -1 << 2 << 2;
+
+			QTest::newRow("0;0 - 2;4") << 0 << 0 << 2 << 4 << -2 << -4;
+			QTest::newRow("0;0 - -2;-4") << 0 << 0 << -2 << -4 << 2 << 4;
+			QTest::newRow("-2;-4 - -2;-4") << -2 << -4 << -2 << -4 << 0 << 0;
+			QTest::newRow("-2;-4 - 2;4") << -2 << -4 << 2 << 4 << -4 << -8;
+			QTest::newRow("2;4 - 2;4") << 2 << 4 << 2 << 4 << 0 << 0;
+			QTest::newRow("2;4 - -2;-4") << 2 << 4 << -2 << -4 << 4 << 8;
+		}
+		void testMovable_negative_move() {
+			QFETCH(int, fromX);
+			QFETCH(int, fromY);
+			QFETCH(int, offX);
+			QFETCH(int, offY);
+			QFETCH(int, toX);
+			QFETCH(int, toY);
+			Movable mov = Coord(fromX, fromY);
+			Movable mov_receiver = Coord();
+			connect(&mov, SIGNAL(locationChanged(const Located&)),
+					&mov_receiver, SLOT(setMovable(const Located&)));
+
+			mov << Coord(offX, offY);
+
+			QCOMPARE(mov.x(), toX);
+			QCOMPARE(mov.y(), toY);
+			QCOMPARE(mov_receiver.x(), toX);
+			QCOMPARE(mov_receiver.y(), toY);
+		}
 
 		void testCoord_sum_data() {
 			testMovable_move13_data();
@@ -557,26 +607,7 @@ class Test : public QObject
 			QCOMPARE(dest2.y(), toY);
 		}
 		void testCoord_sub_data() {
-			QTest::addColumn<int>("fromX");
-			QTest::addColumn<int>("fromY");
-			QTest::addColumn<int>("offX");
-			QTest::addColumn<int>("offY");
-			QTest::addColumn<int>("toX");
-			QTest::addColumn<int>("toY");
-
-			QTest::newRow("0;0 - 1;1") << 0 << 0 << 1 << 1 << -1 << -1;
-			QTest::newRow("0;0 - -1;-1") << 0 << 0 << -1 << -1 << 1 << 1;
-			QTest::newRow("-1;-1 - -1;-1") << -1 << -1 << -1 << -1 << 0 << 0;
-			QTest::newRow("-1;-1 - 1;1") << -1 << -1 << 1 << 1 << -2 << -2;
-			QTest::newRow("1;1 - 1;1") << 1 << 1 << 1 << 1 << 0 << 0;
-			QTest::newRow("1;1 - -1;-1") << 1 << 1 << -1 << -1 << 2 << 2;
-
-			QTest::newRow("0;0 - 2;4") << 0 << 0 << 2 << 4 << -2 << -4;
-			QTest::newRow("0;0 - -2;-4") << 0 << 0 << -2 << -4 << 2 << 4;
-			QTest::newRow("-2;-4 - -2;-4") << -2 << -4 << -2 << -4 << 0 << 0;
-			QTest::newRow("-2;-4 - 2;4") << -2 << -4 << 2 << 4 << -4 << -8;
-			QTest::newRow("2;4 - 2;4") << 2 << 4 << 2 << 4 << 0 << 0;
-			QTest::newRow("2;4 - -2;-4") << 2 << 4 << -2 << -4 << 4 << 8;
+			testMovable_negative_move_data();
 		}
 		void testCoord_sub() {
 			QFETCH(int, fromX);
