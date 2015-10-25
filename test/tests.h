@@ -248,7 +248,6 @@ class Test : public QObject
 			QFETCH(Direction, dir1);
 			QFETCH(Direction, dir2);
 			QFETCH(Direction, dir3);
-
 			Direction dir6 = Direction::sum(dir1,dir2);
 			Direction dir4 = Direction::sum(dir1.coefficientX(),dir1.coefficientY(), dir2.coefficientX(), dir2.coefficientY());
 			Direction dir5 = dir1 + dir2;
@@ -627,7 +626,54 @@ class Test : public QObject
 			QCOMPARE(dest2.x(), toX);
 			QCOMPARE(dest2.y(), toY);
 		}
+		void testCoord_sum_with_direction_data() {
+			QTest::addColumn<int>("fromX");
+			QTest::addColumn<int>("fromY");
+			QTest::addColumn<Direction>("dir");
+			QTest::addColumn<int>("toX");
+			QTest::addColumn<int>("toY");
 
+			QTest::newRow("0;0 UP 1") << 0 << 0 << Direction::UP << 0 << -1;
+			QTest::newRow("0;0 DOWN_LEFT 1") << 0 << 0 << Direction::DOWN_LEFT << -1 << 1;
+		}
+		void testCoord_sum_with_direction() {
+			QFETCH(int, fromX);
+			QFETCH(int, fromY);
+			QFETCH(Direction, dir);
+			QFETCH(int, toX);
+			QFETCH(int, toY);
+
+			Coord src(fromX, fromY);
+			Coord dest = src+dir;
+
+			QCOMPARE(dest.x(), toX);
+			QCOMPARE(dest.y(), toY);
+		}
+		void testCoord_sub_with_direction_data() {
+			QTest::addColumn<int>("fromX");
+			QTest::addColumn<int>("fromY");
+			QTest::addColumn<Direction>("dir");
+			QTest::addColumn<int>("toX");
+			QTest::addColumn<int>("toY");
+
+			QTest::newRow("0;0 UP 1") << 0 << 0 << Direction::UP << 0 << +1;
+			QTest::newRow("0;0 DOWN_LEFT 1") << 0 << 0 << Direction::DOWN_LEFT << +1 << -1;
+			QTest::newRow("4;8 UP 1") << 4 << 8 << Direction::UP << 4 << +9;
+			QTest::newRow("4;8 DOWN_LEFT 1") << 4 << 8 << Direction::DOWN_LEFT << 5 << 7;
+		}
+		void testCoord_sub_with_direction() {
+			QFETCH(int, fromX);
+			QFETCH(int, fromY);
+			QFETCH(Direction, dir);
+			QFETCH(int, toX);
+			QFETCH(int, toY);
+
+			Coord src(fromX, fromY);
+			Coord dest = src-dir;
+
+			QCOMPARE(dest.x(), toX);
+			QCOMPARE(dest.y(), toY);
+		}
 };
 
 #endif // TESTS_H

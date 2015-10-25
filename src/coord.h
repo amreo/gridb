@@ -42,11 +42,23 @@ class Coord : public Movable
 		 */
 		Coord operator+(const Located& right);
 		/**
+		 * @brief Move the coord by direction*1
+		 * @param Direction
+		 * @return the coord moved
+		 */
+		Coord operator+(const Direction& right);
+		/**
 		 * @brief Move the coord by -offset right
 		 * @param Offset X and Y
 		 * @return the coord moved
 		 */
 		Coord operator-(const Located& right);
+		/**
+		 * @brief Move the coord by -offset right
+		 * @param Offset X and Y
+		 * @return the coord moved
+		 */
+		Coord operator-(const Direction& right);
 	signals:
 
 	public slots:
