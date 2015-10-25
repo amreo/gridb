@@ -535,6 +535,67 @@ class Test : public QObject
 			QCOMPARE(mov_receiver.y(), toY);
 		}
 
+		void testCoord_sum_data() {
+			testMovable_move13_data();
+		}
+		void testCoord_sum() {
+			QFETCH(int, fromX);
+			QFETCH(int, fromY);
+			QFETCH(int, offX);
+			QFETCH(int, offY);
+			QFETCH(int, toX);
+			QFETCH(int, toY);
+
+			Coord src(fromX, fromY);
+			Coord off(offX, offY);
+			Coord dest1 = src+off;
+			Coord dest2 = Coord::sum(src,off);
+
+			QCOMPARE(dest1.x(), toX);
+			QCOMPARE(dest1.y(), toY);
+			QCOMPARE(dest2.x(), toX);
+			QCOMPARE(dest2.y(), toY);
+		}
+		void testCoord_sub_data() {
+			QTest::addColumn<int>("fromX");
+			QTest::addColumn<int>("fromY");
+			QTest::addColumn<int>("offX");
+			QTest::addColumn<int>("offY");
+			QTest::addColumn<int>("toX");
+			QTest::addColumn<int>("toY");
+
+			QTest::newRow("0;0 - 1;1") << 0 << 0 << 1 << 1 << -1 << -1;
+			QTest::newRow("0;0 - -1;-1") << 0 << 0 << -1 << -1 << 1 << 1;
+			QTest::newRow("-1;-1 - -1;-1") << -1 << -1 << -1 << -1 << 0 << 0;
+			QTest::newRow("-1;-1 - 1;1") << -1 << -1 << 1 << 1 << -2 << -2;
+			QTest::newRow("1;1 - 1;1") << 1 << 1 << 1 << 1 << 0 << 0;
+			QTest::newRow("1;1 - -1;-1") << 1 << 1 << -1 << -1 << 2 << 2;
+
+			QTest::newRow("0;0 - 2;4") << 0 << 0 << 2 << 4 << -2 << -4;
+			QTest::newRow("0;0 - -2;-4") << 0 << 0 << -2 << -4 << 2 << 4;
+			QTest::newRow("-2;-4 - -2;-4") << -2 << -4 << -2 << -4 << 0 << 0;
+			QTest::newRow("-2;-4 - 2;4") << -2 << -4 << 2 << 4 << -4 << -8;
+			QTest::newRow("2;4 - 2;4") << 2 << 4 << 2 << 4 << 0 << 0;
+			QTest::newRow("2;4 - -2;-4") << 2 << 4 << -2 << -4 << 4 << 8;
+		}
+		void testCoord_sub() {
+			QFETCH(int, fromX);
+			QFETCH(int, fromY);
+			QFETCH(int, offX);
+			QFETCH(int, offY);
+			QFETCH(int, toX);
+			QFETCH(int, toY);
+
+			Coord src(fromX, fromY);
+			Coord off(+offX, +offY);
+			Coord dest1 = src-off;
+			Coord dest2 = Coord::sub(src,off);
+
+			QCOMPARE(dest1.x(), toX);
+			QCOMPARE(dest1.y(), toY);
+			QCOMPARE(dest2.x(), toX);
+			QCOMPARE(dest2.y(), toY);
+		}
 
 };
 
