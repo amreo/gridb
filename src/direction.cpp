@@ -159,6 +159,16 @@ bool Direction::operator!=(const Direction& dir2)
 	return this->_coefficientX != dir2._coefficientX || this->_coefficientY != dir2._coefficientY;
 }
 
+Direction Direction::operator<<(int times)
+{
+	return this->getDirectionRotated(-times);
+}
+
+Direction Direction::operator>>(int times)
+{
+	return this->getDirectionRotated(times);
+}
+
 const Direction Direction::NONE = Direction(0, 0);
 const Direction Direction::UP = Direction(0, -1);
 const Direction Direction::UP_RIGHT = Direction(1, -1);

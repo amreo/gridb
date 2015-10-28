@@ -339,9 +339,13 @@ class Test : public QObject
 			QFETCH(Direction, result);
 
 			Direction dir2 = dir.getDirectionRotated(times);
+			Direction dir3 = dir>>times;
+
 
 			QCOMPARE(dir2.coefficientX(), result.coefficientX());
 			QCOMPARE(dir2.coefficientY(), result.coefficientY());
+			QCOMPARE(dir3.coefficientX(), result.coefficientX());
+			QCOMPARE(dir3.coefficientY(), result.coefficientY());
 		}
 		void testDirection_angle_data() {
 			QTest::addColumn <Direction> ("dir");

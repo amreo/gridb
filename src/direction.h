@@ -144,6 +144,19 @@ class SRCSHARED_EXPORT Direction
 		bool operator!= (const Direction& dir2);
 
 		/**
+		 * @brief Rotate anticlockwise for times
+		 * @param times to rotate
+		 * @return The direction rotated
+		 */
+		Direction operator<<(int times);
+		/**
+		 * @brief Rotate clockwise for times
+		 * @param times to rotate
+		 * @return The direction rotated
+		 */
+		Direction operator>>(int times);
+
+		/**
 		 * @brief Direction NONE (0; 0)
 		 */
 		const static Direction NONE;
