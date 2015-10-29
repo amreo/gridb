@@ -24,14 +24,16 @@ SOURCES += located.cpp \
     direction.cpp \
     movable.cpp \
     coord.cpp \
-    coordselecter.cpp
+    coordselecter.cpp \
+    listcoordselecter.cpp
 
 HEADERS += located.h\
         src_global.h \
     direction.h \
     movable.h \
     coord.h \
-    coordselecter.h
+    coordselecter.h \
+    listcoordselecter.h
 
 unix {
     target.path = /usr/lib

@@ -7,8 +7,10 @@
 #include "direction.h"
 #include "movable.h"
 #include "coord.h"
+#include "coordselecter.h"
+#include "listcoordselecter.h"
 Q_DECLARE_METATYPE(Direction)
-
+Q_DECLARE_METATYPE(Coord)
 
 /**
  * @author amreo
@@ -694,6 +696,31 @@ class Test : public QObject
 				QCOMPARE(dest2.y(), toY);
 			}
 		}
+
+
+		void testListCoordSelecter_select_data() {
+			QTest::addColumn<Coord>("loc");
+
+			QTest::newRow("0 0") << Coord(0,0);
+			QTest::newRow("1 1") << Coord(1,1);
+			QTest::newRow("-1 1") << Coord(-1,1);
+		}
+		void testListCoordSelecter_select() {
+			QFETCH(Coord, loc);
+			ListCoordSelecter sel = ListCoordSelecter();
+			ListCoordSelecter sel2 = ListCoordSelecter();
+
+			QCOMPARE(sel.isSelected(loc), false);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
+			sel.select(loc);
+			QCOMPARE(sel.isSelected(loc), true);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), true);
+
+			sel2.select(loc.x(), loc.y());
+			QCOMPARE(sel2.isSelected(loc), true);
+			QCOMPARE(sel2.isSelected(loc.x(), loc.y()), true);
+		}
+
 };
 
 #endif // TESTS_H
