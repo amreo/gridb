@@ -731,7 +731,36 @@ class Test : public QObject
 			sel->deSelect(loc.x(), loc.y());
 			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
 		}
-
+		void testCoordSelecter_test3_data() {
+			testCoordSelecter_test_data();
+		}
+		void testCoordSelecter_test3(CoordSelecter* sel)
+		{
+			QFETCH(Coord, loc);
+			QCOMPARE(sel->isSelected(loc), false);
+			sel->select(loc);
+			sel->select(loc);
+			QCOMPARE(sel->isSelected(loc), true);
+			sel->deSelect(loc);
+			QCOMPARE(sel->isSelected(loc), false);
+			sel->deSelect(loc);
+			QCOMPARE(sel->isSelected(loc), false);
+		}
+		void testCoordSelecter_test4_data() {
+			testCoordSelecter_test_data();
+		}
+		void testCoordSelecter_test4(CoordSelecter* sel)
+		{
+			QFETCH(Coord, loc);
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
+			sel->select(loc.x(), loc.y());
+			sel->select(loc.x(), loc.y());
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), true);
+			sel->deSelect(loc.x(), loc.y());
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
+			sel->deSelect(loc.x(), loc.y());
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
+		}
 
 		void testListCoordSelecter_test1_data() {
 			testCoordSelecter_test1_data();
@@ -745,7 +774,18 @@ class Test : public QObject
 		void testListCoordSelecter_test2() {
 			testCoordSelecter_test2(new ListCoordSelecter());
 		}
-
+		void testListCoordSelecter_test3_data() {
+			testCoordSelecter_test1_data();
+		}
+		void testListCoordSelecter_test3() {
+			testCoordSelecter_test1(new ListCoordSelecter());
+		}
+		void testListCoordSelecter_test4_data() {
+			testCoordSelecter_test2_data();
+		}
+		void testListCoordSelecter_test4() {
+			testCoordSelecter_test2(new ListCoordSelecter());
+		}
 };
 
 #endif // TESTS_H
