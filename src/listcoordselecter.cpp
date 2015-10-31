@@ -24,7 +24,7 @@ void ListCoordSelecter::select(int x, int y)
 
 void ListCoordSelecter::deSelect(const Located& loc)
 {
-	for (QLinkedList<Located>::iterator iter = this->list.begin(); iter != list.end(); ++iter)
+	for (auto iter = this->list.begin(); iter != list.end(); ++iter)
 	{
 		if(iter->x() == loc.x() && iter->y() == loc.y())
 		{
@@ -36,7 +36,7 @@ void ListCoordSelecter::deSelect(const Located& loc)
 
 void ListCoordSelecter::deSelect(int x, int y)
 {
-	for (QLinkedList<Located>::iterator iter = this->list.begin(); iter != list.end(); ++iter)
+	for (auto iter = this->list.begin(); iter != list.end(); ++iter)
 	{
 		if(iter->x() == x && iter->y() == y)
 		{
