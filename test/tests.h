@@ -698,12 +698,16 @@ class Test : public QObject
 		}
 
 
-		void testListCoordSelecter_select1_data() {
+		void testCoordSelecter_select_data()  {
 			QTest::addColumn<Coord>("loc");
 
 			QTest::newRow("0 0") << Coord(0,0);
 			QTest::newRow("1 1") << Coord(1,1);
 			QTest::newRow("-1 1") << Coord(-1,1);
+		}
+
+		void testListCoordSelecter_select1_data() {
+			testCoordSelecter_select_data();
 		}
 		void testListCoordSelecter_select1() {
 			QFETCH(Coord, loc);
@@ -716,7 +720,7 @@ class Test : public QObject
 			QCOMPARE(sel.isSelected(loc.x(), loc.y()), true);
 		}
 		void testListCoordSelecter_select2_data() {
-			testListCoordSelecter_select1_data();
+			testCoordSelecter_select_data();
 		}
 		void testListCoordSelecter_select2() {
 			QFETCH(Coord, loc);
@@ -730,11 +734,7 @@ class Test : public QObject
 		}
 
 		void testListCoordSelecter_deSelect1_data() {
-			QTest::addColumn<Coord>("loc");
-
-			QTest::newRow("0 0") << Coord(0,0);
-			QTest::newRow("1 1") << Coord(1,1);
-			QTest::newRow("-1 1") << Coord(-1,1);
+			testCoordSelecter_select_data();
 		}
 		void testListCoordSelecter_deSelect1() {
 			QFETCH(Coord, loc);
@@ -749,7 +749,7 @@ class Test : public QObject
 
 		}
 		void testListCoordSelecter_deSelect2_data() {
-			testListCoordSelecter_deSelect1_data();
+			testCoordSelecter_select_data();
 		}
 		void testListCoordSelecter_deSelect2() {
 			QFETCH(Coord, loc);
