@@ -25,7 +25,8 @@ SOURCES += located.cpp \
     movable.cpp \
     coord.cpp \
     coordselecter.cpp \
-    listcoordselecter.cpp
+    listcoordselecter.cpp \
+    gridcoordselecter.cpp
 
 HEADERS += located.h\
         src_global.h \
@@ -33,7 +34,8 @@ HEADERS += located.h\
     movable.h \
     coord.h \
     coordselecter.h \
-    listcoordselecter.h
+    listcoordselecter.h \
+    gridcoordselecter.h
 
 unix {
     target.path = /usr/lib
