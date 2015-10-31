@@ -24,12 +24,26 @@ void ListCoordSelecter::select(int x, int y)
 
 void ListCoordSelecter::deSelect(const Located& loc)
 {
-
+	for (QLinkedList<Located>::iterator iter = this->list.begin(); iter != list.end(); ++iter)
+	{
+		if(iter->x() == loc.x() && iter->y() == loc.y())
+		{
+			this->list.erase(iter);
+			break; //end of loop
+		}
+	}
 }
 
 void ListCoordSelecter::deSelect(int x, int y)
 {
-
+	for (QLinkedList<Located>::iterator iter = this->list.begin(); iter != list.end(); ++iter)
+	{
+		if(iter->x() == x && iter->y() == y)
+		{
+			this->list.erase(iter);
+			break; //end of loop
+		}
+	}
 }
 
 bool ListCoordSelecter::isSelected(const Located& loc)
