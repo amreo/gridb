@@ -21,6 +21,8 @@ Q_DECLARE_METATYPE(Coord)
 class Test : public QObject
 {
 		Q_OBJECT
+	private:
+
 
 	private slots:
 		void testLocated_common_data() {
@@ -698,69 +700,50 @@ class Test : public QObject
 		}
 
 
-		void testCoordSelecter_select_data()  {
+		void testCoordSelecter_test_data()  {
 			QTest::addColumn<Coord>("loc");
 
 			QTest::newRow("0 0") << Coord(0,0);
 			QTest::newRow("1 1") << Coord(1,1);
 			QTest::newRow("-1 1") << Coord(-1,1);
 		}
-
-		void testListCoordSelecter_select1_data() {
-			testCoordSelecter_select_data();
+		void testCoordSelecter_test1_data() {
+			testCoordSelecter_test_data();
 		}
-		void testListCoordSelecter_select1() {
+		void testCoordSelecter_test1(CoordSelecter* sel)
+		{
 			QFETCH(Coord, loc);
-			ListCoordSelecter sel = ListCoordSelecter();
-
-			QCOMPARE(sel.isSelected(loc), false);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
-			sel.select(loc);
-			QCOMPARE(sel.isSelected(loc), true);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), true);
+			QCOMPARE(sel->isSelected(loc), false);
+			sel->select(loc);
+			QCOMPARE(sel->isSelected(loc), true);
+			sel->deSelect(loc);
+			QCOMPARE(sel->isSelected(loc), false);
 		}
-		void testListCoordSelecter_select2_data() {
-			testCoordSelecter_select_data();
+		void testCoordSelecter_test2_data() {
+			testCoordSelecter_test_data();
 		}
-		void testListCoordSelecter_select2() {
+		void testCoordSelecter_test2(CoordSelecter* sel)
+		{
 			QFETCH(Coord, loc);
-			ListCoordSelecter sel = ListCoordSelecter();
-
-			QCOMPARE(sel.isSelected(loc), false);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
-			sel.select(loc.x(), loc.y());
-			QCOMPARE(sel.isSelected(loc), true);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), true);
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
+			sel->select(loc.x(), loc.y());
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), true);
+			sel->deSelect(loc.x(), loc.y());
+			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
 		}
 
-		void testListCoordSelecter_deSelect1_data() {
-			testCoordSelecter_select_data();
-		}
-		void testListCoordSelecter_deSelect1() {
-			QFETCH(Coord, loc);
-			ListCoordSelecter sel = ListCoordSelecter();
 
-			QCOMPARE(sel.isSelected(loc), false);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
-			sel.select(loc);
-			sel.deSelect(loc);
-			QCOMPARE(sel.isSelected(loc), false);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
-
+		void testListCoordSelecter_test1_data() {
+			testCoordSelecter_test1_data();
 		}
-		void testListCoordSelecter_deSelect2_data() {
-			testCoordSelecter_select_data();
+		void testListCoordSelecter_test1() {
+			testCoordSelecter_test1(new ListCoordSelecter());
 		}
-		void testListCoordSelecter_deSelect2() {
-			QFETCH(Coord, loc);
-			ListCoordSelecter sel = ListCoordSelecter();
-
-			QCOMPARE(sel.isSelected(loc), false);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
-			sel.select(loc.x(), loc.y());
-			sel.deSelect(loc.x(), loc.y());
-			QCOMPARE(sel.isSelected(loc), false);
-			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
+		void testListCoordSelecter_test2_data() {
+			testCoordSelecter_test2_data();
+		}
+		void testListCoordSelecter_test2() {
+			testCoordSelecter_test2(new ListCoordSelecter());
 		}
 
 };
