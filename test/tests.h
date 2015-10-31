@@ -698,27 +698,69 @@ class Test : public QObject
 		}
 
 
-		void testListCoordSelecter_select_data() {
+		void testListCoordSelecter_select1_data() {
 			QTest::addColumn<Coord>("loc");
 
 			QTest::newRow("0 0") << Coord(0,0);
 			QTest::newRow("1 1") << Coord(1,1);
 			QTest::newRow("-1 1") << Coord(-1,1);
 		}
-		void testListCoordSelecter_select() {
+		void testListCoordSelecter_select1() {
 			QFETCH(Coord, loc);
 			ListCoordSelecter sel = ListCoordSelecter();
-			ListCoordSelecter sel2 = ListCoordSelecter();
 
 			QCOMPARE(sel.isSelected(loc), false);
 			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
 			sel.select(loc);
 			QCOMPARE(sel.isSelected(loc), true);
 			QCOMPARE(sel.isSelected(loc.x(), loc.y()), true);
+		}
+		void testListCoordSelecter_select2_data() {
+			testListCoordSelecter_select1_data();
+		}
+		void testListCoordSelecter_select2() {
+			QFETCH(Coord, loc);
+			ListCoordSelecter sel = ListCoordSelecter();
 
-			sel2.select(loc.x(), loc.y());
-			QCOMPARE(sel2.isSelected(loc), true);
-			QCOMPARE(sel2.isSelected(loc.x(), loc.y()), true);
+			QCOMPARE(sel.isSelected(loc), false);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
+			sel.select(loc.x(), loc.y());
+			QCOMPARE(sel.isSelected(loc), true);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), true);
+		}
+
+		void testListCoordSelecter_deSelect1_data() {
+			QTest::addColumn<Coord>("loc");
+
+			QTest::newRow("0 0") << Coord(0,0);
+			QTest::newRow("1 1") << Coord(1,1);
+			QTest::newRow("-1 1") << Coord(-1,1);
+		}
+		void testListCoordSelecter_deSelect1() {
+			QFETCH(Coord, loc);
+			ListCoordSelecter sel = ListCoordSelecter();
+
+			QCOMPARE(sel.isSelected(loc), false);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
+			sel.select(loc);
+			sel.deSelect(loc);
+			QCOMPARE(sel.isSelected(loc), false);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
+
+		}
+		void testListCoordSelecter_deSelect2_data() {
+			testListCoordSelecter_deSelect1_data();
+		}
+		void testListCoordSelecter_deSelect2() {
+			QFETCH(Coord, loc);
+			ListCoordSelecter sel = ListCoordSelecter();
+
+			QCOMPARE(sel.isSelected(loc), false);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
+			sel.select(loc.x(), loc.y());
+			sel.deSelect(loc.x(), loc.y());
+			QCOMPARE(sel.isSelected(loc), false);
+			QCOMPARE(sel.isSelected(loc.x(), loc.y()), false);
 		}
 
 };
