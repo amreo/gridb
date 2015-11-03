@@ -46,7 +46,7 @@ void ListCoordSelecter::deSelect(int x, int y)
 	}
 }
 
-bool ListCoordSelecter::isSelected(const Located& loc)
+bool ListCoordSelecter::isSelected(const Located& loc) const
 {
 	foreach (Located item, this->list) {
 		if (item.x()==loc.x() && item.y()==loc.y())
@@ -55,11 +55,16 @@ bool ListCoordSelecter::isSelected(const Located& loc)
 	return false;
 }
 
-bool ListCoordSelecter::isSelected(int x, int y)
+bool ListCoordSelecter::isSelected(int x, int y) const
 {
 	foreach (Located item, this->list) {
 		if (item.x()==x && item.y()==y)
 			return true;
 	}
 	return false;
+}
+
+const QLinkedList<Located> ListCoordSelecter::getSelection() const
+{
+	return this->list;
 }

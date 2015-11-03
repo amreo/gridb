@@ -1,6 +1,7 @@
 #ifndef COORDSELECTER_H
 #define COORDSELECTER_H
 #include "located.h"
+#include <QLinkedList>
 
 /**
  * @brief This class rappresent a set of selected coord
@@ -47,26 +48,30 @@ class CoordSelecter
 		 */
 		void deSelect(const Located list[], int n);
 
-
-
 		/**
 		 * @brief Check if the location is selected
 		 * @param loc
 		 */
-		virtual bool isSelected(const Located& loc) = 0;
+		virtual bool isSelected(const Located& loc) const = 0;
 		/**
 		 * @brief Check if the location is selected
 		 * @param x coordinate x
 		 * @param y coordinate y
 		 */
-		virtual bool isSelected(int x, int y) = 0;
+		virtual bool isSelected(int x, int y) const = 0;
 		/**
 		 * @brief Check if the all coords in the list are selected
 		 * @param list of coord
 		 * @param n of elemenent
 		 */
-		bool isSelected(const Located list[], int n);
+		bool isSelected(const Located list[], int n) const;
 
+
+		/**
+		 * @brief Return the list of selected coords
+		 * @return The list of selected coords
+		 */
+		virtual const QLinkedList<Located> getSelection() const = 0;
 };
 
 #endif // COORDSELECTER_H

@@ -107,7 +107,8 @@ class Test : public QObject
 			QFETCH(bool, result);
 
 			QCOMPARE(Located::isLocationEqual(Coord(x1,y1), Coord(x2, y2)), result);
-			QCOMPARE(Located::isLocationEqual(Coord(x1,y1), Coord(x2, y2)), result);
+			QCOMPARE(Coord(x1,y1) == Coord(x2, y2), result);
+			QCOMPARE(Coord(x1,y1) != Coord(x2, y2), !result);
 		}
 
 
@@ -761,6 +762,24 @@ class Test : public QObject
 			sel->deSelect(loc.x(), loc.y());
 			QCOMPARE(sel->isSelected(loc.x(), loc.y()), false);
 		}
+		void testCoordSelecter_getSelection_data()
+		{
+			testCoordSelecter_test_data();
+		}
+		void testCoordSelecter_getSelection(CoordSelecter* sel)
+		{
+			QFETCH(Coord, loc);
+			sel->select(loc);
+			sel->select(loc+Coord(-3,3));
+			sel->select(loc+Coord(3,-3));
+
+			const QLinkedList<Located> list = sel->getSelection();
+			QCOMPARE(list.contains(loc), true);
+			QCOMPARE(list.contains(loc+Coord(-3,3)), true);
+			QCOMPARE(list.contains(loc+Coord(3,-3)), true);
+			QCOMPARE(list.contains(loc+Coord(-5,3)), false);
+			QCOMPARE(list.contains(loc+Coord(3,-1)), false);
+		}
 
 		void testListCoordSelecter_test1_data() {
 			testCoordSelecter_test1_data();
@@ -786,6 +805,15 @@ class Test : public QObject
 		void testListCoordSelecter_test4() {
 			testCoordSelecter_test2(new ListCoordSelecter());
 		}
+		void testListCoordSelecter_getSelection_data()
+		{
+			testCoordSelecter_getSelection_data();
+		}
+		void testListCoordSelecter_getSelection()
+		{
+			testCoordSelecter_getSelection(new ListCoordSelecter());
+		}
+
 };
 
 #endif // TESTS_H

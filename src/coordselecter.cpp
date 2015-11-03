@@ -16,7 +16,7 @@ void CoordSelecter::deSelect(const Located list[], int n)
 	}
 }
 
-bool CoordSelecter::isSelected(const Located list[], int n)
+bool CoordSelecter::isSelected(const Located list[], int n) const
 {
 	for (int i=0; i<n; i++)
 		if (!isSelected(list[i]))
