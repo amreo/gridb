@@ -16,6 +16,8 @@ MOC_DIR = ../build/moc
 RCC_DIR = ../build/rcc
 UI_DIR = ../build/ui
 
+CONFIG += c++11
+
 unix:OBJECTS_DIR = ../build/o/unix
 win32:OBJECTS_DIR = ../build/o/win32
 macx:OBJECTS_DIR = ../build/o/mac

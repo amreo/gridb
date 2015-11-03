@@ -2,6 +2,7 @@
 #define LISTCOORDSELECTER_H
 #include "coordselecter.h"
 #include <QLinkedList>
+#include <QLinkedList>
 #include "coord.h"
 
 /**
@@ -45,13 +46,20 @@ class ListCoordSelecter : public CoordSelecter
 		 * @brief Check if the location is selected
 		 * @param loc
 		 */
-		bool isSelected(const Located& loc);
+		bool isSelected(const Located& loc) const;
 		/**
 		 * @brief Check if the location is selected
 		 * @param x coordinate x
 		 * @param y coordinate y
 		 */
-		bool isSelected(int x, int y);
+		bool isSelected(int x, int y) const;
+
+		/**
+		 * @brief Return the list of selected coords
+		 * @return The list of selected coords
+		 */
+		const QLinkedList<Located> getSelection() const;
+
 
 	protected:
 		/**

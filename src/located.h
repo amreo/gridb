@@ -33,7 +33,7 @@ class SRCSHARED_EXPORT Located
 		 * @brief Return the location of this object
 		 * @return Location of this object
 		 */
-		Located getLocation();
+		Located getLocation() const;
 
 		/**
 		 * @brief Check if the location are equal
@@ -42,6 +42,19 @@ class SRCSHARED_EXPORT Located
 		 * @return True if are in the same location (x and y), else false
 		 */
 		static bool isLocationEqual(const Located& loc1, const Located& loc2);
+
+		/**
+		 * @brief Check if the location are equal
+		 * @param Second location
+		 * @return True if are in the same location (x and y), else false
+		 */
+		bool operator ==(const Located& loc2) const;
+		/**
+		 * @brief Check if the location are inequal
+		 * @param Second location
+		 * @return True if are in the same location (x and y), else false
+		 */
+		bool operator !=(const Located& loc2) const;
 
 	protected:
 		/**

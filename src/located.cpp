@@ -21,7 +21,7 @@ int Located::y() const
 	return this->_y;
 }
 
-Located Located::getLocation()
+Located Located::getLocation() const
 {
 	return Located(this->_x, this->_y);
 }
@@ -29,4 +29,14 @@ Located Located::getLocation()
 bool Located::isLocationEqual(const Located& loc1, const Located& loc2)
 {
 	return loc1._x == loc2._x && loc1._y == loc2._y;
+}
+
+bool Located::operator ==(const Located& loc2) const
+{
+	return this->_x == loc2._x && this->_y == loc2._y;
+}
+
+bool Located::operator !=(const Located& loc2) const
+{
+	return this->_x != loc2._x || this->_y != loc2._y;
 }
