@@ -11,6 +11,9 @@
  */
 int main(int argc, char *argv[])
 {
-	return QTest::qExec(new Test(), argc, argv);
+	Test* test = new Test();
+	int res = QTest::qExec(test, argc, argv);
+	delete test;
+	return res;
 }
 
