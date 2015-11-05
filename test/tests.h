@@ -9,6 +9,7 @@
 #include "coord.h"
 #include "coordselecter.h"
 #include "listcoordselecter.h"
+#include "gridcoordselecter.h"
 Q_DECLARE_METATYPE(Direction)
 Q_DECLARE_METATYPE(Coord)
 
@@ -812,6 +813,68 @@ class Test : public QObject
 		void testListCoordSelecter_getSelection()
 		{
 			testCoordSelecter_getSelection(new ListCoordSelecter());
+		}
+
+		void testGridCoordSelecter_costructor_data()
+		{
+			QTest::addColumn<int> ("offX");
+			QTest::addColumn<int> ("offY");
+			QTest::addColumn<int> ("width");
+			QTest::addColumn<int> ("height");
+			QTest::addColumn<int> ("width_result");
+			QTest::addColumn<int> ("height_result");
+			QTest::newRow("0; 0 - 10;10") << 0 << 0 << 10 << 10  << 10 << 10;
+			QTest::newRow("0; 0 - -10;-10") << 0 << 0 << -10 << -10  << 0 << 0;
+			QTest::newRow("0; 0 - 10;40") << 0 << 0 << 10 << 40  << 10 << 40;
+			QTest::newRow("-3; 1 - -61;-10") << -3 << 1 << -61 << -10  << 0 << 0;
+		}
+		void testGridCoordSelecter_costructor()
+		{
+			QFETCH(int, offX);
+			QFETCH(int, offY);
+			QFETCH(int, width);
+			QFETCH(int, height);
+			QFETCH(int, width_result);
+			QFETCH(int, height_result);
+
+			GridCoordSelecter sel(offX, offY, width, height);
+
+			QCOMPARE(sel.offsetX(), offX);
+			QCOMPARE(sel.offsetY(), offY);
+			QCOMPARE(sel.width(), width_result);
+			QCOMPARE(sel.height(), height_result);
+		}
+		void testGridCoordSelecter_test1_data() {
+			testCoordSelecter_test1_data();
+		}
+		void testGridCoordSelecter_test1() {
+			testCoordSelecter_test1(new GridCoordSelecter(-10, -10, 10, 10));
+		}
+		void testGridCoordSelecter_test2_data() {
+			testCoordSelecter_test2_data();
+		}
+		void testGridCoordSelecter_test2() {
+			testCoordSelecter_test2(new GridCoordSelecter(-10, -10, 10, 10));
+		}
+		void testGridCoordSelecter_test3_data() {
+			testCoordSelecter_test1_data();
+		}
+		void testGridCoordSelecter_test3() {
+			testCoordSelecter_test1(new GridCoordSelecter(-10, -10, 10, 10));
+		}
+		void testGridCoordSelecter_test4_data() {
+			testCoordSelecter_test2_data();
+		}
+		void testGridCoordSelecter_test4() {
+			testCoordSelecter_test2(new GridCoordSelecter(-10, -10, 10, 10));
+		}
+		void testGridCoordSelecter_getSelection_data()
+		{
+			testCoordSelecter_getSelection_data();
+		}
+		void testGridCoordSelecter_getSelection()
+		{
+			testCoordSelecter_getSelection(new GridCoordSelecter(-10, -10, 10, 10));
 		}
 
 };
