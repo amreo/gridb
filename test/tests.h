@@ -786,25 +786,33 @@ class Test : public QObject
 			testCoordSelecter_test1_data();
 		}
 		void testListCoordSelecter_test1() {
-			testCoordSelecter_test1(new ListCoordSelecter());
+			ListCoordSelecter* sel = new ListCoordSelecter();
+			testCoordSelecter_test1(sel);
+			delete sel;
 		}
 		void testListCoordSelecter_test2_data() {
 			testCoordSelecter_test2_data();
 		}
 		void testListCoordSelecter_test2() {
-			testCoordSelecter_test2(new ListCoordSelecter());
+			ListCoordSelecter* sel = new ListCoordSelecter();
+			testCoordSelecter_test2(sel);
+			delete sel;
 		}
 		void testListCoordSelecter_test3_data() {
-			testCoordSelecter_test1_data();
+			testCoordSelecter_test3_data();
 		}
 		void testListCoordSelecter_test3() {
-			testCoordSelecter_test1(new ListCoordSelecter());
+			ListCoordSelecter* sel = new ListCoordSelecter();
+			testCoordSelecter_test3(sel);
+			delete sel;
 		}
 		void testListCoordSelecter_test4_data() {
-			testCoordSelecter_test2_data();
+			testCoordSelecter_test4_data();
 		}
 		void testListCoordSelecter_test4() {
-			testCoordSelecter_test2(new ListCoordSelecter());
+			ListCoordSelecter* sel = new ListCoordSelecter();
+			testCoordSelecter_test4(sel);
+			delete sel;
 		}
 		void testListCoordSelecter_getSelection_data()
 		{
@@ -812,7 +820,9 @@ class Test : public QObject
 		}
 		void testListCoordSelecter_getSelection()
 		{
-			testCoordSelecter_getSelection(new ListCoordSelecter());
+			ListCoordSelecter* sel = new ListCoordSelecter();
+			testCoordSelecter_getSelection(sel);
+			delete sel;
 		}
 
 		void testGridCoordSelecter_costructor_data()
