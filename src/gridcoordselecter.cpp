@@ -24,6 +24,10 @@ GridCoordSelecter::GridCoordSelecter(int offX, int offY, int width, int height)
 	this->_height = height;
 
 	this->grid = new bool[width*height];
+
+	for (int x = 0; x < _width; x++)
+		for (int y = 0; y < _height; y++)
+			grid[x*_width+y] = DESELECTED;
 }
 
 GridCoordSelecter::~GridCoordSelecter()
@@ -103,26 +107,30 @@ bool GridCoordSelecter::isSelected(int x, int y) const
 const QLinkedList<Located> GridCoordSelecter::getSelection() const
 {
 	QLinkedList<Located> list;
-
-	FORXY(x, 0, this->_width-1, y, 0, this->_height -1)
-		if (this->grid[x*this->_width+y] == SELECTED)
-			list.append(Coord(x+this->_offX, y+this->_offY));
-
+	for (int x = 0; x < _width; x++)
+		for (int y = 0; y < _height; y++)
+			if (grid[x*_width+y] == SELECTED)
+				list.append(Coord(x+_offX,y+_offY));
 	return list;
 }
 
 bool GridCoordSelecter::checkBounds(int x, int y) const
 {
-	//check the x and y after sub offX/offY
-	return ((x - this->_offX < 0 && x-this->_offX > _width-1) && (y - this->_offY < 0 && y-this->_offY > _height-1));
+	x -= _offX;
+	y -= _offY;
+	return (x > 0 && x < _width && y > 0 && y < _height);
 }
 
 void GridCoordSelecter::SetInternalState(int x, int y, bool value)
 {
-	this->grid[(x-this->_offX)*this->_width+y-this->_offY] = value;
+	x -= _offX;
+	y -= _offY;
+	this->grid[x*_width + y] = value;
 }
 
 bool GridCoordSelecter::InternalState(int x, int y) const
 {
-	return this->grid[(x-this->_offX)*this->_width+y-this->_offY];
+	x -= _offX;
+	y -= _offY;
+	return this->grid[x*_width + y];
 }

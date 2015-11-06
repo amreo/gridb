@@ -14,7 +14,7 @@ class GridCoordSelecter : public CoordSelecter
 		 * @param width
 		 * @param height
 		 */
-		GridCoordSelecter(int offX = 0, int offY = 0, int width = 10, int height = 10);
+		GridCoordSelecter(int offX = -10, int offY = -10, int width = 20, int height = 20);
 		/**
 		 * @brief Destructor of GridCoordSelecter
 		 */
@@ -112,8 +112,6 @@ class GridCoordSelecter : public CoordSelecter
 		 * @param y
 		 */
 		bool InternalState(int x, int y) const;
-
-
 };
 
 #endif // GRIDCOORDSELECTER_H

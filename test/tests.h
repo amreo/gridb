@@ -770,11 +770,13 @@ class Test : public QObject
 		void testCoordSelecter_getSelection(CoordSelecter* sel)
 		{
 			QFETCH(Coord, loc);
+
 			sel->select(loc);
 			sel->select(loc+Coord(-3,3));
 			sel->select(loc+Coord(3,-3));
 
 			const QLinkedList<Located> list = sel->getSelection();
+
 			QCOMPARE(list.contains(loc), true);
 			QCOMPARE(list.contains(loc+Coord(-3,3)), true);
 			QCOMPARE(list.contains(loc+Coord(3,-3)), true);
@@ -858,25 +860,33 @@ class Test : public QObject
 			testCoordSelecter_test1_data();
 		}
 		void testGridCoordSelecter_test1() {
-			testCoordSelecter_test1(new GridCoordSelecter(-10, -10, 10, 10));
+			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
+			testCoordSelecter_test1(sel);
+			delete sel;
 		}
 		void testGridCoordSelecter_test2_data() {
 			testCoordSelecter_test2_data();
 		}
 		void testGridCoordSelecter_test2() {
-			testCoordSelecter_test2(new GridCoordSelecter(-10, -10, 10, 10));
+			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
+			testCoordSelecter_test2(sel);
+			delete sel;
 		}
 		void testGridCoordSelecter_test3_data() {
-			testCoordSelecter_test1_data();
+			testCoordSelecter_test3_data();
 		}
 		void testGridCoordSelecter_test3() {
-			testCoordSelecter_test1(new GridCoordSelecter(-10, -10, 10, 10));
+			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
+			testCoordSelecter_test3(sel);
+			delete sel;
 		}
 		void testGridCoordSelecter_test4_data() {
-			testCoordSelecter_test2_data();
+			testCoordSelecter_test4_data();
 		}
 		void testGridCoordSelecter_test4() {
-			testCoordSelecter_test2(new GridCoordSelecter(-10, -10, 10, 10));
+			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
+			testCoordSelecter_test4(sel);
+			delete sel;
 		}
 		void testGridCoordSelecter_getSelection_data()
 		{
@@ -884,7 +894,10 @@ class Test : public QObject
 		}
 		void testGridCoordSelecter_getSelection()
 		{
-			testCoordSelecter_getSelection(new GridCoordSelecter(-10, -10, 10, 10));
+
+			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
+			testCoordSelecter_getSelection(sel);
+			delete sel;
 		}
 
 };
