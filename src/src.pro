@@ -37,7 +37,8 @@ HEADERS += located.h\
     coord.h \
     coordselecter.h \
     listcoordselecter.h \
-    gridcoordselecter.h
+    gridcoordselecter.h \
+    abstractdistancefunction.h
 
 unix {
     target.path = /usr/lib
