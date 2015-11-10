@@ -10,6 +10,8 @@
 #include "coordselecter.h"
 #include "listcoordselecter.h"
 #include "gridcoordselecter.h"
+#include "abstractdistancefunction.h"
+#include "manhattandistancefunction.h"
 Q_DECLARE_METATYPE(Direction)
 Q_DECLARE_METATYPE(Coord)
 
@@ -900,6 +902,57 @@ class Test : public QObject
 			delete sel;
 		}
 
+		void testDistanceFunction_data()
+		{
+			QTest::addColumn <Coord>("loc1");
+			QTest::addColumn <Coord>("loc2");
+			QTest::addColumn <float> ("dist");
+
+			QTest::newRow("0;0 0;0") << Coord(0,0) << Coord(0,0) << 0.0f;
+			QTest::newRow("0;0 10;0") << Coord(0,0) << Coord(10,0) << 10.0f;
+			QTest::newRow("0;0 -10;0") << Coord(0,0) << Coord(-10,0) << 10.0f;
+			QTest::newRow("0;0 0;10") << Coord(0,0) << Coord(0,10) << 10.0f;
+			QTest::newRow("0;0 0;-10") << Coord(0,0) << Coord(0,-10) << 10.0f;
+			QTest::newRow("5;0 10;0") << Coord(5,0) << Coord(10,0) << 5.0f;
+			QTest::newRow("5;0 -10;0") << Coord(5,0) << Coord(-10,0) << 15.0f;
+			QTest::newRow("0:5 0;10") << Coord(0,5) << Coord(0,10) << 5.0f;
+			QTest::newRow("0;5 0;-10") << Coord(0,5) << Coord(0,-10) << 15.0f;
+			QTest::newRow("-5;0 10;0") << Coord(-5,0) << Coord(10,0) << 15.0f;
+			QTest::newRow("-5;0 -10;0") << Coord(-5,0) << Coord(-10,0) << 5.0f;
+			QTest::newRow("0:-5 0;10") << Coord(0,-5) << Coord(0,10) << 15.0f;
+			QTest::newRow("0;-5 0;-10") << Coord(0,-5) << Coord(0,-10) << 5.0f;
+		}
+		void testDistanceFunction(const AbstractDistanceFunction& func)
+		{
+			QFETCH(Coord, loc1);
+			QFETCH(Coord, loc2);
+			QFETCH(float, dist);
+
+			QCOMPARE(func(loc1,loc2), dist);
+			QCOMPARE(func(loc1.x(), loc1.y(), loc2.x(), loc2.y()), dist);
+		}
+
+		void testManhattanDistanceFunction_data()
+		{
+			testDistanceFunction_data();
+
+			QTest::newRow("0;0 10;10") << Coord(0,0) << Coord(10,10) << 20.0f;
+			QTest::newRow("0;0 -10;10") << Coord(0,0) << Coord(-10,10) << 20.0f;
+			QTest::newRow("0;0 10;-10") << Coord(0,0) << Coord(10,-10) << 20.0f;
+			QTest::newRow("0;0 -10;-10") << Coord(0,0) << Coord(-10,-10) << 20.0f;
+			QTest::newRow("4;6 10;10") << Coord(4,6) << Coord(10,10) << 10.0f;
+			QTest::newRow("4;6 -10;10") << Coord(4,6) << Coord(-10,10) << 18.0f;
+			QTest::newRow("4;6 10;-10") << Coord(4,6) << Coord(10,-10) << 22.0f;
+			QTest::newRow("4;6 -10;-10") << Coord(4,6) << Coord(-10,-10) << 30.0f;
+			QTest::newRow("-4;-6 10;10") << Coord(-4,-6) << Coord(10,10) << 30.0f;
+			QTest::newRow("-4;-6 -10;10") << Coord(-4,-6) << Coord(-10,10) << 22.0f;
+			QTest::newRow("-4;-6 10;-10") << Coord(-4,-6) << Coord(10,-10) << 18.0f;
+			QTest::newRow("-4;-6 -10;-10") << Coord(-4,-6) << Coord(-10,-10) << 10.0f;
+		}
+		void testManhattanDistanceFunction()
+		{
+			testDistanceFunction(ManhattanDistanceFunction());
+		}
 };
 
 #endif // TESTS_H

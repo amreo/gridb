@@ -28,7 +28,8 @@ SOURCES += located.cpp \
     coord.cpp \
     coordselecter.cpp \
     listcoordselecter.cpp \
-    gridcoordselecter.cpp
+    gridcoordselecter.cpp \
+    manhattandistancefunction.cpp
 
 HEADERS += located.h\
         src_global.h \
@@ -38,7 +39,8 @@ HEADERS += located.h\
     coordselecter.h \
     listcoordselecter.h \
     gridcoordselecter.h \
-    abstractdistancefunction.h
+    abstractdistancefunction.h \
+    manhattandistancefunction.h
 
 unix {
     target.path = /usr/lib
