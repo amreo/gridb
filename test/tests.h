@@ -784,6 +784,7 @@ class Test : public QObject
 			QCOMPARE(list.contains(loc+Coord(3,-1)), false);
 		}
 
+
 		void testListCoordSelecter_test1_data() {
 			testCoordSelecter_test1_data();
 		}
@@ -826,6 +827,7 @@ class Test : public QObject
 			testCoordSelecter_getSelection(sel);
 			delete sel;
 		}
+
 
 		void testGridCoordSelecter_costructor_data()
 		{
@@ -894,7 +896,6 @@ class Test : public QObject
 		}
 		void testGridCoordSelecter_getSelection()
 		{
-
 			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
 			testCoordSelecter_getSelection(sel);
 			delete sel;
