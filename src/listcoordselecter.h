@@ -14,9 +14,13 @@ class ListCoordSelecter : public CoordSelecter
 {
 	public:
 		/**
-		 * @brief ListCoordSelecter costructor
+		 * @brief Costructor
 		 */
 		ListCoordSelecter();
+		/**
+		 * @brief Distructot
+		 */
+		virtual ~ListCoordSelecter() {}
 
 		/**
 		 * @brief Select  loc
