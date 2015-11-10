@@ -3,6 +3,8 @@
 #include "located.h"
 /**
  * @brief Rappresent a generic functor that return the distance between p1 and p2
+ * @version 0.1
+ * @since 0.3
  */
 class AbstractDistanceFunction
 {
