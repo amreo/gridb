@@ -18,7 +18,7 @@ class GridCoordSelecter : public CoordSelecter
 		/**
 		 * @brief Destructor of GridCoordSelecter
 		 */
-		~GridCoordSelecter();
+		virtual ~GridCoordSelecter();
 
 
 		/**
