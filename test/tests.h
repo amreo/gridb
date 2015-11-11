@@ -3,6 +3,7 @@
 
 #include <QTest>
 #include <QDebug>
+#include <QSignalSpy>
 #include "located.h"
 #include "direction.h"
 #include "movable.h"
@@ -436,15 +437,10 @@ class Test : public QObject
 			Coord l1;
 			Coord l2;
 			Coord l3;
-			Coord l1_receiver;
-			Coord l2_receiver;
-			Coord l3_receiver;
-			connect(&l1, SIGNAL(locationChanged(const Located&)),
-					&l1_receiver, SLOT(setMovable(const Located&)));
-			connect(&l2, SIGNAL(locationChanged(const Located&)),
-					&l2_receiver, SLOT(setMovable(const Located&)));
-			connect(&l3, SIGNAL(locationChanged(const Located&)),
-					&l3_receiver, SLOT(setMovable(const Located&)));
+			QSignalSpy l1_receiver(&l1, SIGNAL(locationChanged(const Located&)));
+			QSignalSpy l2_receiver(&l2, SIGNAL(locationChanged(const Located&)));
+			QSignalSpy l3_receiver(&l3, SIGNAL(locationChanged(const Located&)));
+
 			l1.setX(x);
 			l1.setY(y);
 			l2.setMovable(x,y);
@@ -456,12 +452,9 @@ class Test : public QObject
 			QCOMPARE(l3.x(), x);
 			QCOMPARE(l3.y(), y);
 
-			QCOMPARE(l1_receiver.x(), x);
-			QCOMPARE(l1_receiver.y(), y);
-			QCOMPARE(l2_receiver.x(), x);
-			QCOMPARE(l2_receiver.y(), y);
-			QCOMPARE(l3_receiver.x(), x);
-			QCOMPARE(l3_receiver.y(), y);
+			QCOMPARE(l1_receiver.count(), 2);
+			QCOMPARE(l2_receiver.count(), 1);
+			QCOMPARE(l3_receiver.count(), 1);
 		}
 		void testMovable_move13_data() {
 			QTest::addColumn<int>("fromX");
@@ -494,33 +487,27 @@ class Test : public QObject
 			QFETCH(int, toY);
 
 			Coord mov(fromX, fromY);
-			Coord mov_receiver;
 			Coord mov2(fromX, fromY);
-			Coord mov2_receiver;
 			Coord mov3(fromX, fromY);
-			Coord mov3_receiver;
-			connect(&mov, SIGNAL(locationChanged(const Located&)),
-					&mov_receiver, SLOT(setMovable(const Located&)));
-			connect(&mov2, SIGNAL(locationChanged(const Located&)),
-					&mov2_receiver, SLOT(setMovable(const Located&)));
-			connect(&mov3, SIGNAL(locationChanged(const Located&)),
-					&mov3_receiver, SLOT(setMovable(const Located&)));
+
+			QSignalSpy mov_receiver(&mov, SIGNAL(locationChanged(const Located&)));
+			QSignalSpy mov2_receiver(&mov2, SIGNAL(locationChanged(const Located&)));
+			QSignalSpy mov3_receiver(&mov3, SIGNAL(locationChanged(const Located&)));
+
 			mov.move(offX, offY);
 			mov2.move(Coord(offX, offY));
 			mov3>>Coord(offX, offY);
 
 			QCOMPARE(mov.x(), toX);
 			QCOMPARE(mov.y(), toY);
-			QCOMPARE(mov_receiver.x(), toX);
-			QCOMPARE(mov_receiver.y(), toY);
 			QCOMPARE(mov2.x(), toX);
 			QCOMPARE(mov2.y(), toY);
-			QCOMPARE(mov2_receiver.x(), toX);
-			QCOMPARE(mov2_receiver.y(), toY);
 			QCOMPARE(mov3.x(), toX);
 			QCOMPARE(mov3.y(), toY);
-			QCOMPARE(mov3_receiver.x(), toX);
-			QCOMPARE(mov3_receiver.y(), toY);
+
+			QCOMPARE(mov_receiver.count(), 1);
+			QCOMPARE(mov2_receiver.count(), 1);
+			QCOMPARE(mov3_receiver.count(), 1);
 		}
 		void testMovable_move2_data() {
 			QTest::addColumn<int>("fromX");
@@ -544,15 +531,15 @@ class Test : public QObject
 			QFETCH(int, toY);
 
 			Coord mov(fromX, fromY);
-			Coord mov_receiver;
-			connect(&mov, SIGNAL(locationChanged(const Located&)),
-					&mov_receiver, SLOT(setMovable(const Located&)));
+
+			QSignalSpy mov_receiver(&mov, SIGNAL(locationChanged(const Located&)));
+
 			mov.move(dir, off);
 
 			QCOMPARE(mov.x(), toX);
 			QCOMPARE(mov.y(), toY);
-			QCOMPARE(mov_receiver.x(), toX);
-			QCOMPARE(mov_receiver.y(), toY);
+
+			QCOMPARE(mov_receiver.count(), 1);
 		}
 		void testMovable_negative_move_data() {
 			QTest::addColumn<int>("fromX");
@@ -584,16 +571,15 @@ class Test : public QObject
 			QFETCH(int, toX);
 			QFETCH(int, toY);
 			Movable mov = Coord(fromX, fromY);
-			Movable mov_receiver = Coord();
-			connect(&mov, SIGNAL(locationChanged(const Located&)),
-					&mov_receiver, SLOT(setMovable(const Located&)));
+
+			QSignalSpy mov_receiver(&mov, SIGNAL(locationChanged(const Located&)));
 
 			mov << Coord(offX, offY);
 
 			QCOMPARE(mov.x(), toX);
 			QCOMPARE(mov.y(), toY);
-			QCOMPARE(mov_receiver.x(), toX);
-			QCOMPARE(mov_receiver.y(), toY);
+
+			QCOMPARE(mov_receiver.count(), 1);
 		}
 
 		void testCoord_sum_data() {
@@ -786,6 +772,7 @@ class Test : public QObject
 			QCOMPARE(list.contains(loc+Coord(3,-1)), false);
 		}
 
+
 		void testListCoordSelecter_test1_data() {
 			testCoordSelecter_test1_data();
 		}
@@ -828,6 +815,7 @@ class Test : public QObject
 			testCoordSelecter_getSelection(sel);
 			delete sel;
 		}
+
 
 		void testGridCoordSelecter_costructor_data()
 		{
@@ -896,7 +884,6 @@ class Test : public QObject
 		}
 		void testGridCoordSelecter_getSelection()
 		{
-
 			GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
 			testCoordSelecter_getSelection(sel);
 			delete sel;
