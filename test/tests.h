@@ -16,6 +16,7 @@
 #include "manhattandistancefunction.h"
 #include "euclideandistancefunction.h"
 #include "diagonaldistancefunction.h"
+#include "squaredeuclideandistancefunction.h"
 
 Q_DECLARE_METATYPE(Direction)
 Q_DECLARE_METATYPE(Coord)
@@ -989,6 +990,45 @@ class Test : public QObject
 		void testDiagonalDistanceFunction()
 		{
 			testDistanceFunction(DiagonalDistanceFunction());
+		}
+
+
+		void testSquaredEuclideanDistanceFunction_data()
+		{
+			QTest::addColumn <Coord>("loc1");
+			QTest::addColumn <Coord>("loc2");
+			QTest::addColumn <float> ("dist");
+
+			QTest::newRow("0;0 0;0") << Coord(0,0) << Coord(0,0) << 0.0f;
+			QTest::newRow("0;0 10;0") << Coord(0,0) << Coord(10,0) << 100.0f;
+			QTest::newRow("0;0 -10;0") << Coord(0,0) << Coord(-10,0) << 100.0f;
+			QTest::newRow("0;0 0;10") << Coord(0,0) << Coord(0,10) << 100.0f;
+			QTest::newRow("0;0 0;-10") << Coord(0,0) << Coord(0,-10) << 100.0f;
+			QTest::newRow("5;0 10;0") << Coord(5,0) << Coord(10,0) << 25.0f;
+			QTest::newRow("5;0 -10;0") << Coord(5,0) << Coord(-10,0) << 225.0f;
+			QTest::newRow("0:5 0;10") << Coord(0,5) << Coord(0,10) << 25.0f;
+			QTest::newRow("0;5 0;-10") << Coord(0,5) << Coord(0,-10) << 225.0f;
+			QTest::newRow("-5;0 10;0") << Coord(-5,0) << Coord(10,0) << 225.0f;
+			QTest::newRow("-5;0 -10;0") << Coord(-5,0) << Coord(-10,0) << 25.0f;
+			QTest::newRow("0:-5 0;10") << Coord(0,-5) << Coord(0,10) << 225.0f;
+			QTest::newRow("0;-5 0;-10") << Coord(0,-5) << Coord(0,-10) << 25.0f;
+
+			QTest::newRow("0;0 10;10") << Coord(0,0) << Coord(10,10) << 200.0f;
+			QTest::newRow("0;0 -10;10") << Coord(0,0) << Coord(-10,10) << 200.0f;
+			QTest::newRow("0;0 10;-10") << Coord(0,0) << Coord(10,-10) << 200.0f;
+			QTest::newRow("0;0 -10;-10") << Coord(0,0) << Coord(-10,-10) << 200.0f;
+			QTest::newRow("4;6 10;10") << Coord(4,6) << Coord(10,10) << (float)(36+16);
+			QTest::newRow("4;6 -10;10") << Coord(4,6) << Coord(-10,10) << (float)(14*14+16);
+			QTest::newRow("4;6 10;-10") << Coord(4,6) << Coord(10,-10) << (float)(36+16*16);
+			QTest::newRow("4;6 -10;-10") << Coord(4,6) << Coord(-10,-10) << (float)(14*14+16*16);
+			QTest::newRow("-4;-6 10;10") << Coord(-4,-6) << Coord(10,10) << (float)(14*14+16*16);
+			QTest::newRow("-4;-6 -10;10") << Coord(-4,-6) << Coord(-10,10) << (float)(36+16*16);
+			QTest::newRow("-4;-6 10;-10") << Coord(-4,-6) << Coord(10,-10) << (float)(14*14+16);
+			QTest::newRow("-4;-6 -10;-10") << Coord(-4,-6) << Coord(-10,-10) << (float)(36+16);
+		}
+		void testSquaredEuclideanDistanceFunction()
+		{
+			testDistanceFunction(SquaredEuclideanDistanceFunction());
 		}
 };
 

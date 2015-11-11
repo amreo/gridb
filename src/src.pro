@@ -31,7 +31,8 @@ SOURCES += located.cpp \
     gridcoordselecter.cpp \
     manhattandistancefunction.cpp \
     euclideandistancefunction.cpp \
-    diagonaldistancefunction.cpp
+    diagonaldistancefunction.cpp \
+    squaredeuclideandistancefunction.cpp
 
 HEADERS += located.h\
         src_global.h \
@@ -44,7 +45,8 @@ HEADERS += located.h\
     abstractdistancefunction.h \
     manhattandistancefunction.h \
     euclideandistancefunction.h \
-    diagonaldistancefunction.h
+    diagonaldistancefunction.h \
+    squaredeuclideandistancefunction.h
 
 unix {
     target.path = /usr/lib
