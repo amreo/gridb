@@ -30,7 +30,8 @@ SOURCES += located.cpp \
     listcoordselecter.cpp \
     gridcoordselecter.cpp \
     manhattandistancefunction.cpp \
-    euclideandistancefunction.cpp
+    euclideandistancefunction.cpp \
+    diagonaldistancefunction.cpp
 
 HEADERS += located.h\
         src_global.h \
@@ -42,7 +43,8 @@ HEADERS += located.h\
     gridcoordselecter.h \
     abstractdistancefunction.h \
     manhattandistancefunction.h \
-    euclideandistancefunction.h
+    euclideandistancefunction.h \
+    diagonaldistancefunction.h
 
 unix {
     target.path = /usr/lib

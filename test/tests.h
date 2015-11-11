@@ -15,6 +15,7 @@
 #include "abstractdistancefunction.h"
 #include "manhattandistancefunction.h"
 #include "euclideandistancefunction.h"
+#include "diagonaldistancefunction.h"
 
 Q_DECLARE_METATYPE(Direction)
 Q_DECLARE_METATYPE(Coord)
@@ -944,6 +945,7 @@ class Test : public QObject
 			testDistanceFunction(ManhattanDistanceFunction());
 		}
 
+
 		void testEuclideanDistanceFunction_data()
 		{
 			testDistanceFunction_data();
@@ -964,6 +966,29 @@ class Test : public QObject
 		void testEuclideanDistanceFunction()
 		{
 			testDistanceFunction(EuclideanDistanceFunction());
+		}
+
+
+		void testDiagonalDistanceFunction_data()
+		{
+			testDistanceFunction_data();
+
+			QTest::newRow("0;0 10;10") << Coord(0,0) << Coord(10,10) << 10.0f;
+			QTest::newRow("0;0 -10;10") << Coord(0,0) << Coord(-10,10) << 10.0f;
+			QTest::newRow("0;0 10;-10") << Coord(0,0) << Coord(10,-10) << 10.0f;
+			QTest::newRow("0;0 -10;-10") << Coord(0,0) << Coord(-10,-10) << 10.0f;
+			QTest::newRow("4;6 10;10") << Coord(4,6) << Coord(10,10) << 6.0f;
+			QTest::newRow("4;6 -10;10") << Coord(4,6) << Coord(-10,10) << 14.0f;
+			QTest::newRow("4;6 10;-10") << Coord(4,6) << Coord(10,-10) << 16.0f;
+			QTest::newRow("4;6 -10;-10") << Coord(4,6) << Coord(-10,-10) << 16.0f;
+			QTest::newRow("-4;-6 10;10") << Coord(-4,-6) << Coord(10,10) << 16.0f;
+			QTest::newRow("-4;-6 -10;10") << Coord(-4,-6) << Coord(-10,10) << 16.0f;
+			QTest::newRow("-4;-6 10;-10") << Coord(-4,-6) << Coord(10,-10) << 14.0f;
+			QTest::newRow("-4;-6 -10;-10") << Coord(-4,-6) << Coord(-10,-10) << 6.0f;
+		}
+		void testDiagonalDistanceFunction()
+		{
+			testDistanceFunction(DiagonalDistanceFunction());
 		}
 };
 
