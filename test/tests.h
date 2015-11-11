@@ -4,6 +4,7 @@
 #include <QTest>
 #include <QDebug>
 #include <QSignalSpy>
+#include <QtMath>
 #include "located.h"
 #include "direction.h"
 #include "movable.h"
@@ -13,6 +14,8 @@
 #include "gridcoordselecter.h"
 #include "abstractdistancefunction.h"
 #include "manhattandistancefunction.h"
+#include "euclideandistancefunction.h"
+
 Q_DECLARE_METATYPE(Direction)
 Q_DECLARE_METATYPE(Coord)
 
@@ -939,6 +942,28 @@ class Test : public QObject
 		void testManhattanDistanceFunction()
 		{
 			testDistanceFunction(ManhattanDistanceFunction());
+		}
+
+		void testEuclideanDistanceFunction_data()
+		{
+			testDistanceFunction_data();
+
+			QTest::newRow("0;0 10;10") << Coord(0,0) << Coord(10,10) << (float)qSqrt(200);
+			QTest::newRow("0;0 -10;10") << Coord(0,0) << Coord(-10,10) << (float)qSqrt(200);
+			QTest::newRow("0;0 10;-10") << Coord(0,0) << Coord(10,-10) << (float)qSqrt(200);
+			QTest::newRow("0;0 -10;-10") << Coord(0,0) << Coord(-10,-10) << (float)qSqrt(200);
+			QTest::newRow("4;6 10;10") << Coord(4,6) << Coord(10,10) << (float)qSqrt(36+16);
+			QTest::newRow("4;6 -10;10") << Coord(4,6) << Coord(-10,10) << (float)qSqrt(14*14+16);
+			QTest::newRow("4;6 10;-10") << Coord(4,6) << Coord(10,-10) << (float)qSqrt(36+16*16);
+			QTest::newRow("4;6 -10;-10") << Coord(4,6) << Coord(-10,-10) << (float)qSqrt(14*14+16*16);
+			QTest::newRow("-4;-6 10;10") << Coord(-4,-6) << Coord(10,10) << (float)qSqrt(14*14+16*16);
+			QTest::newRow("-4;-6 -10;10") << Coord(-4,-6) << Coord(-10,10) << (float)qSqrt(36+16*16);
+			QTest::newRow("-4;-6 10;-10") << Coord(-4,-6) << Coord(10,-10) << (float)qSqrt(14*14+16);
+			QTest::newRow("-4;-6 -10;-10") << Coord(-4,-6) << Coord(-10,-10) << (float)qSqrt(36+16);
+		}
+		void testEuclideanDistanceFunction()
+		{
+			testDistanceFunction(EuclideanDistanceFunction());
 		}
 };
 

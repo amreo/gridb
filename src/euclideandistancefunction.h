@@ -1,12 +1,8 @@
-#ifndef MANHATTANDISTANCEFUNCTION_H
-#define MANHATTANDISTANCEFUNCTION_H
+#ifndef EUCLIDEANDISTANCEFUNCTION_H
+#define EUCLIDEANDISTANCEFUNCTION_H
 #include "abstractdistancefunction.h"
-/**
- * @brief Rappresent a functor that return the manhattan distance between p1 and p2
- * @version 0.1
- * @since 0.3
- */
-class ManhattanDistanceFunction : public AbstractDistanceFunction
+
+class EuclideanDistanceFunction : public AbstractDistanceFunction
 {
 	public:
 		/**
@@ -18,7 +14,6 @@ class ManhattanDistanceFunction : public AbstractDistanceFunction
 		 * @return the distance between first and second point
 		 */
 		virtual float operator() (int x1, int y1, int x2, int y2) const;
-
 };
 
-#endif // MANHATTANDISTANCEFUNCTION_H
+#endif // EUCLIDEANDISTANCEFUNCTION_H
