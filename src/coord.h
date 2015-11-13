@@ -1,6 +1,7 @@
 #ifndef COORD_H
 #define COORD_H
 #include "movable.h"
+#include <QPoint>
 
 /**
  * @brief This class rappresent a position in 2D space
@@ -18,6 +19,11 @@ class Coord : public Movable
 		 * @param Coordinate y
 		 */
 		Coord(int x = 0, int y = 0, QObject *parent = 0);
+		/**
+		 * @brief Create a new instance of coord
+		 * @param point
+		 */
+		Coord(QPoint loc) : Coord(loc.x(), loc.y()) {}
 
 		/**
 		 * @brief Sum the left and the right
