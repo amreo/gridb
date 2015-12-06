@@ -22,30 +22,29 @@ unix:OBJECTS_DIR = ../build/o/unix
 win32:OBJECTS_DIR = ../build/o/win32
 macx:OBJECTS_DIR = ../build/o/mac
 
-SOURCES += located.cpp \
+SOURCES += \
     direction.cpp \
-    movable.cpp \
-    coord.cpp \
     coordselecter.cpp \
-    listcoordselecter.cpp \
     gridcoordselecter.cpp \
+    listcoordselecter.cpp \
     manhattandistancefunction.cpp \
-    euclideandistancefunction.cpp \
     diagonaldistancefunction.cpp \
+    euclideandistancefunction.cpp \
     squaredeuclideandistancefunction.cpp
-
-HEADERS += located.h\
-        src_global.h \
-    direction.h \
+HEADERS += \
+    abstractlocated.h \
+    located.h \
+    abstractmovable.h \
     movable.h \
     coord.h \
+    direction.h \
     coordselecter.h \
-    listcoordselecter.h \
     gridcoordselecter.h \
+    listcoordselecter.h \
     abstractdistancefunction.h \
     manhattandistancefunction.h \
-    euclideandistancefunction.h \
     diagonaldistancefunction.h \
+    euclideandistancefunction.h \
     squaredeuclideandistancefunction.h
 
 unix {

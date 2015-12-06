@@ -26,8 +26,13 @@ class ListCoordSelecter : public CoordSelecter
 		 * @brief Select  loc
 		 * @param loc
 		 */
-		void select(const Located& loc);
-		/**
+        void select(const AbstractLocated& loc);
+        /**
+         * @brief Select  loc
+         * @param loc
+         */
+        void select(const AbstractLocated* loc);
+        /**
 		 * @brief Select a coord in x and y
 		 * @param x coordinate x
 		 * @param y coordinate y
@@ -38,8 +43,13 @@ class ListCoordSelecter : public CoordSelecter
 		 * @brief Deselect  loc
 		 * @param loc
 		 */
-		void deSelect(const Located& loc);
-		/**
+        void deSelect(const AbstractLocated& loc);
+        /**
+         * @brief Deselect  loc
+         * @param loc
+         */
+        void deSelect(const AbstractLocated* loc);
+        /**
 		 * @brief Deselect a coord in x and y
 		 * @param x coordinate x
 		 * @param y coordinate y
@@ -50,8 +60,13 @@ class ListCoordSelecter : public CoordSelecter
 		 * @brief Check if the location is selected
 		 * @param loc
 		 */
-		bool isSelected(const Located& loc) const;
-		/**
+        bool isSelected(const AbstractLocated& loc) const;
+        /**
+         * @brief Check if the location is selected
+         * @param loc
+         */
+        bool isSelected(const AbstractLocated* loc) const;
+        /**
 		 * @brief Check if the location is selected
 		 * @param x coordinate x
 		 * @param y coordinate y
@@ -62,14 +77,14 @@ class ListCoordSelecter : public CoordSelecter
 		 * @brief Return the list of selected coords
 		 * @return The list of selected coords
 		 */
-		const QLinkedList<Located> getSelection() const;
+        const QLinkedList<Coord> getSelection() const;
 
 
 	protected:
 		/**
 		 * @brief A list that contains the selected coords
 		 */
-		QLinkedList<Located> list;
+        QLinkedList<Coord> list;
 };
 
 #endif // LISTCOORDSELECTER_H

@@ -1,6 +1,6 @@
 #ifndef ABSTRACTDISTANCEFUNCTION_H
 #define ABSTRACTDISTANCEFUNCTION_H
-#include "located.h"
+#include "abstractlocated.h"
 /**
  * @brief Rappresent a generic functor that return the distance between p1 and p2
  * @version 0.1
@@ -15,7 +15,7 @@ class AbstractDistanceFunction
 		 * @param Second point
 		 * @return the distance between first and second point
 		 */
-		virtual float inline operator() (const Located& loc1, const Located& loc2) const
+        virtual float inline operator() (const AbstractLocated& loc1, const AbstractLocated& loc2) const
 		{ return this->operator ()(loc1.x(), loc1.y(), loc2.x(), loc2.y()); }
 		/**
 		 * @brief Calculate the distance between x1/y1 and x2/y2
@@ -25,7 +25,7 @@ class AbstractDistanceFunction
 		 * @param Coordinate Y of second point
 		 * @return the distance between first and second point
 		 */
-		virtual float operator() (int x1, int y1, int x2, int y2) const = 0;
+        virtual float operator() (int x1, int y1, int x2, int y2) const = 0;
 };
 
 #endif // ABSTRACTDISTANCEFUNCTION_H

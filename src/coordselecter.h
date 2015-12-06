@@ -1,6 +1,6 @@
 #ifndef COORDSELECTER_H
 #define COORDSELECTER_H
-#include "located.h"
+#include "coord.h"
 #include <QLinkedList>
 
 /**
@@ -16,8 +16,13 @@ class CoordSelecter
 		 * @brief Select  loc
 		 * @param loc
 		 */
-		virtual void select(const Located& loc) = 0;
-		/**
+        virtual void select(const AbstractLocated& loc) = 0;
+        /**
+         * @brief Select  loc
+         * @param loc
+         */
+        virtual void select(const AbstractLocated* loc) = 0;
+        /**
 		 * @brief Select a coord in x and y
 		 * @param x coordinate x
 		 * @param y coordinate y
@@ -28,14 +33,19 @@ class CoordSelecter
 		 * @param list of coord
 		 * @param n of elemenent
 		 */
-		void select(const Located list[], int n);
+        void select(const AbstractLocated* list[], int n);
 
 		/**
 		 * @brief Deselect  loc
 		 * @param loc
 		 */
-		virtual void deSelect(const Located& loc) = 0;
-		/**
+        virtual void deSelect(const AbstractLocated& loc) = 0;
+        /**
+         * @brief Deselect  loc
+         * @param loc
+         */
+        virtual void deSelect(const AbstractLocated* loc) = 0;
+        /**
 		 * @brief Deselect a coord in x and y
 		 * @param x coordinate x
 		 * @param y coordinate y
@@ -46,13 +56,18 @@ class CoordSelecter
 		 * @param list of coord
 		 * @param n of elemenent
 		 */
-		void deSelect(const Located list[], int n);
+        void deSelect(const AbstractLocated* list[], int n);
 
 		/**
 		 * @brief Check if the location is selected
 		 * @param loc
 		 */
-		virtual bool isSelected(const Located& loc) const = 0;
+        virtual bool isSelected(const AbstractLocated& loc) const = 0;
+        /**
+         * @brief Check if the location is selected
+         * @param loc
+         */
+        virtual bool isSelected(const AbstractLocated* loc) const = 0;
 		/**
 		 * @brief Check if the location is selected
 		 * @param x coordinate x
@@ -64,14 +79,14 @@ class CoordSelecter
 		 * @param list of coord
 		 * @param n of elemenent
 		 */
-		bool isSelected(const Located list[], int n) const;
+        bool isSelected(const AbstractLocated* list[], int n) const;
 
 
 		/**
 		 * @brief Return the list of selected coords
 		 * @return The list of selected coords
 		 */
-		virtual const QLinkedList<Located> getSelection() const = 0;
+        virtual const QLinkedList<Coord> getSelection() const = 0;
 };
 
 #endif // COORDSELECTER_H

@@ -1,89 +1,32 @@
 #ifndef COORD_H
 #define COORD_H
 #include "movable.h"
-#include <QPoint>
 
-/**
- * @brief This class rappresent a position in 2D space
- * @author amreo
- * @version 0.1
- * @since 0.1
- */
 class Coord : public Movable
 {
-		Q_OBJECT
-	public:
-		/**
-		 * @brief Create a new instance of coord
-		 * @param Coordinate x
-		 * @param Coordinate y
-		 */
-		Coord(int x = 0, int y = 0, QObject *parent = 0);
-		/**
-		 * @brief Create a new instance of coord
-		 * @param point
-		 */
-		Coord(QPoint loc) : Coord(loc.x(), loc.y()) {}
+    Q_OBJECT
+public:
+    Coord(int x = 0, int y = 0) : Movable(x,y) {}
+    Coord(const Coord& c) : Coord(c.x(), c.y()) {}
+    Coord(const AbstractLocated& c) : Coord(c.x(), c.y()) {}
 
-		/**
-		 * @brief Sum the left and the right
-		 * @param left
-		 * @param right
-		 * @return the sum of left and right
-		 */
-		static Coord sum(const Located& left, const Located& right);
-		/**
-		 * @brief Sum the left and the direction
-		 * @param left
-		 * @param the direction
-		 * @param offset
-		 * @return the sum of left and the Direction
-		 */
-		static Coord sum(const Located& left, const Direction& dir, int offset = 1);
-		/**
-		 * @brief Sub the left and the right
-		 * @param left
-		 * @param right
-		 * @return the sum of left and -right
-		 */
-		static Coord sub(const Located& left, const Located& right);
-		/**
-		 * @brief Sub the left and the direction
-		 * @param left
-		 * @param the direction
-		 * @param offset
-		 * @return the sum of left and the Direction
-		 */
-		static Coord sub(const Located& left, const Direction& dir, int offset = 1);
+    static Coord sum(const AbstractLocated& loc1, const AbstractLocated& loc2)
+    { return Coord(loc1.x()+loc2.x(), loc1.y() + loc2.y()); }
 
+    static Coord sub(const AbstractLocated& loc1, const AbstractLocated& loc2)
+    { return Coord(loc1.x() - loc2.x(), loc1.y() - loc2.y()); }
 
-		/**
-		 * @brief Move the coord by offset right
-		 * @param Offset X and Y
-		 * @return the coord moved
-		 */
-		Coord operator+(const Located& right);
-		/**
-		 * @brief Move the coord by direction*1
-		 * @param Direction
-		 * @return the coord moved
-		 */
-		Coord operator+(const Direction& right);
-		/**
-		 * @brief Move the coord by -offset right
-		 * @param Offset X and Y
-		 * @return the coord moved
-		 */
-		Coord operator-(const Located& right);
-		/**
-		 * @brief Move the coord by -offset right
-		 * @param Offset X and Y
-		 * @return the coord moved
-		 */
-		Coord operator-(const Direction& right);
-	signals:
+    Coord operator+(const AbstractLocated& loc2) const
+    { return Coord(this->x()+loc2.x(), this->y()+loc2.y()); }
+    Coord operator-(const AbstractLocated& loc2) const
+    { return Coord(this->x()-loc2.x(), this->y()-loc2.y()); }
 
-	public slots:
+    ~Coord() {}
+
+signals:
+
+public slots:
+
 };
 
 #endif // COORD_H

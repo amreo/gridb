@@ -1,14 +1,14 @@
 #include "coordselecter.h"
 
-void CoordSelecter::select(const Located list[], int n)
+void CoordSelecter::select(const AbstractLocated* list[], int n)
 {
 	for (int i=0; i<n; i++)
 	{
-		select(list[i]);
+        select(list[i]);
 	}
 }
 
-void CoordSelecter::deSelect(const Located list[], int n)
+void CoordSelecter::deSelect(const AbstractLocated* list[], int n)
 {
 	for (int i=0; i<n; i++)
 	{
@@ -16,7 +16,7 @@ void CoordSelecter::deSelect(const Located list[], int n)
 	}
 }
 
-bool CoordSelecter::isSelected(const Located list[], int n) const
+bool CoordSelecter::isSelected(const AbstractLocated* list[], int n) const
 {
 	for (int i=0; i<n; i++)
 		if (!isSelected(list[i]))

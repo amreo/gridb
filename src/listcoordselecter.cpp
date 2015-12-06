@@ -5,16 +5,21 @@
 
 ListCoordSelecter::ListCoordSelecter()
 {
-	this->list = QLinkedList<Located>();
+    this->list = QLinkedList<Coord>();
 }
 
-void ListCoordSelecter::select(const Located& loc)
+void ListCoordSelecter::select(const AbstractLocated& loc)
 {
 	if (!this->isSelected(loc)) {
-		this->list.append(loc);
+        this->list.append(Coord(loc));
 	}
 }
-
+void ListCoordSelecter::select(const AbstractLocated* loc)
+{
+    if (!this->isSelected(loc)) {
+        this->list.append(Coord(loc->x(), loc->y()));
+    }
+}
 void ListCoordSelecter::select(int x, int y)
 {
 	if (!this->isSelected(x,y)) {
@@ -22,7 +27,7 @@ void ListCoordSelecter::select(int x, int y)
 	}
 }
 
-void ListCoordSelecter::deSelect(const Located& loc)
+void ListCoordSelecter::deSelect(const AbstractLocated& loc)
 {
 	for (auto iter = this->list.begin(); iter != list.end(); ++iter)
 	{
@@ -32,6 +37,17 @@ void ListCoordSelecter::deSelect(const Located& loc)
 			break; //end of loop
 		}
 	}
+}
+void ListCoordSelecter::deSelect(const AbstractLocated* loc)
+{
+    for (auto iter = this->list.begin(); iter != list.end(); ++iter)
+    {
+        if(iter->x() == loc->x() && iter->y() == loc->y())
+        {
+            this->list.erase(iter);
+            break; //end of loop
+        }
+    }
 }
 
 void ListCoordSelecter::deSelect(int x, int y)
@@ -46,7 +62,7 @@ void ListCoordSelecter::deSelect(int x, int y)
 	}
 }
 
-bool ListCoordSelecter::isSelected(const Located& loc) const
+bool ListCoordSelecter::isSelected(const AbstractLocated& loc) const
 {
 	foreach (Located item, this->list) {
 		if (item.x()==loc.x() && item.y()==loc.y())
@@ -54,6 +70,15 @@ bool ListCoordSelecter::isSelected(const Located& loc) const
 	}
 	return false;
 }
+bool ListCoordSelecter::isSelected(const AbstractLocated* loc) const
+{
+    foreach (Located item, this->list) {
+        if (item.x()==loc->x() && item.y()==loc->y())
+            return true;
+    }
+    return false;
+}
+
 
 bool ListCoordSelecter::isSelected(int x, int y) const
 {
@@ -64,7 +89,7 @@ bool ListCoordSelecter::isSelected(int x, int y) const
 	return false;
 }
 
-const QLinkedList<Located> ListCoordSelecter::getSelection() const
+const QLinkedList<Coord> ListCoordSelecter::getSelection() const
 {
 	return this->list;
 }

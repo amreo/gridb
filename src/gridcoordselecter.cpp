@@ -52,9 +52,13 @@ int GridCoordSelecter::height()
 	return this->_height;
 }
 
-void GridCoordSelecter::select(const Located& loc)
+void GridCoordSelecter::select(const AbstractLocated& loc)
 {
 	this->select(loc.x(), loc.y());
+}
+void GridCoordSelecter::select(const AbstractLocated* loc)
+{
+    this->select(loc->x(), loc->y());
 }
 
 void GridCoordSelecter::select(int x, int y)
@@ -69,10 +73,15 @@ void GridCoordSelecter::select(int x, int y)
 	}
 }
 
-void GridCoordSelecter::deSelect(const Located& loc)
+void GridCoordSelecter::deSelect(const AbstractLocated& loc)
 {
 	this->deSelect(loc.x(), loc.y());
 }
+void GridCoordSelecter::deSelect(const AbstractLocated* loc)
+{
+    this->deSelect(loc->x(), loc->y());
+}
+
 
 void GridCoordSelecter::deSelect(int x, int y)
 {
@@ -86,9 +95,13 @@ void GridCoordSelecter::deSelect(int x, int y)
 	}
 }
 
-bool GridCoordSelecter::isSelected(const Located& loc) const
+bool GridCoordSelecter::isSelected(const AbstractLocated& loc) const
 {
 	return isSelected(loc.x(),loc.y());
+}
+bool GridCoordSelecter::isSelected(const AbstractLocated* loc) const
+{
+    return isSelected(loc->x(),loc->y());
 }
 
 bool GridCoordSelecter::isSelected(int x, int y) const
@@ -104,13 +117,13 @@ bool GridCoordSelecter::isSelected(int x, int y) const
 	}
 }
 
-const QLinkedList<Located> GridCoordSelecter::getSelection() const
+const QLinkedList<Coord> GridCoordSelecter::getSelection() const
 {
-	QLinkedList<Located> list;
+    QLinkedList<Coord> list;
 	for (int x = 0; x < _width; x++)
 		for (int y = 0; y < _height; y++)
 			if (grid[x*_width+y] == SELECTED)
-				list.append(Coord(x+_offX,y+_offY));
+                list.append(Coord(x+_offX,y+_offY));
 	return list;
 }
 

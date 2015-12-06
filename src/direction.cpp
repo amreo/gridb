@@ -5,24 +5,24 @@
 Direction::Direction(int coefficientX, int coefficientY)
 {
 
-	this->_coefficientX = qBound(-1, coefficientX, 1);
-	this->_coefficientY = qBound(-1,coefficientY, 1);
+    _coefficientX = qBound(-1, coefficientX, 1);
+    _coefficientY = qBound(-1,coefficientY, 1);
 }
 
 Direction::Direction(const Direction& dir)
 {
-	this->_coefficientX = dir._coefficientX;
-	this->_coefficientY = dir._coefficientY;
+    _coefficientX = dir._coefficientX;
+    _coefficientY = dir._coefficientY;
 }
 
 int Direction::coefficientX() const
 {
-	return this->_coefficientX;
+    return _coefficientX;
 }
 
 int Direction::coefficientY() const
 {
-	return this->_coefficientY;
+    return _coefficientY;
 }
 
 int Direction::getDirectionAngle() const
@@ -48,27 +48,27 @@ int Direction::getDirectionAngle() const
 
 Direction Direction::getDirectionOpposite() const
 {
-	return Direction(-this->_coefficientX, -this->_coefficientY);
+    return Direction(-_coefficientX, -_coefficientY);
 }
 
 Direction Direction::getDirectionRotated(int angle) const
 {
 	if (Direction::equal(Direction::NONE, *this)) return Direction::NONE;
 	Direction dir = Direction::NONE;
-	dir.setDirection(this->getDirectionAngle() + angle);
+    dir.setDirection(getDirectionAngle() + angle);
 	return dir;
 }
 
 void Direction::setDirection(const Direction& dir)
 {
-	this->_coefficientX = dir._coefficientX;
-	this->_coefficientY = dir._coefficientY;
+    _coefficientX = dir._coefficientX;
+    _coefficientY = dir._coefficientY;
 }
 
 void Direction::setDirection(const int coefficientX, const int coefficientY)
 {
-	this->_coefficientX = qBound(-1, coefficientX, 1);
-	this->_coefficientY = qBound(-1,coefficientY, 1);
+    _coefficientX = qBound(-1, coefficientX, 1);
+    _coefficientY = qBound(-1,coefficientY, 1);
 }
 
 void Direction::setDirection(int angle)
@@ -78,40 +78,40 @@ void Direction::setDirection(int angle)
 	if (angle < 0) angle = 8+angle;
 	switch (angle) {
 		case 0:
-			this->setDirection(Direction::UP);
+            setDirection(Direction::UP);
 			return;
 		case 1:
-			this->setDirection(Direction::UP_RIGHT);
+            setDirection(Direction::UP_RIGHT);
 			return;
 		case 2:
-			this->setDirection(Direction::RIGHT);
+            setDirection(Direction::RIGHT);
 			return;
 		case 3:
-			this->setDirection(Direction::DOWN_RIGHT);
+            setDirection(Direction::DOWN_RIGHT);
 			return;
 		case 4:
-			this->setDirection(Direction::DOWN);
+            setDirection(Direction::DOWN);
 			return;
 		case 5:
-			this->setDirection(Direction::DOWN_LEFT);
+            setDirection(Direction::DOWN_LEFT);
 			return;
 		case 6:
-			this->setDirection(Direction::LEFT);
+            setDirection(Direction::LEFT);
 			return;
 		case 7:
-			this->setDirection(Direction::UP_LEFT);
+            setDirection(Direction::UP_LEFT);
 			return;
 	}
 }
 
 void Direction::setCoefficientX(const int coefficientX)
 {
-	this->_coefficientX = qBound(-1,coefficientX,1);
+    _coefficientX = qBound(-1,coefficientX,1);
 }
 
 void Direction::setCoefficientY(const int coefficientY)
 {
-	this->_coefficientY = qBound(-1,coefficientY,1);
+    _coefficientY = qBound(-1,coefficientY,1);
 }
 
 Direction Direction::sum(const Direction& dir1, const Direction& dir2)
@@ -141,32 +141,32 @@ bool Direction::equal(const Direction& dir1, const Direction& dir2)
 
 Direction Direction::operator+(const Direction& dir2)
 {
-	return Direction(this->_coefficientX + dir2._coefficientX, this->_coefficientY + dir2._coefficientY);
+    return Direction(_coefficientX + dir2._coefficientX, _coefficientY + dir2._coefficientY);
 }
 
 Direction Direction::operator-(const Direction& dir2)
 {
-	return Direction(this->_coefficientX - dir2._coefficientX, this->_coefficientY - dir2._coefficientY);
+    return Direction(_coefficientX - dir2._coefficientX, _coefficientY - dir2._coefficientY);
 }
 
 bool Direction::operator==(const Direction& dir2)
 {
-	return this->_coefficientX == dir2._coefficientX && this->_coefficientY == dir2._coefficientY;
+    return _coefficientX == dir2._coefficientX && _coefficientY == dir2._coefficientY;
 }
 
 bool Direction::operator!=(const Direction& dir2)
 {
-	return this->_coefficientX != dir2._coefficientX || this->_coefficientY != dir2._coefficientY;
+    return _coefficientX != dir2._coefficientX || _coefficientY != dir2._coefficientY;
 }
 
 Direction Direction::operator<<(int times)
 {
-	return this->getDirectionRotated(-times);
+    return getDirectionRotated(-times);
 }
 
 Direction Direction::operator>>(int times)
 {
-	return this->getDirectionRotated(times);
+    return getDirectionRotated(times);
 }
 
 const Direction Direction::NONE = Direction(0, 0);
