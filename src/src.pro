@@ -45,7 +45,8 @@ HEADERS += \
     manhattandistancefunction.h \
     diagonaldistancefunction.h \
     euclideandistancefunction.h \
-    squaredeuclideandistancefunction.h
+    squaredeuclideandistancefunction.h \
+    moveevent.h
 
 unix {
     target.path = /usr/lib

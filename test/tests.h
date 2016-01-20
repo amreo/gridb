@@ -31,7 +31,7 @@ class Test : public QObject
 	private:
 
 
-	private slots:
+    private slots:
 
         void testLocated_common_data() {
             QTest::addColumn<int>("x");
@@ -473,38 +473,38 @@ class Test : public QObject
             QCOMPARE(mov2_receiver.count(), 1);
             QCOMPARE(mov3_receiver.count(), 1);
         }
-//		void testMovable_move2_data() {
-//			QTest::addColumn<int>("fromX");
-//			QTest::addColumn<int>("fromY");
-//			QTest::addColumn<Direction>("dir");
-//			QTest::addColumn<int>("off");
-//			QTest::addColumn<int>("toX");
-//			QTest::addColumn<int>("toY");
+        void testMovable_move2_data() {
+            QTest::addColumn<int>("fromX");
+            QTest::addColumn<int>("fromY");
+            QTest::addColumn<Direction>("dir");
+            QTest::addColumn<int>("off");
+            QTest::addColumn<int>("toX");
+            QTest::addColumn<int>("toY");
 
-//			QTest::newRow("0;0 UP 1") << 0 << 0 << Direction::UP << 1 << 0 << -1;
-//			QTest::newRow("0;0 DOWN_LEFT 1") << 0 << 0 << Direction::DOWN_LEFT << 1 << -1 << 1;
-//			QTest::newRow("2;-6 UP 10") << 2 << -6 << Direction::UP << 10 << 2 << -16;
-//			QTest::newRow("-4;7 DOWN_LEFT 8") << -4 << 7 << Direction::DOWN_LEFT << 8 << -4-8 << 7+8;
-//		}
-//		void testMovable_move2() {
-//			QFETCH(int, fromX);
-//			QFETCH(int, fromY);
-//			QFETCH(Direction, dir);
-//			QFETCH(int, off);
-//			QFETCH(int, toX);
-//			QFETCH(int, toY);
+            QTest::newRow("0;0 UP 1") << 0 << 0 << Direction::UP << 1 << 0 << -1;
+            QTest::newRow("0;0 DOWN_LEFT 1") << 0 << 0 << Direction::DOWN_LEFT << 1 << -1 << 1;
+            QTest::newRow("2;-6 UP 10") << 2 << -6 << Direction::UP << 10 << 2 << -16;
+            QTest::newRow("-4;7 DOWN_LEFT 8") << -4 << 7 << Direction::DOWN_LEFT << 8 << -4-8 << 7+8;
+        }
+        void testMovable_move2() {
+            QFETCH(int, fromX);
+            QFETCH(int, fromY);
+            QFETCH(Direction, dir);
+            QFETCH(int, off);
+            QFETCH(int, toX);
+            QFETCH(int, toY);
 
-//			Coord mov(fromX, fromY);
+            Coord mov(fromX, fromY);
 
-//			QSignalSpy mov_receiver(&mov, SIGNAL(locationChanged(const Located&)));
+            QSignalSpy mov_receiver(&mov, SIGNAL(locationChanged(const AbstractLocated&)));
 
-//			mov.move(dir, off);
+            mov.move(dir, off);
 
-//			QCOMPARE(mov.x(), toX);
-//			QCOMPARE(mov.y(), toY);
+            QCOMPARE(mov.x(), toX);
+            QCOMPARE(mov.y(), toY);
 
-//			QCOMPARE(mov_receiver.count(), 1);
-//		}
+            QCOMPARE(mov_receiver.count(), 1);
+        }
         void testMovable_negative_move_data() {
             QTest::addColumn<int>("fromX");
             QTest::addColumn<int>("fromY");

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "abstractlocated.h"
+#include "direction.h"
 
 class AbstractMovable : public QObject, public virtual AbstractLocated
 {
@@ -24,6 +25,9 @@ public slots:
 
     inline void move(int offsetX, int offsetY) {setMovable(x()+offsetX, y()+offsetY);}
     inline void move(const AbstractLocated& offset) {setMovable(x()+offset.x(), y()+offset.y());}
+    inline void move(const Direction& dir, int offset) {
+        setMovable(x()+offset*dir.coefficientX(), y()+offset*dir.coefficientY());
+    }
 
 };
 
