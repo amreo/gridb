@@ -44,8 +44,7 @@ class Coord : public Movable
          */
         inline static Coord sum(const AbstractLocated& left, const AbstractLocated& right)
         { return Coord(left.x()+right.x(), left.y() + right.y()); }
-
-        /**
+        /*
          * @brief Sub the left and the right
          * @param left
          * @param right
@@ -54,11 +53,24 @@ class Coord : public Movable
         inline static Coord sub(const AbstractLocated& left, const AbstractLocated& right)
         { return Coord(left.x() - right.x(), left.y() - right.y()); }
 
+        /**
+         * @brief Move the coord by offset right
+         * @param Offset X and Y
+         * @return the coord moved
+         */
         inline Coord operator+(const AbstractLocated& loc2) const
         { return Coord(this->x()+loc2.x(), this->y()+loc2.y()); }
+        /**
+         * @brief Move the coord by -offset right
+         * @param Offset X and Y
+         * @return the coord moved
+         */
         inline Coord operator-(const AbstractLocated& loc2) const
         { return Coord(this->x()-loc2.x(), this->y()-loc2.y()); }
 
+        /**
+         * Stub destructor
+         */
         ~Coord() {}
 
     signals:

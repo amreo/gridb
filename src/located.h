@@ -22,6 +22,9 @@ class Located : public virtual AbstractLocated
          */
         inline int y() const { return _y; }
 
+        /**
+         * @brief Stub destructor
+         */
         virtual ~Located() {}
 
     protected:
