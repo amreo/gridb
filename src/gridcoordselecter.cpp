@@ -9,14 +9,14 @@ GridCoordSelecter::GridCoordSelecter(int offX, int offY, int width, int height)
 	this->_offY = offY;
 	if (width <= 0)
 	{
-		qDebug() << "GridCoordSelecter is costructed with negative width ["
+        qWarning() << "GridCoordSelecter is costructed with negative width ["
 				 << offX << "; " << offY << "; " << width << "; " << height << "]";
 		width = 0;
 	}
 
 	if (height <= 0)
 	{
-		qDebug() << "GridCoordSelecter is costructed with negative height ["
+        qWarning() << "GridCoordSelecter is costructed with negative height ["
 				 << offX << "; " << offY << "; " << width << "; " << height << "]";
 		height = 0;
 	}
@@ -65,7 +65,7 @@ void GridCoordSelecter::select(int x, int y)
 {
 	if (!checkBounds(x, y))
 	{
-		qDebug() << "loc [" << x << "; " << y << "] are out of bounds";
+        qWarning() << "loc [" << x << "; " << y << "] are out of bounds";
 	}
 	else
 	{
@@ -87,7 +87,7 @@ void GridCoordSelecter::deSelect(int x, int y)
 {
 	if (!checkBounds(x, y))
 	{
-		qDebug() << "loc [" << x << "; " << y << "] are out of bounds";
+        qWarning() << "loc [" << x << "; " << y << "] are out of bounds";
 	}
 	else
 	{
@@ -108,7 +108,7 @@ bool GridCoordSelecter::isSelected(int x, int y) const
 {
 	if (!checkBounds(x, y))
 	{
-		qDebug() << "loc [" << x << "; " << y << "] are out of bounds";
+        qWarning() << "loc [" << x << "; " << y << "] are out of bounds";
 		return DESELECTED;
 	}
 	else
