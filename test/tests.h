@@ -588,70 +588,70 @@ class Test : public QObject
             QCOMPARE(dest2.x(), toX);
             QCOMPARE(dest2.y(), toY);
         }
-//		void testCoord_sum_with_direction_data() {
-//			testMovable_move2_data();
-//		}
-//		void testCoord_sum_with_direction() {
-//			QFETCH(int, fromX);
-//			QFETCH(int, fromY);
-//			QFETCH(Direction, dir);
-//			QFETCH(int, off);
-//			QFETCH(int, toX);
-//			QFETCH(int, toY);
+        void testCoord_sum_with_direction_data() {
+            testMovable_move2_data();
+        }
+        void testCoord_sum_with_direction() {
+            QFETCH(int, fromX);
+            QFETCH(int, fromY);
+            QFETCH(Direction, dir);
+            QFETCH(int, off);
+            QFETCH(int, toX);
+            QFETCH(int, toY);
 
-//			Coord src(fromX, fromY);
-//			Coord dest = Coord::sum(src,dir,off);
+            Coord src(fromX, fromY);
+            Coord dest = Coord::sum(src,dir,off);
 
-//			QCOMPARE(dest.x(), toX);
-//			QCOMPARE(dest.y(), toY);
+            QCOMPARE(dest.x(), toX);
+            QCOMPARE(dest.y(), toY);
 
-//			if (off == 1) {
-//				Coord dest2 = src+dir;
+            if (off == 1) {
+                Coord dest2 = src+dir;
 
-//				QCOMPARE(dest2.x(), toX);
-//				QCOMPARE(dest2.y(), toY);
-//			}
-//		}
+                QCOMPARE(dest2.x(), toX);
+                QCOMPARE(dest2.y(), toY);
+            }
+        }
 
 
-//		void testCoord_sub_with_direction_data() {
-//			QTest::addColumn<int>("fromX");
-//			QTest::addColumn<int>("fromY");
-//			QTest::addColumn<Direction>("dir");
-//			QTest::addColumn<int>("off");
-//			QTest::addColumn<int>("toX");
-//			QTest::addColumn<int>("toY");
+        void testCoord_sub_with_direction_data() {
+            QTest::addColumn<int>("fromX");
+            QTest::addColumn<int>("fromY");
+            QTest::addColumn<Direction>("dir");
+            QTest::addColumn<int>("off");
+            QTest::addColumn<int>("toX");
+            QTest::addColumn<int>("toY");
 
-//			QTest::newRow("0;0 UP 1") << 0 << 0 << Direction::UP << 1<< 0 << 1;
-//			QTest::newRow("0;0 DOWN_LEFT 1") << 0 << 0 << Direction::DOWN_LEFT << 1<< +1 << -1;
-//			QTest::newRow("4;8 UP 1") << 4 << 8 << Direction::UP << 1 << 4 << +9;
-//			QTest::newRow("4;8 DOWN_LEFT 1") << 4 << 8 << Direction::DOWN_LEFT << 1<< 5 << 7;
-//			QTest::newRow("0;0 UP 2") << 0 << 0 << Direction::UP << 2 << 0 << +2;
-//			QTest::newRow("0;0 DOWN_LEFT 2") << 0 << 0 << Direction::DOWN_LEFT << 2 << +2 << -2;
-//			QTest::newRow("4;8 UP 2") << 4 << 8 << Direction::UP << 2 << 4 << 10;
-//			QTest::newRow("4;8 DOWN_LEFT 2") << 4 << 8 << Direction::DOWN_LEFT << 2<< 6 << 6;
-//		}
-//		void testCoord_sub_with_direction() {
-//			QFETCH(int, fromX);
-//			QFETCH(int, fromY);
-//			QFETCH(Direction, dir);
-//			QFETCH(int, off);
-//			QFETCH(int, toX);
-//			QFETCH(int, toY);
+            QTest::newRow("0;0 UP 1") << 0 << 0 << Direction::UP << 1<< 0 << 1;
+            QTest::newRow("0;0 DOWN_LEFT 1") << 0 << 0 << Direction::DOWN_LEFT << 1<< +1 << -1;
+            QTest::newRow("4;8 UP 1") << 4 << 8 << Direction::UP << 1 << 4 << +9;
+            QTest::newRow("4;8 DOWN_LEFT 1") << 4 << 8 << Direction::DOWN_LEFT << 1<< 5 << 7;
+            QTest::newRow("0;0 UP 2") << 0 << 0 << Direction::UP << 2 << 0 << +2;
+            QTest::newRow("0;0 DOWN_LEFT 2") << 0 << 0 << Direction::DOWN_LEFT << 2 << +2 << -2;
+            QTest::newRow("4;8 UP 2") << 4 << 8 << Direction::UP << 2 << 4 << 10;
+            QTest::newRow("4;8 DOWN_LEFT 2") << 4 << 8 << Direction::DOWN_LEFT << 2<< 6 << 6;
+        }
+        void testCoord_sub_with_direction() {
+            QFETCH(int, fromX);
+            QFETCH(int, fromY);
+            QFETCH(Direction, dir);
+            QFETCH(int, off);
+            QFETCH(int, toX);
+            QFETCH(int, toY);
 
-//			Coord src(fromX, fromY);
-//			Coord dest = Coord::sub(src, dir, off);
+            Coord src(fromX, fromY);
+            Coord dest = Coord::sub(src, dir, off);
 
-//			QCOMPARE(dest.x(), toX);
-//			QCOMPARE(dest.y(), toY);
+            QCOMPARE(dest.x(), toX);
+            QCOMPARE(dest.y(), toY);
 
-//			if (off == 1) {
-//				Coord dest2 = src-dir;
+            if (off == 1) {
+                Coord dest2 = src-dir;
 
-//				QCOMPARE(dest2.x(), toX);
-//				QCOMPARE(dest2.y(), toY);
-//			}
-//		}
+                QCOMPARE(dest2.x(), toX);
+                QCOMPARE(dest2.y(), toY);
+            }
+        }
 
 
         void testCoordSelecter_test_data()  {

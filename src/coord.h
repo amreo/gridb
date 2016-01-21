@@ -44,14 +44,32 @@ class Coord : public Movable
          */
         inline static Coord sum(const AbstractLocated& left, const AbstractLocated& right)
         { return Coord(left.x()+right.x(), left.y() + right.y()); }
+        /**
+         * @brief Add the direction to left
+         * @param left coord
+         * @param Direction to added
+         * @param Distance of the movement
+         * @return The sum of the left and Direction
+         */
+        inline static Coord sum(const AbstractLocated& left, const Direction& dir, int distance = 1)
+        { return Coord(left.x()+dir.coefficientX()*distance, left.y() + dir.coefficientY()*distance); }
+
         /*
-         * @brief Sub the left and the right
+         * @brief Sub to left the right
          * @param left
          * @param right
          * @return the sum of left and -right
          */
         inline static Coord sub(const AbstractLocated& left, const AbstractLocated& right)
         { return Coord(left.x() - right.x(), left.y() - right.y()); }
+        /*
+         * @brief Sub to left the direction*offset
+         * @param left
+         * @param Direction of the movement
+         * @return the sum of left and -dir*offset
+         */
+        inline static Coord sub(const AbstractLocated& left, const Direction& dir, int offset = 1)
+        { return Coord(left.x() - dir.coefficientX()*offset, left.y() - dir.coefficientY()*offset); }
 
         /**
          * @brief Move the coord by offset right
@@ -61,12 +79,28 @@ class Coord : public Movable
         inline Coord operator+(const AbstractLocated& loc2) const
         { return Coord(this->x()+loc2.x(), this->y()+loc2.y()); }
         /**
+         * @brief Move the coord by direction(1)
+         * @param Direction of the movement
+         * @return the coord moved
+         */
+        inline Coord operator+(const Direction& dir) const
+        { return Coord(this->x()+dir.coefficientX(), this->y()+dir.coefficientY()); }
+
+        /**
          * @brief Move the coord by -offset right
          * @param Offset X and Y
          * @return the coord moved
          */
         inline Coord operator-(const AbstractLocated& loc2) const
         { return Coord(this->x()-loc2.x(), this->y()-loc2.y()); }
+        /**
+         * @brief Move the coord by -dir(1)
+         * @param Direction of the movement
+         * @return the coord moved
+         */
+        inline Coord operator-(const Direction& dir) const
+        { return Coord(this->x()-dir.coefficientX(), this->y()-dir.coefficientY()); }
+
 
         /**
          * Stub destructor
