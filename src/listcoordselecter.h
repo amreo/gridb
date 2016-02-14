@@ -18,7 +18,7 @@ class ListCoordSelecter : public CoordSelecter
 		 */
 		ListCoordSelecter();
 		/**
-		 * @brief Distructot
+         * @brief Distructor
 		 */
 		virtual ~ListCoordSelecter() {}
 

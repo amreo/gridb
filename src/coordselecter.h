@@ -12,6 +12,11 @@ class CoordSelecter
 {
 	public:
 
+        /**
+         * @brief Virtual destructor
+         */
+        virtual ~CoordSelecter() {}
+
 		/**
 		 * @brief Select  loc
 		 * @param loc
