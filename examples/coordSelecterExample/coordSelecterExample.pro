@@ -1,0 +1,26 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2016-02-14T14:51:58
+#
+#-------------------------------------------------
+
+QT       += core
+
+QT       -= gui
+
+TARGET = coordSelecterExample
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG += c++11
+
+TEMPLATE = app
+
+
+SOURCES += main.cpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../bin/release/ -lgridb
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../bin/debug/ -lgridb
+else:unix: LIBS += -L$$OUT_PWD/../../bin/ -lgridb
+
+INCLUDEPATH += $$PWD/../../src
+DEPENDPATH += $$PWD/../../src
