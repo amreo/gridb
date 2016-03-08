@@ -92,6 +92,4 @@ int main()
 
     }
     while (choiche != 0); /* choiche 0 == EXIT*/
-
-    qDebug() << "Goodbye";
 }

@@ -35,7 +35,6 @@ int main()
         switch (choiche)
         {
             case 0: //0) EXIT
-                qDebug() << "Exiting";
                 break;
             case 1: //1) PRINT all coords selected
             {
