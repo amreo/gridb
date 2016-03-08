@@ -7,7 +7,7 @@
  * @version 0.1
  * @since 0.3
  */
-class moveEvent
+class MoveEvent
 {
     protected:
         /**
@@ -25,7 +25,7 @@ class moveEvent
          * @param source location
          * @param destination location
          */
-        inline moveEvent(const Coord& source, const Coord& destination) { this->source = source; this->destination = destination; }
+        inline MoveEvent(const Coord& source, const Coord& destination) { this->source = source; this->destination = destination; }
 
         /**
          * @brief Set the source of the moveEvent
