@@ -36,3 +36,6 @@ Makefile*
 #Documentation
 doc/*
 !doc/doc-extra
+#Binaries
+bin/*
+build/*
