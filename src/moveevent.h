@@ -1,6 +1,6 @@
 #ifndef MOVEEVENT_H
 #define MOVEEVENT_H
-#include "coord.h"
+#include "abstractlocated.h"
 
 /**
  * @brief Event class that contains source location and destination location
@@ -13,11 +13,11 @@ class MoveEvent
         /**
          * @brief Source location of the event
          */
-        Coord& source;
+        AbstractLocated& source;
         /**
          * @brief Destination location of th event
          */
-        Coord& destination;
+        AbstractLocated& destination;
 
     public:
         /**
@@ -25,28 +25,28 @@ class MoveEvent
          * @param source location
          * @param destination location
          */
-        inline MoveEvent(const Coord& source, const Coord& destination) { this->source = source; this->destination = destination; }
+        inline MoveEvent(const AbstractLocated& source, const AbstractLocated& destination) { this->source = source; this->destination = destination; }
 
         /**
          * @brief Set the source of the moveEvent
          * @param source
          */
-        inline void setSource(const Coord& source) { this->source = source; }
+        inline void setSource(const AbstractLocated& source) { this->source = source; }
         /**
          * @brief Set the destination of the moveEvent
          * @param destination
          */
-        inline void setDestination(const Coord& destination) { this->destination = destination; }
+        inline void setDestination(const AbstractLocated& destination) { this->destination = destination; }
         /**
          * @brief Get the source of the movement
          * @return the source of the movement
          */
-        inline const Coord& source() const { return source; }
+        inline const AbstractLocated& source() const { return source; }
         /**
          * @brief Get the destination of the movement
          * @return the destination of the movement
          */
-        inline const Coord& destination() const { return destination; }
+        inline const AbstractLocated& destination() const { return destination; }
 
 };
 

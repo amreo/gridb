@@ -5,7 +5,6 @@
 #include "abstractlocated.h"
 #include "direction.h"
 
-
 /**
  * @brief This class is the base class of any movable objects in 2D space (without full implementation)
  * @author amreo
