@@ -4,6 +4,7 @@
 #include "coordselecter.h"
 #include "gridcoordselecter.h"
 #include "listcoordselecter.h"
+#include "gridlistcoordselecter.h"
 
 int main()
 {
@@ -74,12 +75,15 @@ int main()
             case 5: //5) CHANGE selecter
                 qDebug() << "Selecter type? 1-GridCoordSelecter(-10,-10,20,20)";
                 qDebug() << "               2-ListCoordSelecter";
+                qDebug() << "               3-GridListCoordSelecter";
                 qIn >> temp;
                 delete selecter;
                 if (temp == 1)
                     selecter = new GridCoordSelecter(-10,-10,20,20);
                 else if (temp == 2)
                     selecter = new ListCoordSelecter();
+                else if (temp == 3)
+                    selecter = new GridListCoordSelecter(-10,-10,20,20);
             }
 
     }

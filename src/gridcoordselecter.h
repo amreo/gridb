@@ -99,6 +99,13 @@ class GridCoordSelecter : public CoordSelecter
 		 */
         const QLinkedList<Coord> getSelection() const;
 
+        /**
+         * @brief Check if the X and Y are in the bounds
+         * @param Coordinate X
+         * @param Coordinate Y
+         * @return True if are in the bound, else false
+         */
+        bool checkBounds(int x, int y) const;
 
 	protected:
 		int _offX;
@@ -107,13 +114,6 @@ class GridCoordSelecter : public CoordSelecter
 		int _height;
 		bool* grid;
 
-		/**
-		 * @brief Check if the X and Y are in the bounds
-		 * @param Coordinate X
-		 * @param Coordinate Y
-		 * @return True if are in the bound, else false
-		 */
-		bool checkBounds(int x, int y) const;
 		/**
 		 * @brief Set the cell of grid to value
 		 * @param x

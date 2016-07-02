@@ -10,6 +10,7 @@
 #include "coordselecter.h"
 #include "listcoordselecter.h"
 #include "gridcoordselecter.h"
+#include "gridlistcoordselecter.h"
 #include "abstractdistancefunction.h"
 #include "manhattandistancefunction.h"
 #include "euclideandistancefunction.h"
@@ -854,6 +855,78 @@ class Test : public QObject
         void testGridCoordSelecter_getSelection()
         {
             GridCoordSelecter* sel = new GridCoordSelecter(-20, -20, 40, 40);
+            testCoordSelecter_getSelection(sel);
+            delete sel;
+        }
+
+        void testGridListCoordSelecter_costructor_data()
+        {
+            QTest::addColumn<int> ("offX");
+            QTest::addColumn<int> ("offY");
+            QTest::addColumn<int> ("width");
+            QTest::addColumn<int> ("height");
+            QTest::addColumn<int> ("width_result");
+            QTest::addColumn<int> ("height_result");
+            QTest::newRow("0; 0 - 10;10") << 0 << 0 << 10 << 10  << 10 << 10;
+            QTest::newRow("0; 0 - -10;-10") << 0 << 0 << -10 << -10  << 0 << 0;
+            QTest::newRow("0; 0 - 10;40") << 0 << 0 << 10 << 40  << 10 << 40;
+            QTest::newRow("-3; 1 - -61;-10") << -3 << 1 << -61 << -10  << 0 << 0;
+        }
+        void testGridListCoordSelecter_costructor()
+        {
+            QFETCH(int, offX);
+            QFETCH(int, offY);
+            QFETCH(int, width);
+            QFETCH(int, height);
+            QFETCH(int, width_result);
+            QFETCH(int, height_result);
+
+            GridListCoordSelecter sel(offX, offY, width, height);
+
+            QCOMPARE(sel.offsetX(), offX);
+            QCOMPARE(sel.offsetY(), offY);
+            QCOMPARE(sel.width(), width_result);
+            QCOMPARE(sel.height(), height_result);
+        }
+        void testGridListCoordSelecter_test1_data() {
+            testCoordSelecter_test1_data();
+        }
+        void testGridListCoordSelecter_test1() {
+            GridListCoordSelecter* sel = new GridListCoordSelecter(-20, -20, 40, 40);
+            testCoordSelecter_test1(sel);
+            delete sel;
+        }
+        void testGridListCoordSelecter_test2_data() {
+            testCoordSelecter_test2_data();
+        }
+        void testGridListCoordSelecter_test2() {
+            GridListCoordSelecter* sel = new GridListCoordSelecter(-20, -20, 40, 40);
+            testCoordSelecter_test2(sel);
+            delete sel;
+        }
+        void testGridListCoordSelecter_test3_data() {
+            testCoordSelecter_test3_data();
+        }
+        void testGridListCoordSelecter_test3() {
+            GridListCoordSelecter* sel = new GridListCoordSelecter(-20, -20, 40, 40);
+            testCoordSelecter_test3(sel);
+            delete sel;
+        }
+        void testGridListCoordSelecter_test4_data() {
+            testCoordSelecter_test4_data();
+        }
+        void testGridListCoordSelecter_test4() {
+            GridListCoordSelecter* sel = new GridListCoordSelecter(-20, -20, 40, 40);
+            testCoordSelecter_test4(sel);
+            delete sel;
+        }
+        void testGridListCoordSelecter_getSelection_data()
+        {
+            testCoordSelecter_getSelection_data();
+        }
+        void testGridListCoordSelecter_getSelection()
+        {
+            GridListCoordSelecter* sel = new GridListCoordSelecter(-20, -20, 40, 40);
             testCoordSelecter_getSelection(sel);
             delete sel;
         }

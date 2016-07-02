@@ -73,10 +73,10 @@ class ListCoordSelecter : public CoordSelecter
 		 */
 		bool isSelected(int x, int y) const;
 
-		/**
-		 * @brief Return the list of selected coords
-		 * @return The list of selected coords
-		 */
+        /**
+         * @brief Return the list of selected coords
+         * @return The list of selected coords
+         */
         const QLinkedList<Coord> getSelection() const;
 
 

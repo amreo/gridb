@@ -30,7 +30,8 @@ SOURCES += \
     manhattandistancefunction.cpp \
     diagonaldistancefunction.cpp \
     euclideandistancefunction.cpp \
-    squaredeuclideandistancefunction.cpp
+    squaredeuclideandistancefunction.cpp \
+    gridlistcoordselecter.cpp
 HEADERS += \
     abstractlocated.h \
     located.h \
@@ -46,7 +47,8 @@ HEADERS += \
     diagonaldistancefunction.h \
     euclideandistancefunction.h \
     squaredeuclideandistancefunction.h \
-    moveevent.h
+    moveevent.h \
+    gridlistcoordselecter.h
 
 unix {
     target.path = /usr/lib
