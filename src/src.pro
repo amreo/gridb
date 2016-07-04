@@ -48,7 +48,9 @@ HEADERS += \
     euclideandistancefunction.h \
     squaredeuclideandistancefunction.h \
     moveevent.h \
-    gridlistcoordselecter.h
+    gridlistcoordselecter.h \
+    abstractmaptile.h \
+    maptile.h
 
 unix {
     target.path = /usr/lib
