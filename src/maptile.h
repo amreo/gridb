@@ -15,11 +15,11 @@ class MapTile : public AbstractMapTile, public Located
          * @param y
          * @param map
          */
-        MapTile(int x, int y, AbstractMap& map) : Located(x,y)
+        MapTile(int x, int y, AbstractMap* map) : Located(x,y)
         { _map = map; }
-        MapTile(const AbstractLocated& loc, AbstractMap& map) : Located(loc.x(), loc.y())
+        MapTile(const AbstractLocated& loc, AbstractMap* map) : Located(loc.x(), loc.y())
         { _map = map; }
-        MapTile(const AbstractLocated* loc, AbstractMap& map) : Located(loc->x(), loc->y())
+        MapTile(const AbstractLocated* loc, AbstractMap* map) : Located(loc->x(), loc->y())
         { _map = map; }
 
         // AbstractMapTile interface
@@ -29,26 +29,26 @@ class MapTile : public AbstractMapTile, public Located
          * @brief Return the map of this MapTile
          * @return The map of this MapTile
          */
-        virtual inline AbstractMap &map() const { return _map; }
+        virtual inline AbstractMap* map() const { return _map; }
 
         /**
          * @brief Return the tile of this MapTile
          * @return Tile of this MapTile
          */
-        virtual inline AbstractTile &tile() const { return _tile; }
+        virtual inline AbstractTile* tile() const { return _tile; }
         /**
          * @brief Set the tile of this MapTile
          * @param The tile to set
          * @remarks When the tile is setted, It raises the signal of changing tile
          */
-        virtual void setTile(AbstractTile &tile)
+        virtual void setTile(AbstractTile* tile)
         { _tile = tile; /*TODO: activate signal*/ }
         /**
          * @brief Set the tile of this MapTile
          * @param The tile to set
          * @remarks When the tile is setted, It doesn't raise the signal of changing tile
          */
-        virtual void setUnsecureTile(AbstractTile &tile) { _tile = &tile; }
+        virtual void setUnsecureTile(AbstractTile* tile) { _tile = tile; }
         /**
          * @brief Remove the tile of this MapTile
          * @remarks The signal of changing tile is activated
@@ -79,12 +79,12 @@ class MapTile : public AbstractMapTile, public Located
          * @brief Set the actor on this MapTile
          * @param The actor to set
          */
-        virtual void setActor(AbstractActor &actor) { _actor = &actor; }
+        virtual void setActor(AbstractActor* actor) { _actor = &actor; }
         /**
          * @brief Return the actor on this MapTile
          * @return The actor on this MapTile
          */
-        virtual AbstractActor &actor() const { return *_actor; }
+        virtual AbstractActor* actor() const { return *_actor; }
         /**
          * @brief Return true if there is a actor on this MapTile
          * @return True if there is a actor on this MapTile
@@ -95,7 +95,7 @@ class MapTile : public AbstractMapTile, public Located
          * @param The actor
          * @return True if the actor can enter in this MapTile
          */
-        virtual bool canActorEnterIn(AbstractActor &actor) const
+        virtual bool canActorEnterIn(AbstractActor* actor) const
         {
             if (!hasActor() && hasTile())
                 return _tile.canActorEnterIn(this, actor);
@@ -107,7 +107,7 @@ class MapTile : public AbstractMapTile, public Located
         /**
          * @brief The map
          */
-        AbstractMap _map;
+        AbstractMap* _map;
         /**
          * @brief The tile
          */

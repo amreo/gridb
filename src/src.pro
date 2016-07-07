@@ -50,7 +50,9 @@ HEADERS += \
     moveevent.h \
     gridlistcoordselecter.h \
     abstractmaptile.h \
-    maptile.h
+    maptile.h \
+    abstracttile.h \
+    actormoveevent.h
 
 unix {
     target.path = /usr/lib
