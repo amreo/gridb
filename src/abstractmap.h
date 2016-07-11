@@ -2,6 +2,7 @@
 #define ABSTRACTMAP_H
 #include "abstractlocated.h"
 #include "abstracttile.h"
+#include "coorder.h"
 #include <QSize>
 /**
  * @brief The AbstractMap class
