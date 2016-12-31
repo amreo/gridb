@@ -11,7 +11,7 @@ class AbstractMap;
 /**
  * @brief This class is a base class of any MapTile contained in a Map
  */
-class AbstractMapTile : public virtual AbstractLocated, public QObject
+class AbstractMapTile : public QObject, public virtual AbstractLocated
 {
     Q_OBJECT
 
