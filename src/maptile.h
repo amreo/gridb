@@ -8,6 +8,7 @@
  */
 class MapTile : public AbstractMapTile, public Located
 {
+
     public:
         /**
          * @brief Create a new instance of MapTile
@@ -21,6 +22,8 @@ class MapTile : public AbstractMapTile, public Located
         { _map = map; }
         MapTile(const AbstractLocated* loc, AbstractMap* map) : Located(loc->x(), loc->y())
         { _map = map; }
+
+        ~MapTile() {}
 
         // AbstractMapTile interface
     public:
@@ -42,7 +45,7 @@ class MapTile : public AbstractMapTile, public Located
          * @remarks When the tile is setted, It raises the signal of changing tile
          */
         virtual void setTile(AbstractTile* tile)
-        { _tile = tile; /*TODO: activate signal*/ }
+        { _tile = tile; /*emit changedTile();*/ }
         /**
          * @brief Set the tile of this MapTile
          * @param The tile to set
@@ -59,7 +62,7 @@ class MapTile : public AbstractMapTile, public Located
          * @brief Remove the tile of this MapTile
          * @remarks The signal of changing tile is not activated
          */
-        virtual void removeUnsecureTile() { _tile = nullptr; }
+        virtual void removeUnsecureTile() { _tile = nullptr; /*emit changedTile();*/ }
         /**
          * @brief Return true if this MapTile has got a tile
          * @return True if this MapTile has got a tile
@@ -69,39 +72,39 @@ class MapTile : public AbstractMapTile, public Located
         /**
          * @brief Initialize the MapTile and the actor
          */
-        virtual void init() { _tile.init(this); }
+        virtual void init() { _tile->init(this); }
         /**
          * @brief Update the tile
          */
-        virtual void updateTile() { _tile.update(this); }
+        virtual void updateTile() { _tile->update(this); }
 
-        /**
-         * @brief Set the actor on this MapTile
-         * @param The actor to set
-         */
-        virtual void setActor(AbstractActor* actor) { _actor = &actor; }
-        /**
-         * @brief Return the actor on this MapTile
-         * @return The actor on this MapTile
-         */
-        virtual AbstractActor* actor() const { return *_actor; }
-        /**
-         * @brief Return true if there is a actor on this MapTile
-         * @return True if there is a actor on this MapTile
-         */
-        virtual inline bool hasActor() const { return _actor != nullptr; }
-        /**
-         * @brief Return true if the actor can enter in this MapTile
-         * @param The actor
-         * @return True if the actor can enter in this MapTile
-         */
-        virtual bool canActorEnterIn(AbstractActor* actor) const
-        {
-            if (!hasActor() && hasTile())
-                return _tile.canActorEnterIn(this, actor);
-            else
-                return false;
-        }
+//        /**
+//         * @brief Set the actor on this MapTile
+//         * @param The actor to set
+//         */
+//        virtual void setActor(AbstractActor* actor) { _actor = &actor; }
+//        /**
+//         * @brief Return the actor on this MapTile
+//         * @return The actor on this MapTile
+//         */
+//        virtual AbstractActor* actor() const { return *_actor; }
+//        /**
+//         * @brief Return true if there is a actor on this MapTile
+//         * @return True if there is a actor on this MapTile
+//         */
+//        virtual inline bool hasActor() const { return _actor != nullptr; }
+//        /**
+//         * @brief Return true if the actor can enter in this MapTile
+//         * @param The actor
+//         * @return True if the actor can enter in this MapTile
+//         */
+//        virtual bool canActorEnterIn(AbstractActor* actor) const
+//        {
+//            if (!hasActor() && hasTile())
+//                return _tile.canActorEnterIn(this, actor);
+//            else
+//                return false;
+//        }
 
     protected:
         /**
@@ -112,10 +115,10 @@ class MapTile : public AbstractMapTile, public Located
          * @brief The tile
          */
         AbstractTile* _tile;
-        /**
-         * @brief The actor
-         */
-        AbstractActor* _actor;
+//        /**
+//         * @brief The actor
+//         */
+//        AbstractActor* _actor;
 };
 
 #endif // MAPTILE_H

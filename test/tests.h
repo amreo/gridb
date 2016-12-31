@@ -16,6 +16,10 @@
 #include "euclideandistancefunction.h"
 #include "diagonaldistancefunction.h"
 #include "squaredeuclideandistancefunction.h"
+#include "abstractmap.h"
+#include "abstractmaptile.h"
+#include "abstracttile.h"
+#include "maptile.h"
 
 Q_DECLARE_METATYPE(Direction)
 Q_DECLARE_METATYPE(Coord)
@@ -1066,6 +1070,41 @@ class Test : public QObject
         void testSquaredEuclideanDistanceFunction()
         {
             testDistanceFunction(SquaredEuclideanDistanceFunction());
+        }
+
+        void testMapTileCostructor1()
+        {
+            AbstractMapTile* mapTile = new MapTile(10,20,nullptr);
+
+            QCOMPARE(mapTile->x(), 10);
+            QCOMPARE(mapTile->y(), 20);
+            QVERIFY(mapTile->map() == nullptr);
+
+            delete mapTile;
+        }
+
+        void testMapTileCostructor2()
+        {
+            AbstractMapTile* mapTile = new MapTile(Coord(10,20), nullptr);
+
+            QCOMPARE(mapTile->x(), 10);
+            QCOMPARE(mapTile->y(), 20);
+            QVERIFY(mapTile->map() == nullptr);
+
+            delete mapTile;
+        }
+
+        void testMapTileCostructor3()
+        {
+            Coord* c = new Coord(10,20);
+            AbstractMapTile* mapTile = new MapTile(c,nullptr);
+
+            QCOMPARE(mapTile->x(), 10);
+            QCOMPARE(mapTile->y(), 20);
+            QVERIFY(mapTile->map() == nullptr);
+
+            delete c;
+            delete mapTile;
         }
 };
 

@@ -52,7 +52,9 @@ HEADERS += \
     abstractmaptile.h \
     maptile.h \
     abstracttile.h \
-    actormoveevent.h
+    actormoveevent.h \
+    tile.h \
+    abstractmap.h
 
 unix {
     target.path = /usr/lib

@@ -19,17 +19,17 @@ class AbstractTile : public QObject
          * @brief Return a copy of itself
          * @return A copy of itself
          */
-        virtual AbstractTile* getCopy() const;
+        virtual AbstractTile* getCopy() const = 0;
         /**
          * @brief Return a copy of itself if static or itself if not static
          * @return A copy of itself if static or itself if not static
          */
-        virtual AbstractTile* getInstance() const;
+        virtual AbstractTile* getInstance() const = 0;
         /**
          * @brief Return true if itself is shared between MapTile
          * @return True if itself is shared between MapTile
          */
-        virtual bool isStatic() const;
+        virtual bool isStatic() const = 0;
 
         /**
          * @brief Return the score of this Tile for Path Finding
@@ -37,32 +37,32 @@ class AbstractTile : public QObject
          * @return The score of this Tile for Path Finding
          * @remarks The score depend by actor
          */
-        virtual float getPathFinderScore(const AbstractActor* actor) const;
+//        virtual float getPathFinderScore(const AbstractActor* actor, const AbstractMapTile* tile) const = 0;
 
         /**
          * @brief Return the name of this Tile
          * @return The name of this Tile
          */
-        virtual QString getName() const;
+        virtual QString getName() const = 0;
 
         /**
          * @brief Init this tile of mapTile
          * @param MapTile that contain this tile (if not static)
          */
-        virtual void init(AbstractMapTile* ref);
+        virtual void init(AbstractMapTile* ref) { Q_UNUSED(ref) }
 
         /**
          * @brief Update this tile of mapTile
          * @param MapTile that contain this tile (if not static)
          */
-        virtual void update(AbstractMapTile* ref);
+        virtual void update(AbstractMapTile* ref) { Q_UNUSED(ref) }
 
         /**
          * @brief Return true if this tile is equal to second tile
          * @param second tile
          * @return True if they are equal
          */
-        virtual bool isEqual(const AbstractTile* tile2) const;
+        virtual bool isEqual(const AbstractTile* tile2) const = 0;
 
         /**
          * @brief Emit the event Actor entering event
@@ -109,22 +109,22 @@ class AbstractTile : public QObject
          * @brief
          * @param event
          */
-        virtual void actorEnteringEvent(ActorMoveEvent& event);
+        virtual void actorEnteringEvent(ActorMoveEvent& event) { Q_UNUSED(event) }
         /**
          * @brief actorEnteredEvent
          * @param event
          */
-        virtual void actorEnteredEvent(ActorMoveEvent& event);
+        virtual void actorEnteredEvent(ActorMoveEvent& event) { Q_UNUSED(event) }
         /**
          * @brief actorLeavingEvent
          * @param event
          */
-        virtual void actorLeavingEvent(ActorMoveEvent& event);
+        virtual void actorLeavingEvent(ActorMoveEvent& event) { Q_UNUSED(event) }
         /**
          * @brief actorLeavedEvent
          * @param event
          */
-        virtual void actorLeavedEvent(ActorMoveEvent& event);
+        virtual void actorLeavedEvent(ActorMoveEvent& event) { Q_UNUSED(event) }
 
     signals:
         /**

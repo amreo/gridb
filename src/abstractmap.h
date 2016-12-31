@@ -1,125 +1,82 @@
 #ifndef ABSTRACTMAP_H
 #define ABSTRACTMAP_H
 #include "abstractlocated.h"
-#include "abstracttile.h"
+#include "abstractmaptile.h"
 #include "coord.h"
 #include <QSize>
+
+class AbstractMapTile;
+class AbstractTile;
+
 /**
- * @brief The AbstractMap class
+ * @brief This class is the base class of any kind of grid map
+ * @author amreo, amdev10
+ * @version 0.1
+ * @since 0.4
  */
-class AbstractMap
+class AbstractMap : public QObject
 {
+    Q_OBJECT
     public:
         /**
-         * @brief GetMapTile
-         * @param x
-         * @param y
-         * @return
+         * @brief Return the map tile at the specified coord
+         * @param Coord x
+         * @param Coord y
+         * @return The map tile at the specified coord
          */
-        virtual AbstractMapTile GetMapTile(int x, int y) const;
+        virtual AbstractMapTile* mapTile(int x, int y) const = 0;
         /**
-         * @brief GetMapTile
-         * @param c
-         * @return
+         * @brief Return the map tile at the specified coord
+         * @return The map tile at the specified coord
          */
-        virtual AbstractMapTile GetMapTile(AbstractLocated c) const;
+        virtual AbstractMapTile* mapTile(const AbstractLocated& c) const = 0;
 
         /**
-         * @brief GetTile
-         * @param x
-         * @param y
-         * @return
+         * @brief Return the default tile of the map where there is no a mapTile setted
+         * @return The default tile of the map
          */
-        virtual AbstractTile GetTile(int x, int y) const;
-        /**
-         * @brief GetTile
-         * @param c
-         * @return
-         */
-        virtual AbstractTile GetTile(AbstractLocated c) const;
+        virtual AbstractTile* defaultTile() const = 0;
 
         /**
-         * @brief GetDefaultTile
-         * @return
+         * @brief Return the size of the map where there is no a mapTile setted
+         * @return The size of the map
          */
-        virtual AbstractTile GetDefaultTile() const;
+        virtual QSize size() const = 0;
 
         /**
-         * @brief GetSize
-         * @return
+         * @brief Set the default tile of the map where there is no a mapTile setted
+         * @param Default tile
          */
-        virtual Qsize GetSize() const;
-        /**
-         * @brief GetLocation
-         * @return
-         */
-        virtual Coord GetLocation() const;
+        virtual void setDefaultTile(AbstractTile* Tile) = 0;
 
         /**
-         * @brief SetTile
-         * @param x
-         * @param y
-         * @param tile
+         * @brief Initialize the status of the map and relatives tile
          */
-        virtual void SetTile(int x, int y, AbstractTile* tile);
-        /**
-         * @brief SetTile
-         * @param Tile
-         */
-        virtual void SetTile(AbstractLocated&, AbstractTile* Tile);
+        virtual void initMap() = 0;
 
         /**
-         * @brief SetDefaultTile
-         * @param Tile
+         * @brief Check if the specified coord is valid for the map
+         * @param Coord
+         * @return True if the coord c is valid, otherwise false
          */
-        virtual void SetDefaultTile(AbstractTile* Tile);
+        virtual bool isValid(const AbstractLocated& c) const = 0;
 
         /**
-         * @brief InitMap
+         * @brief Check if the specified coord is valid for the map
+         * @param Coord X
+         * @param Coord Y
+         * @return True if the coord c is valid, otherwise false
          */
-        virtual void InitMap();
+        virtual bool isValid(int cX, int cY) const = 0;
 
-        /**
-         * @brief IsValid
-         * @param c
-         * @return
-         */
-        virtual bool IsValid(AbstractLocated c);
-        /**
-         * @brief IsValid
-         * @param cX
-         * @param cY
-         * @return
-         */
-        virtual bool IsValid(int cX, int cY);
 
-        /**
-         * @brief NotifyChange
-         * @param src
-         * @param dest
-         */
-        virtual void NotifyChange(AbstractActor&, AbstractMapTile* src, AbstractMapTile* dest);
+        signals:
+//        /**
+//         * @brief NotifyChange
+//         * @param src
+//         * @param dest
+//         */
+//        virtual void notifyChange(const AbstractActor* act, const AbstractMapTile* src, const AbstractMapTile* dest);
 
-        /**
-         * @brief SetActor
-         */
-        virtual void SetActor(AbstractActor&);
-        /**
-         * @brief GetActor
-         * @param c
-         * @return
-         */
-        virtual AbstractActor GetActor(AbstractLocated c) const;
-        /**
-         * @brief GetActor
-         * @param x
-         * @param y
-         * @return
-         */
-        virtual AbstractActor GetActor(int x, int y) const;
-        /**
-         * @brief DespawnActor
-         */
-        virtual void DespawnActor (AbstractActor&);
-)
+};
 #endif // ABSTRACTMAP_H
