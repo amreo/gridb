@@ -8,13 +8,13 @@
 class ActorMoveEvent
 {
     public:
-        /**
-         * @brief Create a new instance of ActorMoveEvent
-         * @param From of the moveement
-         * @param Destination of the moveement
-         * @param Actor that is moving
-         */
-        ActorMoveEvent(AbstractMapTile& src, AbstractMapTile& dest, AbstractActor& actor);
+//        /**
+//         * @brief Create a new instance of ActorMoveEvent
+//         * @param From of the moveement
+//         * @param Destination of the moveement
+//         * @param Actor that is moving
+//         */
+//        ActorMoveEvent(AbstractMapTile& src, AbstractMapTile& dest, AbstractActor& actor);
 
         /**
          * @brief Return the source of the moveement
@@ -41,15 +41,15 @@ class ActorMoveEvent
         /**
          * @brief Source of the moveement
          */
-        AbstractMapTile& _src;
+        AbstractMapTile* _src;
         /**
          * @brief Destination of the moveement
          */
-        AbstractMapTile& _dest;
+        AbstractMapTile* _dest;
         /**
          * @brief The actot that is moving
          */
-        AbstactActor& _actor;
+//        AbstactActor& _actor;
         /**
          * @brief True if is cancelling the moveement, otherwise false
          */
