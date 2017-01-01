@@ -97,4 +97,6 @@ class AbstractMapTile : public QObject, public virtual AbstractLocated
 //        virtual bool canActorEnterIn(AbstractActor* actor) const = 0;
 };
 
+inline AbstractMapTile::~AbstractMapTile() { }
+
 #endif // ABSTRACTMAPTILE_H

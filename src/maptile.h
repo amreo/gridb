@@ -23,8 +23,6 @@ class MapTile : public AbstractMapTile, public Located
         MapTile(const AbstractLocated* loc, AbstractMap* map) : Located(loc->x(), loc->y())
         { _map = map; }
 
-        ~MapTile() {}
-
         // AbstractMapTile interface
     public:
 
