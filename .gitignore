@@ -39,4 +39,4 @@ doc/*
 #Binaries
 bin/*
 build/*
-test/*
+test/test
