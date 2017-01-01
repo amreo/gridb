@@ -38,7 +38,8 @@ GridListCoordSelecter::GridListCoordSelecter(int offX, int offY, int width, int 
 
 GridListCoordSelecter::~GridListCoordSelecter()
 {
-    delete this->grid;
+    delete[] this->grid;
+    delete[] this->gridBool;
 }
 
 int GridListCoordSelecter::offsetX()
